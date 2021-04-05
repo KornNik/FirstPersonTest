@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e40bbd4e0f9b0e14b8cd981064fc33c7, type: 3}
+  m_Name: LevelsData
+  m_EditorClassIdentifier: 
+  _levels:
+  - LevelType: 1
+    LocationPrefab: {fileID: 7401709698281076387, guid: 57fa1d5b53dda73408474d20e4775bd4,
+      type: 3}
+    HeroPosition:
+      Position: {x: 0, y: 2, z: 0}
+      RotationVector3: {x: 0, y: 0, z: 0}
+    EnemyPosition:
+      Position: {x: 3, y: 3, z: 3}
+      RotationVector3: {x: 0, y: 0, z: 0}
