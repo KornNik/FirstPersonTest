@@ -20,31 +20,31 @@ namespace ExampleTemplate
             RegisterBulletModifier(new BonusDamageModifier(this, _bonusDamage));
         }
 
-        private void OnTriggerEnter(UnityEngine.Collider collision)
+        private void OnCollisionEnter(Collision collision)
         {
-            var tempObj = collision.gameObject.GetComponent<IDamageable>();
-            var tempRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+            Collider[] colliders = Physics.OverlapSphere(transform.position, _radius);
 
-            if (tempObj != null)
+            foreach (Collider items in colliders)
             {
-                InflictDamage(tempObj);
-                if (tempRigidbody != null)
+                var rigidbody = items.GetComponent<Rigidbody>();
+                var damageableObject = items.GetComponent<IDamageable>();
+                if (rigidbody != null)
                 {
-                   Collider[] colliders =  Physics.OverlapSphere(transform.position, _radius);
-                    foreach(Collider items in colliders)
+                    rigidbody.AddExplosionForce(_force, transform.position, _radius);
+                    if (damageableObject != null)
                     {
-                        var rigidbody = items.GetComponent<Rigidbody>();
-                        if (rigidbody != null)
-                        {
-                            rigidbody.AddExplosionForce(_force, transform.position, _radius);
-                        }
+                        InflictDamage(damageableObject);
                     }
                 }
             }
-
             ReturnToPool();
         }
 
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.DrawWireSphere(transform.position, _radius);
+            
+        }
         #endregion
 
     }

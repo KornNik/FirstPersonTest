@@ -10,6 +10,7 @@ namespace ExampleTemplate
 
         [SerializeField] private float _speed;
         [SerializeField] private float _health;
+        [SerializeField] private float _weaponAimingSpeed;
 
         [HideInInspector] public CharacterBehaviour CharacterBehaviour;
         [HideInInspector] public CharacterAnimationBehaviour CharacterAnimationBehaviour;
@@ -42,7 +43,10 @@ namespace ExampleTemplate
         {
             return _health;
         }
-
+        public float GetWeaponAimingSpeed()
+        {
+            return _weaponAimingSpeed;
+        }
         #endregion
     }
 }

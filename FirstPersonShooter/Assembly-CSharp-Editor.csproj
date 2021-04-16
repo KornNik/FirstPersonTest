@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{004B257B-25B7-45A9-FDEF-0C3FC64EB238}</ProjectGuid>
+    <ProjectGuid>{412D50E5-6F1A-E7F8-B584-B6B5CF75B437}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -65,37 +65,37 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Editor\LoadLevel.cs" />
     <Reference Include="UnityEditor.TestRunner">
-      <HintPath>C:/Etc/Architecture/Мой код/ThirdPerson/ThirdPersonShooter/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
+      <HintPath>C:/Users/korni/Documents/GitHub/FirstPersonTest/FirstPersonShooter/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TestRunner">
-      <HintPath>C:/Etc/Architecture/Мой код/ThirdPerson/ThirdPersonShooter/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
+      <HintPath>C:/Users/korni/Documents/GitHub/FirstPersonTest/FirstPersonShooter/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>C:/Etc/Architecture/Мой код/ThirdPerson/ThirdPersonShooter/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/Users/korni/Documents/GitHub/FirstPersonTest/FirstPersonShooter/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>C:/Etc/Architecture/Мой код/ThirdPerson/ThirdPersonShooter/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>C:/Users/korni/Documents/GitHub/FirstPersonTest/FirstPersonShooter/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Etc/Architecture/Мой код/ThirdPerson/ThirdPersonShooter/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/korni/Documents/GitHub/FirstPersonTest/FirstPersonShooter/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Etc/Architecture/Мой код/ThirdPerson/ThirdPersonShooter/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Users/korni/Documents/GitHub/FirstPersonTest/FirstPersonShooter/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>C:/Etc/Architecture/Мой код/ThirdPerson/ThirdPersonShooter/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/Users/korni/Documents/GitHub/FirstPersonTest/FirstPersonShooter/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Etc/Architecture/Мой код/ThirdPerson/ThirdPersonShooter/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/korni/Documents/GitHub/FirstPersonTest/FirstPersonShooter/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>C:/Etc/Architecture/Мой код/ThirdPerson/ThirdPersonShooter/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>C:/Users/korni/Documents/GitHub/FirstPersonTest/FirstPersonShooter/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Etc/Architecture/Мой код/ThirdPerson/ThirdPersonShooter/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/korni/Documents/GitHub/FirstPersonTest/FirstPersonShooter/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Etc/Architecture/Мой код/ThirdPerson/ThirdPersonShooter/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/Users/korni/Documents/GitHub/FirstPersonTest/FirstPersonShooter/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.7f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -296,7 +296,7 @@
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>C:/Etc/Architecture/Мой код/ThirdPerson/ThirdPersonShooter/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
+      <HintPath>C:/Users/korni/Documents/GitHub/FirstPersonTest/FirstPersonShooter/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.7f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -661,11 +661,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{788C236D-2F92-DE6B-240F-6085F16A6D48}</Project>
+      <Project>{202E59FA-BEDF-0B35-35C0-4E7F2FA9864F}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{A79D9CEA-E14F-AEDD-A3B5-7EAD4B2E3EFB}</Project>
+      <Project>{74785DC2-7DCB-D0BD-B1A8-42E524CD9816}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
   </ItemGroup>

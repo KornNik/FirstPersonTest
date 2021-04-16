@@ -44,12 +44,13 @@ namespace ExampleTemplate
                 Services.Instance.WeaponService.ReloadClip();
             }
 
-            float newHandWeight = 0f;
             if (Input.GetAxis(AxisManager.FIRE2) != 0)
             {
-                newHandWeight = 1f;
+                _handWeight += Time.deltaTime*_characterData.GetWeaponAimingSpeed();
             }
-            _handWeight = newHandWeight;
+            else { _handWeight -= Time.deltaTime*_characterData.GetWeaponAimingSpeed(); }
+
+            _handWeight = Mathf.Clamp(_handWeight, 0, 1);
             _characterData.CharacterAnimationBehaviour.SetHandWeight(_handWeight);
         }
 

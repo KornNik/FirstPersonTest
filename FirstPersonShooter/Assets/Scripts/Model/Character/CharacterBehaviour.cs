@@ -46,7 +46,6 @@ namespace ExampleTemplate
             MovingSpeed?.Invoke(inputAxis.y);
             Strafe?.Invoke(inputAxis.x);
 
-
             _moveVector.y = _gravityForce;
             _characterController.Move(_moveVector * Time.deltaTime);
         }

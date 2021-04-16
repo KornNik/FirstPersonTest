@@ -10,10 +10,8 @@ namespace ExampleTemplate
 
         private const int COLLIDED_OBJECT_SIZE = 20;
 
-        private readonly Collider2D[] _collidedObjects;
-        private readonly RaycastHit2D[] _castBuffer;
-        private readonly List<Collider2D> _triggeredObjects;
-        private readonly CameraServices _cameraServices;
+        private readonly Collider[] _collidedObjects;
+        private readonly List<Collider> _triggeredObjects;
 
         #endregion
 
@@ -22,10 +20,8 @@ namespace ExampleTemplate
 
         public PhysicsService(CameraServices cameraServices) : base()
         {
-            _cameraServices = cameraServices;
-            _collidedObjects = new Collider2D[COLLIDED_OBJECT_SIZE];
-            _castBuffer = new RaycastHit2D[64];
-            _triggeredObjects = new List<Collider2D>();
+            _collidedObjects = new Collider[COLLIDED_OBJECT_SIZE];
+            _triggeredObjects = new List<Collider>();
         }
 
         #endregion
@@ -47,12 +43,12 @@ namespace ExampleTemplate
             return true;
         }
         
-        public List<Collider2D> GetObjectsInRadius(Vector3 position, float radius, int layerMask = LayerManager.DEFAULT_LAYER)
+        public List<Collider> GetObjectsInRadius(Vector3 position, float radius, int layerMask = LayerManager.DEFAULT_LAYER)
         {
             _triggeredObjects.Clear();
-            Collider2D trigger;
+            Collider trigger;
 
-            var collidersCount = Physics2D.OverlapCircleNonAlloc(position, radius, _collidedObjects, layerMask);
+            var collidersCount = Physics.OverlapSphereNonAlloc(position, radius, _collidedObjects, layerMask);
             
             for (var i = 0; i < collidersCount; i++)
             {
@@ -65,25 +61,6 @@ namespace ExampleTemplate
             }
 
             return _triggeredObjects;
-        }
-        
-        public HashSet<Collider2D> SphereCastObject(Vector2 center, float radius, HashSet<Collider2D> outBuffer,
-            int layerMask = LayerManager.DEFAULT_LAYER)
-        {
-            outBuffer.Clear();
-
-            var hitCount = Physics2D.OverlapCircleNonAlloc(center, radius, _collidedObjects, layerMask);
-
-            for (var i = 0; i < hitCount; i++)
-            {
-                var carTriggerProvider = _castBuffer[i].collider;
-                if (carTriggerProvider != null)
-                {
-                    outBuffer.Add(carTriggerProvider);
-                }
-            }
-
-            return outBuffer;
         }
         
         public Collider2D GetNearestObject(Vector3 targetPosition, HashSet<Collider2D> objectBuffer)

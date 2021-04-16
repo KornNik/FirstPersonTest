@@ -10,8 +10,8 @@
             RegisterBulletModifier(new PoisonDamageModifier(this, _poisonDamage, _poisonDuration));
         }
 
-        private void OnTriggerEnter(UnityEngine.Collider collision)
-		{
+        private void OnCollisionEnter(UnityEngine.Collision collision)
+        {
             var tempObj = collision.gameObject.GetComponent<IDamageable>();
 
             if (tempObj != null)

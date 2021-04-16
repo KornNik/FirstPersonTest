@@ -305,7 +305,7 @@ MonoBehaviour:
   _barrel: {fileID: 1562680774769912467}
   _placeForClip: {fileID: 254360617733460084}
   _placeForMuffler: {fileID: 755477250637985163}
-  _force: 500
+  _force: 600
   _rechergeTime: 0.6
   _spreadFactor: 0.02
 --- !u!114 &-480909009977223948

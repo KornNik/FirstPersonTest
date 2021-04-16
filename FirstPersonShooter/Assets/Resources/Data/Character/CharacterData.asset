@@ -14,13 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 10
   _health: 100
-  _rotationSpeed: 0.1
-  _allowPlayerRotation: 0.1
-  _isAiming: 0
-  _isGround: 1
-  _isGunOut: 0
-  _isSprinting: 0
-  _isBlockRotation: 0
+  _weaponAimingSpeed: 3
   CharacterBehaviour: {fileID: 0}
-  CameraPlace: {fileID: 0}
-  PlayerSpawn: {fileID: 0}
+  CharacterAnimationBehaviour: {fileID: 0}
+  CameraBehaviuor: {fileID: 0}
+  InventoryBehaviour: {fileID: 0}
+  RightHandTarget: {fileID: 0}
