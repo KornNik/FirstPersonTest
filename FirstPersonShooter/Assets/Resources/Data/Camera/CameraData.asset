@@ -16,9 +16,6 @@ MonoBehaviour:
   _xSensitivity: 2
   _maximumX: 60
   _minimumX: -40
-  _distance: 2
-  _cameraMoveSpeed: 120
-  _minimumDistance: 1
-  _maximumDistance: 4
   _smoothTime: 10
   _isSmooth: 1
+  _isClampRotation: 1

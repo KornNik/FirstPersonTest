@@ -18,6 +18,7 @@ namespace ExampleTemplate
         protected bool _isReady = true;
         protected AmmunitionType[] _ammunitionType = { AmmunitionType.Bullet };
         protected Vector3 _shootDirection;
+        protected CharacterData _characterData;
 
         private Queue<Clip> _clips = new Queue<Clip>();
         private bool _isVisible;
@@ -75,6 +76,8 @@ namespace ExampleTemplate
             ReloadClip();
 
             AmmunitionPool = new AmmunitionPool(8);
+            _characterData = Data.Instance.Character;
+
         }
 
         #endregion
@@ -85,6 +88,7 @@ namespace ExampleTemplate
         protected void ReadyShoot()
         {
             _isReady = true;
+            _barrel.forward = _characterData.CameraBehaviuor.transform.forward;
         }
 
         protected void AddClip(Clip clip)

@@ -87,6 +87,7 @@ namespace ExampleTemplate
             OnHealthChanged?.Invoke(_health);
             if (_health <= 0) { Die(); }
         }
+
         public void ReceiveDamageOverTime(float damage, float duration)
         {
             StartCoroutine(DamageOverTime(damage, duration));
@@ -104,6 +105,7 @@ namespace ExampleTemplate
         {
             transform.position = Data.Instance.LevelsData.GetEnemyPosition(LevelsType.TestLevel).Position;
             _health = _enemyData.GetHealth();
+            OnHealthChanged?.Invoke(_health);
             IsVisible = true;
             IsColliderActive = true;
             _rigidbody.isKinematic = false;
@@ -123,6 +125,7 @@ namespace ExampleTemplate
                 yield return _waitOneSecond;
                 _health -= damage;
                 OnHealthChanged?.Invoke(_health);
+                if (_health <= 0) { Die(); }
             }
         }
 

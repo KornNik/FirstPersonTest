@@ -110,9 +110,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseDamage: 10
   _bonusDamage: 5
-  _poisonDamage: 1
+  _poisonDamage: 2
   _poisonDuration: 4
   Type: 1
+  _currentDamage: 0
 --- !u!54 &2392635498043122666
 Rigidbody:
   m_ObjectHideFlags: 0
