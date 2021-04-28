@@ -11,8 +11,6 @@ namespace ExampleTemplate
         [SerializeField] private float _xSensitivity = 2f;
         [SerializeField] private float _maximumX = 90f;
         [SerializeField] private float _minimumX = -90f;
-        [SerializeField] private float _smoothTime = 100f;
-        [SerializeField] private bool _isSmooth = true;
         [SerializeField] private bool _isClampRotation = true;
 
         #endregion
@@ -35,14 +33,6 @@ namespace ExampleTemplate
         public float GetMimimumX()
         {
             return _minimumX;
-        }
-        public float GetSmoothTime()
-        {
-            return _smoothTime;
-        }
-        public bool GetIsSmooth()
-        {
-            return _isSmooth;
         }
         public bool GetIsClampRotation()
         {

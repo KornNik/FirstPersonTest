@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1152092716169801807}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.0979, z: 0.2209}
+  m_LocalPosition: {x: 0, y: 0.09, z: 0.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2633836524351849050}
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2843134823810108497}
   m_Layer: 0
-  m_Name: MufflerModificationPlace
+  m_Name: PlaceForMuffler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -340,8 +340,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PoolTransform: {fileID: 4019918364103038028}
-  _isClipModificated: 0
-  _isMufflerModificated: 0
+  IsClipModificated: 0
+  IsMufflerModificated: 0
   _barrel: {fileID: 2289233472536901119}
   _placeForClip: {fileID: 4579127945463443048}
   _placeForMuffler: {fileID: 2843134823810108497}
@@ -528,7 +528,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4579127945463443048}
   m_Layer: 0
-  m_Name: ClipModificationPlace
+  m_Name: PlaceForClip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -572,7 +572,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8348259320983593567}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.09790039, z: 0.22090006}
+  m_LocalPosition: {x: 0, y: 0.09, z: 0.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2633836524351849050}

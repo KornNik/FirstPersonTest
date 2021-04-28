@@ -9,8 +9,8 @@ namespace ExampleTemplate
     {
         #region Fields
 
-        public static event Action<float> MovingSpeed;
-        public static event Action<float> Strafe;
+        public static Action<float> MovingSpeed;
+        public static Action<float> Strafe;
 
         private CharacterData _characterData;
         private CharacterController _characterController;

@@ -16,6 +16,6 @@ MonoBehaviour:
   _xSensitivity: 2
   _maximumX: 60
   _minimumX: -40
-  _smoothTime: 10
+  _smoothTime: 30
   _isSmooth: 1
   _isClampRotation: 1

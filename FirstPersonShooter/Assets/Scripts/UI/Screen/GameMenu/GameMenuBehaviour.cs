@@ -19,14 +19,14 @@ namespace ExampleTemplate
 
         private void OnEnable()
         {
-            EnemyBehaviour.OnHealthChanged += EnemyHealth;
-            WeaponService.OnAmmunitionChange += ShowInfo;
+            EnemyBehaviour.EnemyHealthChanged += OnEnemyHealthChanged;
+            WeaponService.AmmunitionChanged += OnAmmunitionChange;
         }
 
         private void OnDisable()
         {
-            EnemyBehaviour.OnHealthChanged -= EnemyHealth;
-            WeaponService.OnAmmunitionChange -= ShowInfo;
+            EnemyBehaviour.EnemyHealthChanged -= OnEnemyHealthChanged;
+            WeaponService.AmmunitionChanged -= OnAmmunitionChange;
         }
 
         #endregion
@@ -45,13 +45,13 @@ namespace ExampleTemplate
             gameObject.SetActive(false);
             HideUI.Invoke();
         }
-        private void ShowInfo(int clip,int ammunition)
+        private void OnAmmunitionChange(int clip,int ammunition)
         {
             _clipCount.text = clip.ToString();
             _ammunitionCount.text = ammunition.ToString();
         }
 
-        private void EnemyHealth(float health)
+        private void OnEnemyHealthChanged(float health)
         {
             _enemyHealth.fillAmount = health/Data.Instance.EnemiesData.GetHealth() ;
         }

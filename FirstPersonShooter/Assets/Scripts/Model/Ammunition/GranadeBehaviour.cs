@@ -24,6 +24,24 @@ namespace ExampleTemplate
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, _radius);
 
+            ExplosionForce(colliders);
+
+            ReturnToPool();
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.DrawWireSphere(transform.position, _radius);
+            
+        }
+
+        #endregion
+
+
+        #region Methods
+
+        private void ExplosionForce(Collider[] colliders)
+        {
             foreach (Collider items in colliders)
             {
                 var rigidbody = items.GetComponent<Rigidbody>();
@@ -37,14 +55,8 @@ namespace ExampleTemplate
                     }
                 }
             }
-            ReturnToPool();
         }
 
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.DrawWireSphere(transform.position, _radius);
-            
-        }
         #endregion
 
     }

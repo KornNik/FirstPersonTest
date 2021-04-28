@@ -8,22 +8,23 @@ namespace ExampleTemplate
     {
         #region Fields
 
+        public static Action FireActn;
+
         public Clip Clip;
         public Transform PoolTransform;
         public AmmunitionPool AmmunitionPool;
-        public static Action OnFire;
+        public bool IsClipModificated = false;
+        public bool IsMufflerModificated = false;
 
 		protected int _countAmmunition = 30;
 		protected int _countClip = 5;
         protected bool _isReady = true;
-        protected AmmunitionType[] _ammunitionType = { AmmunitionType.Bullet };
         protected Vector3 _shootDirection;
         protected CharacterData _characterData;
+        protected AmmunitionType[] _ammunitionType = { AmmunitionType.Bullet };
 
-        private Queue<Clip> _clips = new Queue<Clip>();
         private bool _isVisible;
-        public bool _isClipModificated = false;
-        public bool _isMufflerModificated = false;
+        private Queue<Clip> _clips = new Queue<Clip>();
 
         [SerializeField] protected Transform _barrel;
         [SerializeField] protected Transform _placeForClip;
@@ -31,7 +32,6 @@ namespace ExampleTemplate
         [SerializeField] protected float _force = 700;
         [SerializeField] protected float _rechergeTime = 0.2f;
         [SerializeField] protected float _spreadFactor = 0.02f;
-
 
         #endregion
 
@@ -52,9 +52,9 @@ namespace ExampleTemplate
                 if (tempRenderer)
                     tempRenderer.enabled = _isVisible;
                 if (transform.childCount <= 0) return;
-                foreach (Transform d in transform)
+                foreach (Transform item in transform)
                 {
-                    tempRenderer = d.gameObject.GetComponentInChildren<Renderer>();
+                    tempRenderer = item.GetComponentInChildren<Renderer>();
                     if (tempRenderer)
                         tempRenderer.enabled = _isVisible;
                 }
@@ -91,6 +91,15 @@ namespace ExampleTemplate
             _barrel.forward = _characterData.CameraBehaviuor.transform.forward;
         }
 
+        protected Vector3 SetSpread(Vector3 barrelDirection)
+        {
+            var shootDirection = barrelDirection;
+            shootDirection.z += UnityEngine.Random.Range(-_spreadFactor, _spreadFactor);
+            shootDirection.y += UnityEngine.Random.Range(-_spreadFactor, _spreadFactor);
+
+            return shootDirection;
+        }
+
         protected void AddClip(Clip clip)
         {
             _clips.Enqueue(clip);
@@ -105,14 +114,13 @@ namespace ExampleTemplate
                 AddClip(new Clip { CountAmmunition = _countAmmunition + ammo });
             }
             ReloadClip();
-            WeaponService.OnAmmunitionChange?.Invoke(CountClip, Clip.CountAmmunition);
+            WeaponService.AmmunitionChanged?.Invoke(CountClip, Clip.CountAmmunition);
         }
 
         public void RemoveSpread(float value)
         {
             _spreadFactor -= value;
         }
-        public abstract void Fire();
 
         public void ReloadClip()
         {
@@ -128,6 +136,7 @@ namespace ExampleTemplate
         {
             return _placeForClip;
         }
+        public abstract void Fire();
 
         #endregion
     }

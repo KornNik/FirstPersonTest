@@ -24,13 +24,12 @@ namespace ExampleTemplate
 			if (Clip.CountAmmunition <= 0) return;
 			if (AmmunitionPool == null) return;
 
-			_shootDirection = _barrel.forward;
-			_shootDirection.z += Random.Range(-_spreadFactor, _spreadFactor);
-			_shootDirection.y += Random.Range(-_spreadFactor, _spreadFactor);
+			_shootDirection = SetSpread(_barrel.forward);
 
 			var tempAmmunition = AmmunitionPool.GetAmmunition(AmmunitionType.Bullet);
 			tempAmmunition.AddForce(_shootDirection * _force);
-			OnFire();
+			FireActn?.Invoke();
+
 			Clip.CountAmmunition--;
 			_isReady = false;
 			Invoke(nameof(ReadyShoot), _rechergeTime);

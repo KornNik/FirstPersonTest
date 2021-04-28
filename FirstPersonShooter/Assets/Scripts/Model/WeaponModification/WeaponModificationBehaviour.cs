@@ -28,15 +28,15 @@ namespace ExampleTemplate
             {
                 if (Services.Instance.WeaponService.Weapon != null)
                 {
-                    if (!Services.Instance.WeaponService.Weapon._isClipModificated)
+                    if (!Services.Instance.WeaponService.Weapon.IsClipModificated)
                     {
                         var clip = _clipModification.AddModification(Services.Instance.WeaponService.Weapon);
-                        Services.Instance.WeaponService.Weapon._isClipModificated = true;
+                        Services.Instance.WeaponService.Weapon.IsClipModificated = true;
                     }
-                    if (!Services.Instance.WeaponService.Weapon._isMufflerModificated)
+                    if (!Services.Instance.WeaponService.Weapon.IsMufflerModificated)
                     {
                         var muffler = _mufflerModification.AddModification(Services.Instance.WeaponService.Weapon);
-                        Services.Instance.WeaponService.Weapon._isMufflerModificated = true;
+                        Services.Instance.WeaponService.Weapon.IsMufflerModificated = true;
                     }
                 }
             }

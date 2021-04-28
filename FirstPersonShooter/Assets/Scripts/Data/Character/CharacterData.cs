@@ -22,6 +22,7 @@ namespace ExampleTemplate
 
 
         #region Methods
+
         public void Initialization(CharactersType characterType, CharacterPosition point)
         {
             var characterBehaviour = CustomResources.Load<CharacterBehaviour>
@@ -47,6 +48,7 @@ namespace ExampleTemplate
         {
             return _weaponAimingSpeed;
         }
+
         #endregion
     }
 }

@@ -7,7 +7,6 @@ namespace ExampleTemplate
         #region Fields
 
         private CameraData _cameraData;
-        private Transform _cameraTransform;
         private Quaternion _cameraTargetRot;
 
         #endregion
@@ -18,8 +17,7 @@ namespace ExampleTemplate
         private void Awake()
 		{
 			_cameraData = Data.Instance.Camera;
-            _cameraTargetRot = gameObject.transform.rotation;
-            _cameraTransform = gameObject.transform;
+            _cameraTargetRot = gameObject.transform.localRotation;
         }
 
         #endregion
@@ -27,24 +25,16 @@ namespace ExampleTemplate
 
         #region Methods
 
-        public void LookRotation(Vector2 mouseAxis,Transform character)
+        public void LookRotation(Vector2 mouseAxis, Transform character)
         {
-            character.rotation *= Quaternion.Euler(0f, mouseAxis.x, 0f);
+            character.localRotation *= Quaternion.Euler(0f, mouseAxis.x, 0f);
             _cameraTargetRot *= Quaternion.Euler(-mouseAxis.y, 0f, 0f);
 
             if (_cameraData.GetIsClampRotation())
-                _cameraTargetRot = ClampRotationAroundXAxis(_cameraTargetRot);
+            { _cameraTargetRot = ClampRotationAroundXAxis(_cameraTargetRot); }
 
-            if (_cameraData.GetIsSmooth())
-            {
-                character.localRotation = Quaternion.Slerp(character.localRotation, character.rotation, _cameraData.GetSmoothTime() * Time.deltaTime);
-                _cameraTransform.localRotation = Quaternion.Slerp(_cameraTransform.localRotation, _cameraTargetRot, _cameraData.GetSmoothTime() * Time.deltaTime);
-            }
-            else
-            {
-                character.localRotation = character.rotation;
-                _cameraTransform.localRotation = _cameraTargetRot;
-            }
+            gameObject.transform.localRotation = _cameraTargetRot;
+
         }
 
         private Quaternion ClampRotationAroundXAxis(Quaternion q)

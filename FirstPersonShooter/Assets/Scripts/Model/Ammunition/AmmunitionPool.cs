@@ -101,6 +101,7 @@ namespace ExampleTemplate
         {
             Object.Destroy(Services.Instance.WeaponService.Weapon.PoolTransform.gameObject);
         }
+
         #endregion
 
     }

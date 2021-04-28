@@ -9,7 +9,7 @@ namespace ExampleTemplate
         private static WeaponBehaviour _weapon;
 		private static bool _isWeapon;
 
-        public static Action<int, int> OnAmmunitionChange;
+        public static Action<int, int> AmmunitionChanged;
 
 		#endregion
 
@@ -31,6 +31,7 @@ namespace ExampleTemplate
 			_weapon = weapon as WeaponBehaviour;
 			if (_weapon == null) return;
 			_weapon.IsVisible = true;
+			AmmunitionChanged?.Invoke(_weapon.CountClip, _weapon.Clip.CountAmmunition);
 		}
 
 		public void Off()
@@ -44,7 +45,7 @@ namespace ExampleTemplate
 		{
 			if (_weapon == null) return;
 			_weapon.ReloadClip();
-			OnAmmunitionChange?.Invoke(_weapon.CountClip, _weapon.Clip.CountAmmunition);
+			AmmunitionChanged?.Invoke(_weapon.CountClip, _weapon.Clip.CountAmmunition);
 		}
 
         #endregion

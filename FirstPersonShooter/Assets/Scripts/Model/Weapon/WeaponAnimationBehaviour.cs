@@ -18,12 +18,12 @@ namespace ExampleTemplate
 
         private void OnEnable()
         {
-            WeaponBehaviour.OnFire += Fire;
+            WeaponBehaviour.FireActn += OnFire;
         }
 
         private void OnDisable()
         {
-            WeaponBehaviour.OnFire -= Fire;
+            WeaponBehaviour.FireActn -= OnFire;
         }
 
         private void Awake()
@@ -35,7 +35,7 @@ namespace ExampleTemplate
 
         #region Methods
 
-        private void Fire()
+        private void OnFire()
         {
             _weaponAnimator.SetTrigger(_fireTrigger);
         }

@@ -29,6 +29,27 @@ namespace ExampleTemplate
         
         #region Methods
 
+        public void SwitchRenderer(GameObject swithcingObject, bool value)
+        {
+            var tempRenderer = swithcingObject.GetComponent<Renderer>();
+            if (tempRenderer)
+            {
+                tempRenderer.enabled = value;
+            }
+            if (swithcingObject.transform.childCount <= 0) return;
+
+            foreach(Transform item in swithcingObject.transform)
+            {
+                tempRenderer = item.GetComponentInChildren<Renderer>();
+
+                if (tempRenderer) 
+                { 
+                    tempRenderer.enabled = value;
+                }
+            }
+
+        }
+
         public bool CheckGround(Vector3 position, float distanceRay, out Vector3 hitPoint, int layerMask = LayerManager.DEFAULT_LAYER)
         {
             hitPoint = Vector2.zero;

@@ -4,13 +4,14 @@ using System.Collections;
 
 namespace ExampleTemplate
 {
-    public sealed class EnemyBehaviour : MonoBehaviour , IDamageable
+    public sealed class EnemyBehaviour : MonoBehaviour, IDamageable
     {
         #region Fields
 
-        public static Action<float> OnHealthChanged;
+        public static Action<float> EnemyHealthChanged;
 
-        private WaitForSeconds _waitOneSecond = new WaitForSeconds(1);
+        private WaitForSeconds _waitForDamage = new WaitForSeconds(1);
+        private WaitForSeconds _waitForRevive = new WaitForSeconds(5);
         private EnemiesData _enemyData;
         private Rigidbody _rigidbody;
         private bool _isVisible;
@@ -35,7 +36,7 @@ namespace ExampleTemplate
                     if (transform.childCount <= 0) return;
                     foreach (Transform item in transform)
                     {
-                        tempCollider = item.gameObject.GetComponentInChildren<Collider>();
+                        tempCollider = item.GetComponentInChildren<Collider>();
                         if (tempCollider)
                         {
                             tempCollider.enabled = _isColliderActive;
@@ -57,7 +58,7 @@ namespace ExampleTemplate
                 if (transform.childCount <= 0) return;
                 foreach (Transform item in transform)
                 {
-                    tempRenderer = item.gameObject.GetComponentInChildren<Renderer>();
+                    tempRenderer = item.GetComponentInChildren<Renderer>();
                     if (tempRenderer)
                         tempRenderer.enabled = _isVisible;
                 }
@@ -84,7 +85,7 @@ namespace ExampleTemplate
         public void ReceiveDamage(float damage)
         {
             _health -= damage;
-            OnHealthChanged?.Invoke(_health);
+            EnemyHealthChanged?.Invoke(_health);
             if (_health <= 0) { Die(); }
         }
 
@@ -105,7 +106,7 @@ namespace ExampleTemplate
         {
             transform.position = Data.Instance.LevelsData.GetEnemyPosition(LevelsType.TestLevel).Position;
             _health = _enemyData.GetHealth();
-            OnHealthChanged?.Invoke(_health);
+            EnemyHealthChanged?.Invoke(_health);
             IsVisible = true;
             IsColliderActive = true;
             _rigidbody.isKinematic = false;
@@ -114,17 +115,18 @@ namespace ExampleTemplate
 
         private IEnumerator WaitForRevive()
         {
-            yield return _waitOneSecond;
+            yield return _waitForRevive;
             Revive();
 
         }
+
         private IEnumerator DamageOverTime(float damage, float duration)
         {
             for (int i = 0; i < duration; i++)
             {
-                yield return _waitOneSecond;
+                yield return _waitForDamage;
                 _health -= damage;
-                OnHealthChanged?.Invoke(_health);
+                EnemyHealthChanged?.Invoke(_health);
                 if (_health <= 0) { Die(); }
             }
         }

@@ -14,6 +14,7 @@ namespace ExampleTemplate
 
         #endregion
 
+
         #region IInitialization
 
         public void Initialization()
@@ -24,6 +25,7 @@ namespace ExampleTemplate
 
         #endregion
 
+
         #region IExecute
 
         public void Execute()
@@ -33,10 +35,10 @@ namespace ExampleTemplate
 
             var tempWeapon = Services.Instance.WeaponService.Weapon;
 
-            if (Input.GetAxis(AxisManager.FIRE1) != 0 && _handWeight!=0)
+            if (Input.GetAxis(AxisManager.FIRE1) != 0 && _handWeight != 0)
             {
                 tempWeapon.Fire();
-                WeaponService.OnAmmunitionChange?.Invoke(tempWeapon.CountClip, tempWeapon.Clip.CountAmmunition);
+                WeaponService.AmmunitionChanged?.Invoke(tempWeapon.CountClip, tempWeapon.Clip.CountAmmunition);
             }
 
             if (Input.GetKeyDown(_reloadWeapon))
@@ -46,9 +48,9 @@ namespace ExampleTemplate
 
             if (Input.GetAxis(AxisManager.FIRE2) != 0)
             {
-                _handWeight += Time.deltaTime*_characterData.GetWeaponAimingSpeed();
+                _handWeight += Time.deltaTime * _characterData.GetWeaponAimingSpeed();
             }
-            else { _handWeight -= Time.deltaTime*_characterData.GetWeaponAimingSpeed(); }
+            else { _handWeight -= Time.deltaTime * _characterData.GetWeaponAimingSpeed(); }
 
             _handWeight = Mathf.Clamp(_handWeight, 0, 1);
             _characterData.CharacterAnimationBehaviour.SetHandWeight(_handWeight);
