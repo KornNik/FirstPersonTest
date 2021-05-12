@@ -22,5 +22,12 @@ namespace ExampleTemplate
 
             return c;
         }
+        public static void ChangeColor(Color color, Renderer[] materials)
+        {
+            foreach (var items in materials)
+            {
+                items.material.color = color;
+            }
+        }
     }
 }

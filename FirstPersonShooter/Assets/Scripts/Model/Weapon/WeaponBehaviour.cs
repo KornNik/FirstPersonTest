@@ -20,7 +20,6 @@ namespace ExampleTemplate
 		protected int _countClip = 5;
         protected bool _isReady = true;
         protected Vector3 _shootDirection;
-        protected CharacterData _characterData;
         protected AmmunitionType[] _ammunitionType = { AmmunitionType.Bullet };
 
         private bool _isVisible;
@@ -37,8 +36,6 @@ namespace ExampleTemplate
 
 
         #region Properties
-
-        public Transform Barrel { get { return _barrel; } private set { } }
 
         public int CountClip => _clips.Count;
 
@@ -76,8 +73,6 @@ namespace ExampleTemplate
             ReloadClip();
 
             AmmunitionPool = new AmmunitionPool(8);
-            _characterData = Data.Instance.Character;
-
         }
 
         #endregion
@@ -88,7 +83,6 @@ namespace ExampleTemplate
         protected void ReadyShoot()
         {
             _isReady = true;
-            _barrel.forward = _characterData.CameraBehaviuor.transform.forward;
         }
 
         protected Vector3 SetSpread(Vector3 barrelDirection)

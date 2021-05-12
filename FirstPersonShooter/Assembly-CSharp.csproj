@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\AssetsPath\AssetsPathWeapons.cs" />
     <Compile Include="Assets\Scripts\Controllers\Camera\CameraController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Controllers.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Enemy\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Controllers\GameController.cs" />
     <Compile Include="Assets\Scripts\Controllers\InputController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Interfaces\ICleanUp.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Assets\Scripts\Helper\Customs\CustomDebug.cs" />
     <Compile Include="Assets\Scripts\Helper\Customs\CustomPlayerPrefs.cs" />
     <Compile Include="Assets\Scripts\Helper\Customs\CustomResources.cs" />
+    <Compile Include="Assets\Scripts\Helper\Enemy\Patrol.cs" />
     <Compile Include="Assets\Scripts\Helper\Extensions\ArrayExtensions.cs" />
     <Compile Include="Assets\Scripts\Helper\Extensions\Color32Extensions.cs" />
     <Compile Include="Assets\Scripts\Helper\Extensions\ColorExtensions.cs" />
@@ -158,6 +160,7 @@
     <Compile Include="Assets\Scripts\Type\LevelsType.cs" />
     <Compile Include="Assets\Scripts\Type\ModificationType.cs" />
     <Compile Include="Assets\Scripts\Type\MouseScrollWheel.cs" />
+    <Compile Include="Assets\Scripts\Type\StateBotType.cs" />
     <Compile Include="Assets\Scripts\Type\WeaponType.cs" />
     <Compile Include="Assets\Scripts\UI\BaseUi.cs" />
     <Compile Include="Assets\Scripts\UI\Interfaces\IListenerScreen.cs" />

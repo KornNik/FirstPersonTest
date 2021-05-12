@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 namespace ExampleTemplate
 {
@@ -9,8 +10,10 @@ namespace ExampleTemplate
 
         [SerializeField] private int _health;
         [SerializeField] private float _distanceView;
+        [SerializeField] public int EnemyCount = 5;
 
         [HideInInspector] public EnemyBehaviour EnemyBehaviour;
+        [HideInInspector] public HashSet<EnemyBehaviour> GetBotList { get; } = new HashSet<EnemyBehaviour>();
 
         #endregion
 
@@ -19,11 +22,32 @@ namespace ExampleTemplate
 
         public void Initialization(EnemiesType enemyType, CharacterPosition point)
         {
+            if (EnemyCount <= 0) return;
             var enemyBehaviour = CustomResources.Load<EnemyBehaviour>
                 (AssetsPathEnemies.EnemiesGameObject[enemyType]);
-            EnemyBehaviour = Instantiate(enemyBehaviour, point.Position, point.Rotation());
+            for (int index = 0; index < EnemyCount; index++)
+            {
+                EnemyBehaviour = Instantiate(enemyBehaviour, Patrol.GenericPoint(point.Position), point.Rotation());
+                EnemyBehaviour.Agent.avoidancePriority = index;
+                AddBotToList(EnemyBehaviour);
+            }
         }
-        
+
+        private void AddBotToList(EnemyBehaviour bot)
+        {
+            if (!GetBotList.Contains(bot))
+            {
+                GetBotList.Add(bot);
+            }
+        }
+        public void RemoveBotToList(EnemyBehaviour bot)
+        {
+            if (GetBotList.Contains(bot))
+            {
+                GetBotList.Remove(bot);
+            }
+        }
+
         public int GetHealth()
         {
             return _health;

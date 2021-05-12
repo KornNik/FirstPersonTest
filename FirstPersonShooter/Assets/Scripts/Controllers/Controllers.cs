@@ -24,14 +24,16 @@
         
         public Controllers()
         {
-            _initializations = new IInitialization[2];
+            _initializations = new IInitialization[3];
             _initializations[0] = new LoadLevelController();
             _initializations[1] = new WeaponController();
-            _executeControllers = new IExecute[4];
+            _initializations[2] = new EnemyController();
+            _executeControllers = new IExecute[5];
             _executeControllers[0] = new TimeRemainingController();
             _executeControllers[1] = new InputController();
             _executeControllers[2] = new CameraController();
             _executeControllers[3] = new WeaponController();
+            _executeControllers[4] = new EnemyController();
 
             _cleanUps = new ICleanUp[1];
             _cleanUps[0] = new TimeRemainingCleanUp();

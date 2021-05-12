@@ -9,6 +9,7 @@ namespace ExampleTemplate
 
         private KeyCode _reloadWeapon = KeyCode.R;
         private CharacterData _characterData;
+
         private float _handWeight;
         private bool _isActive;
 

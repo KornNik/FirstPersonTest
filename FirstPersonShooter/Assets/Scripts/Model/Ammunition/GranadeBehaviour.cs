@@ -31,8 +31,7 @@ namespace ExampleTemplate
 
         private void OnDrawGizmosSelected()
         {
-            Gizmos.DrawWireSphere(transform.position, _radius);
-            
+            Gizmos.DrawWireSphere(transform.position, _radius);   
         }
 
         #endregion
@@ -49,10 +48,10 @@ namespace ExampleTemplate
                 if (rigidbody != null)
                 {
                     rigidbody.AddExplosionForce(_force, transform.position, _radius);
-                    if (damageableObject != null)
-                    {
-                        InflictDamage(damageableObject);
-                    }
+                }
+                if (damageableObject != null)
+                {
+                    InflictDamage(damageableObject);
                 }
             }
         }

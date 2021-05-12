@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: EnemyData
   m_EditorClassIdentifier: 
   _health: 100
-  _distanceView: 5
+  _distanceView: 10
+  EnemyCount: 1
   EnemyBehaviour: {fileID: 0}
