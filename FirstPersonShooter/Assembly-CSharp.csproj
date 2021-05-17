@@ -96,6 +96,8 @@
     <Compile Include="Assets\Scripts\Helper\Ciphers\Crypto.cs" />
     <Compile Include="Assets\Scripts\Helper\Ciphers\ICipher.cs" />
     <Compile Include="Assets\Scripts\Helper\Clip.cs" />
+    <Compile Include="Assets\Scripts\Helper\Coroutine\CoroutineBaseObject.cs" />
+    <Compile Include="Assets\Scripts\Helper\Coroutine\CoroutineObject.cs" />
     <Compile Include="Assets\Scripts\Helper\Customs\CustomDebug.cs" />
     <Compile Include="Assets\Scripts\Helper\Customs\CustomPlayerPrefs.cs" />
     <Compile Include="Assets\Scripts\Helper\Customs\CustomResources.cs" />
@@ -115,6 +117,7 @@
     <Compile Include="Assets\Scripts\Helper\Extensions\Vector3Extensions.cs" />
     <Compile Include="Assets\Scripts\Helper\LoadLevelFromEditor.cs" />
     <Compile Include="Assets\Scripts\Helper\Manageres\AxisManager.cs" />
+    <Compile Include="Assets\Scripts\Helper\Manageres\KeyManager.cs" />
     <Compile Include="Assets\Scripts\Helper\Manageres\LayerManager.cs" />
     <Compile Include="Assets\Scripts\Helper\Manageres\NameManager.cs" />
     <Compile Include="Assets\Scripts\Helper\Manageres\TagManager.cs" />

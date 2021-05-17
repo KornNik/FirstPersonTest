@@ -9,7 +9,6 @@ namespace ExampleTemplate
     {
         #region Fields
 
-        [HideInInspector] public Renderer[] Materials;
         [HideInInspector] public NavMeshAgent Agent;
 
         public static Action<float> EnemyHealthChanged;
@@ -17,12 +16,13 @@ namespace ExampleTemplate
         private WaitForSeconds _waitForDamage = new WaitForSeconds(1);
         private WaitForSeconds _waitForState = new WaitForSeconds(5);
         private StateBotType _stateBot;
+        private Renderer[] _materials;
         private Vector3 _point;
+        private Coroutine _waitStateRoutine;
 
         private float _waitForRevive = 10.0f;
         private float _health;
 
-        private bool _isAggressive = true;
         private bool _isColliderActive;
         private bool _isVisible;
         private bool _isDead;
@@ -101,7 +101,7 @@ namespace ExampleTemplate
             _health = _enemyData.GetHealth();
 
             Agent = gameObject.GetComponent<NavMeshAgent>();
-            Materials = gameObject.GetComponentsInChildren<Renderer>();
+            _materials = gameObject.GetComponentsInChildren<Renderer>();
         }
 
         #endregion
@@ -123,7 +123,7 @@ namespace ExampleTemplate
                     Detecting(_target);
                     break;
                 case StateBotType.Died:
-                    _enemyData.EnemyBehaviour.Die();
+                    Die();
                     break;
             }
         }
@@ -135,6 +135,7 @@ namespace ExampleTemplate
 
         public void ReceiveDamage(float damage)
         {
+            if (_stateBot == StateBotType.Died) return;
             _health -= damage;
             EnemyHealthChanged?.Invoke(_health);
             if (_health <= 0 && _stateBot != StateBotType.Died)
@@ -151,19 +152,22 @@ namespace ExampleTemplate
 
         private void Default()
         {
-            ColorExtensions.ChangeColor(Color.white, _enemyData.EnemyBehaviour.Materials);
-            StartCoroutine(WaitState(StateBotType.Patrol));
+            ColorExtensions.ChangeColor(Color.white, _materials);
+            if (_waitStateRoutine == null)
+            {
+                _waitStateRoutine = StartCoroutine(WaitState(StateBotType.Patrol));
+            }
         }
 
         private void Patrolling()
         {
-            if (_isAggressive)
+            if (_enemyData.GetIsAggressive())
             {
                 FindEnemy();
             }
             if (!Agent.hasPath)
             {
-                ColorExtensions.ChangeColor(Color.blue, _enemyData.EnemyBehaviour.Materials);
+                ColorExtensions.ChangeColor(Color.blue, _materials);
                 _point = Patrol.GenericPoint(transform.position);
                 Agent.speed = 3;
                 MovePoint(_point);
@@ -173,10 +177,9 @@ namespace ExampleTemplate
 
         private void Detecting(CharacterBehaviour target)
         {
-            ColorExtensions.ChangeColor(Color.red, _enemyData.EnemyBehaviour.Materials);
+            ColorExtensions.ChangeColor(Color.red, _materials);
             Agent.speed = 6;
             MovePoint(target.transform.position);
-            Debug.Log(target);
             Agent.stoppingDistance = 10;
         }
 
@@ -245,6 +248,7 @@ namespace ExampleTemplate
         {
             yield return _waitForState;
             ReadyState(stateBot);
+            _waitStateRoutine = null;
         }
 
         #endregion

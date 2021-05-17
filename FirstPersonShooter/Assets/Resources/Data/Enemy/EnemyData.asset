@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89fd949419e59504ab7bdf834547386b, type: 3}
   m_Name: EnemyData
   m_EditorClassIdentifier: 
-  _health: 100
   _distanceView: 10
-  EnemyCount: 1
+  _enemyCount: 5
+  _health: 50
+  _isAggressive: 1
   EnemyBehaviour: {fileID: 0}

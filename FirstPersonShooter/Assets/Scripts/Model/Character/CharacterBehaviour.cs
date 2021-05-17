@@ -54,7 +54,14 @@ namespace ExampleTemplate
         {
             if (!_characterController.isGrounded) _gravityForce -= 30 * Time.deltaTime;
             else _gravityForce = -1;
-            if (Input.GetKeyDown(KeyCode.Space) && _characterController.isGrounded) _gravityForce = _jumpPower;
+        }
+
+        public void CharacterJump()
+        {
+            if (_characterController.isGrounded)
+            {
+                _gravityForce = _jumpPower;
+            }
         }
 
         #endregion

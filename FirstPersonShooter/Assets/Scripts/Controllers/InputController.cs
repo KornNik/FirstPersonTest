@@ -9,10 +9,6 @@ namespace ExampleTemplate
 
         private readonly CharacterData _characterData;
 
-        private KeyCode _activeMainMenu = KeyCode.Escape;
-        private KeyCode _deactivateWeapon = KeyCode.Alpha0;
-        private KeyCode _firstWeapon = KeyCode.Alpha1;
-        private KeyCode _secondWeapon = KeyCode.Alpha2;
         private bool _isActive;
 
         #endregion
@@ -36,7 +32,7 @@ namespace ExampleTemplate
         {
             if (!_isActive) return;
 
-            if (Input.GetKey(_activeMainMenu))
+            if (Input.GetAxis(AxisManager.CANCEL) != 0)
             {
                 ActiveMainMenu();
             }
@@ -54,24 +50,28 @@ namespace ExampleTemplate
             _characterData.CharacterBehaviour.CharacterMove(inputAxis);
             _characterData.CharacterBehaviour.GamingGravity();
 
-            if (Input.GetAxis(AxisManager.MousScrollWheel) > 0)
+            if (Input.GetAxis(AxisManager.JUMP) != 0)
+            {
+                _characterData.CharacterBehaviour.CharacterJump();
+            }
+            if (Input.GetAxis(AxisManager.MOUSESCROLLWHEEL) > 0)
             {
                 MouseScroll(MouseScrollWheel.Up);
             }
-            if (Input.GetAxis(AxisManager.MousScrollWheel) < 0)
+            if (Input.GetAxis(AxisManager.MOUSESCROLLWHEEL) < 0)
             {
                 MouseScroll(MouseScrollWheel.Down);
             }
 
-            if (Input.GetKeyDown(_firstWeapon))
+            if (Input.GetKeyDown(KeyManager.FIRSTWEAPON))
             {
                 SelectWeapon(0);
             }
-            if (Input.GetKeyDown(_secondWeapon))
+            if (Input.GetKeyDown(KeyManager.SECONDWEAPON))
             {
                 SelectWeapon(1);
             }
-            if (Input.GetKeyDown(_deactivateWeapon))
+            if (Input.GetKeyDown(KeyManager.CANCELWEAPON))
             {
                 Services.Instance.WeaponService.Off();
             }

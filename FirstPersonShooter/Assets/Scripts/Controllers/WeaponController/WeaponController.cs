@@ -7,7 +7,6 @@ namespace ExampleTemplate
 
         #region Fields
 
-        private KeyCode _reloadWeapon = KeyCode.R;
         private CharacterData _characterData;
 
         private float _handWeight;
@@ -36,25 +35,26 @@ namespace ExampleTemplate
 
             var tempWeapon = Services.Instance.WeaponService.Weapon;
 
+            _handWeight = Mathf.Clamp(_handWeight, 0, 1);
+            _characterData.CharacterAnimationBehaviour.SetHandWeight(_handWeight);
+
             if (Input.GetAxis(AxisManager.FIRE1) != 0 && _handWeight != 0)
             {
                 tempWeapon.Fire();
                 WeaponService.AmmunitionChanged?.Invoke(tempWeapon.CountClip, tempWeapon.Clip.CountAmmunition);
             }
-
-            if (Input.GetKeyDown(_reloadWeapon))
-            {
-                Services.Instance.WeaponService.ReloadClip();
-            }
-
             if (Input.GetAxis(AxisManager.FIRE2) != 0)
             {
                 _handWeight += Time.deltaTime * _characterData.GetWeaponAimingSpeed();
             }
             else { _handWeight -= Time.deltaTime * _characterData.GetWeaponAimingSpeed(); }
 
-            _handWeight = Mathf.Clamp(_handWeight, 0, 1);
-            _characterData.CharacterAnimationBehaviour.SetHandWeight(_handWeight);
+            if (Input.GetKeyDown(KeyManager.RELOADWEAPON))
+            {
+                Services.Instance.WeaponService.ReloadClip();
+            }
+
+
         }
 
         #endregion

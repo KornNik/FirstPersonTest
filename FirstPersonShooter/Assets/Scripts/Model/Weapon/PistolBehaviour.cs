@@ -25,7 +25,6 @@ namespace ExampleTemplate
 			if (AmmunitionPool == null) return;
 
 			_shootDirection = SetSpread(_barrel.forward);
-
 			var tempAmmunition = AmmunitionPool.GetAmmunition(AmmunitionType.Bullet);
 			tempAmmunition.AddForce(_shootDirection * _force);
 			FireActn?.Invoke();

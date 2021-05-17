@@ -8,9 +8,11 @@ namespace ExampleTemplate
     {
         #region Fields
 
-        [SerializeField] private int _health;
         [SerializeField] private float _distanceView;
-        [SerializeField] public int EnemyCount = 5;
+        [SerializeField] private int _enemyCount = 5;
+        [SerializeField] private int _health;
+
+        [SerializeField] private bool _isAggressive = true;
 
         [HideInInspector] public EnemyBehaviour EnemyBehaviour;
         [HideInInspector] public HashSet<EnemyBehaviour> GetBotList { get; } = new HashSet<EnemyBehaviour>();
@@ -22,10 +24,10 @@ namespace ExampleTemplate
 
         public void Initialization(EnemiesType enemyType, CharacterPosition point)
         {
-            if (EnemyCount <= 0) return;
+            if (_enemyCount <= 0) return;
             var enemyBehaviour = CustomResources.Load<EnemyBehaviour>
                 (AssetsPathEnemies.EnemiesGameObject[enemyType]);
-            for (int index = 0; index < EnemyCount; index++)
+            for (int index = 0; index < _enemyCount; index++)
             {
                 EnemyBehaviour = Instantiate(enemyBehaviour, Patrol.GenericPoint(point.Position), point.Rotation());
                 EnemyBehaviour.Agent.avoidancePriority = index;
@@ -55,6 +57,10 @@ namespace ExampleTemplate
         public float GetDistanceView()
         {
             return _distanceView;
+        }
+        public bool GetIsAggressive()
+        {
+            return _isAggressive;
         }
 
         #endregion
