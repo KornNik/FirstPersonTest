@@ -6,10 +6,10 @@ namespace ExampleTemplate
 	{
         #region Fields
 
-        private static WeaponBehaviour _weapon;
-		private static bool _isWeapon;
-
         public static Action<int, int> AmmunitionChanged;
+
+        private WeaponBehaviour _weapon;
+		private bool _isWeapon;
 
 		#endregion
 
