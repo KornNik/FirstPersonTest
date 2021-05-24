@@ -7,7 +7,7 @@ namespace ExampleTemplate
 
         #region Fields
 
-        private static WeaponBehaviour[] _weapons = new WeaponBehaviour[5];
+        private WeaponBehaviour[] _weapons = new WeaponBehaviour[5];
         private int _selectIndexWeapon = 0;
 
         #endregion

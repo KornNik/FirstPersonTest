@@ -227,6 +227,7 @@ namespace ExampleTemplate
 
         #endregion
 
+
         #region IEnumerator
 
         private IEnumerator DamageOverTime(float damage, float duration)
