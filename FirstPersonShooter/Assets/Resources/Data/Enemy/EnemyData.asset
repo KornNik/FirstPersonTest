@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: EnemyData
   m_EditorClassIdentifier: 
   _distanceView: 10
+  _waitForRevive: 5
   _enemyCount: 5
   _health: 50
   _isAggressive: 1

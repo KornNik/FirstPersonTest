@@ -7,16 +7,10 @@ namespace ExampleTemplate
     {
         #region Fields
 
-		[SerializeField] protected float _baseDamage = 10;
-		[SerializeField] protected float _bonusDamage = 5;
-		[SerializeField] protected float _poisonDamage = 1;
-		[SerializeField] protected float _poisonDuration = 4;
-
 		public AmmunitionType Type = AmmunitionType.Bullet;
 
 		protected float _currentDamage;
-        protected float _timeToDestruct = 5;
-		protected float _lossOfDamageAtTime = 0.2f;
+		protected AmmunitionData _ammunitionData;
 
 		private Rigidbody _rigidbody;
 		private TrailRenderer _trailRenderer;
@@ -29,7 +23,7 @@ namespace ExampleTemplate
 
         protected virtual void Awake()
 		{
-			_currentDamage = _baseDamage;
+			_currentDamage = _ammunitionData.GetBaseDamage();
 			_rigidbody = GetComponent<Rigidbody>();
 			_trailRenderer = GetComponent<TrailRenderer>();
 		}
@@ -67,7 +61,7 @@ namespace ExampleTemplate
 
 		protected void LossOfDamage()
 		{
-			_currentDamage -= _lossOfDamageAtTime;
+			_currentDamage -= _ammunitionData.GetLossOfDamage();
 		}
 
         protected void ReturnToPool()
@@ -88,10 +82,10 @@ namespace ExampleTemplate
 
 		private void ActiveAmmunition()
 		{
-			_currentDamage = _baseDamage;
+			_currentDamage = _ammunitionData.GetBaseDamage();
 			gameObject.SetActive(true);
 			InvokeRepeating(nameof(LossOfDamage), 0, 1);
-			Invoke(nameof(ReturnToPool), _timeToDestruct);
+			Invoke(nameof(ReturnToPool), _ammunitionData.GetTimeToDistract());
 			transform.SetParent(null);
 		}
 

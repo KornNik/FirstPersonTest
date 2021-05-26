@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace ExampleTemplate
+﻿namespace ExampleTemplate
 {
     public sealed class GranadeLauncherBehaviour : WeaponBehaviour
 	{
@@ -8,9 +6,8 @@ namespace ExampleTemplate
 
         protected override void Awake()
 		{
-            _countAmmunition = 5;
+            _weaponData = Data.Instance.GranadeLauncherData;
             base.Awake();
-
 		}
 
         #endregion
@@ -22,11 +19,11 @@ namespace ExampleTemplate
 		{
 			if (!_isReady) return;
 			if (Clip.CountAmmunition <= 0) return;
-			if (AmmunitionPool == null) return;
+			if (_ammunitionPool == null) return;
 
             _shootDirection = SetSpread(_barrel.forward);
 
-            var tempAmmunition = AmmunitionPool.GetAmmunition(AmmunitionType.Granade);
+            var tempAmmunition = _ammunitionPool.GetAmmunition(AmmunitionType.Granade);
             tempAmmunition.AddForce(_shootDirection * _force);
 
             Clip.CountAmmunition--;

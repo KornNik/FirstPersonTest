@@ -86,6 +86,8 @@
     <Compile Include="Assets\Scripts\Controllers\TimeRemaining\TimeRemainingController.cs" />
     <Compile Include="Assets\Scripts\Controllers\TimeRemaining\TimeRemainingExtensions.cs" />
     <Compile Include="Assets\Scripts\Controllers\WeaponController\WeaponController.cs" />
+    <Compile Include="Assets\Scripts\Data\Ammunition\AmmunitionData.cs" />
+    <Compile Include="Assets\Scripts\Data\Ammunition\GranadeData.cs" />
     <Compile Include="Assets\Scripts\Data\Camera\CameraData.cs" />
     <Compile Include="Assets\Scripts\Data\Character\CharacterData.cs" />
     <Compile Include="Assets\Scripts\Data\Data.cs" />
@@ -93,6 +95,7 @@
     <Compile Include="Assets\Scripts\Data\Level\CharacterPosition.cs" />
     <Compile Include="Assets\Scripts\Data\Level\LevelData.cs" />
     <Compile Include="Assets\Scripts\Data\Level\LevelsData.cs" />
+    <Compile Include="Assets\Scripts\Data\Weapon\WeaponData.cs" />
     <Compile Include="Assets\Scripts\Helper\Ciphers\CaesarCipher.cs" />
     <Compile Include="Assets\Scripts\Helper\Ciphers\Crypto.cs" />
     <Compile Include="Assets\Scripts\Helper\Ciphers\ICipher.cs" />

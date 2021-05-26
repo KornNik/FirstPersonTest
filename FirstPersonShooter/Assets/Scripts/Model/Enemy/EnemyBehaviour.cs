@@ -20,7 +20,6 @@ namespace ExampleTemplate
         private Vector3 _point;
         private Coroutine _waitStateRoutine;
 
-        private float _waitForRevive = 10.0f;
         private float _health;
 
         private bool _isColliderActive;
@@ -137,7 +136,7 @@ namespace ExampleTemplate
         {
             if (_stateBot == StateBotType.Died) return;
             _health -= damage;
-            EnemyHealthChanged?.Invoke(_health);
+            EnemyHealthChanged?.Invoke(_health / _enemyData.GetHealth());
             if (_health <= 0 && _stateBot != StateBotType.Died)
             {
                 _stateBot = StateBotType.Died;
@@ -211,7 +210,7 @@ namespace ExampleTemplate
             IsVisible = false;
             IsColliderActive = false;
             Agent.ResetPath();
-            Invoke(nameof(Revive), _waitForRevive);
+            Invoke(nameof(Revive), _enemyData.GetReviveTime());
         }
 
         private void Revive()
@@ -220,7 +219,7 @@ namespace ExampleTemplate
             transform.position = Patrol.GenericPoint(_levelsData.GetEnemyPosition(LevelsType.TestLevel).Position);
             transform.rotation = _levelsData.GetEnemyPosition(LevelsType.TestLevel).Rotation();
             _health = _enemyData.GetHealth();
-            EnemyHealthChanged?.Invoke(_health);
+            EnemyHealthChanged?.Invoke(_health/_enemyData.GetHealth());
             IsVisible = true;
             IsColliderActive = true;
         }
@@ -236,7 +235,7 @@ namespace ExampleTemplate
             {
                 yield return _waitForDamage;
                 _health -= damage;
-                EnemyHealthChanged?.Invoke(_health);
+                EnemyHealthChanged?.Invoke(_health / _enemyData.GetHealth());
             }
             if (_health <= 0 && _stateBot != StateBotType.Died)
             {

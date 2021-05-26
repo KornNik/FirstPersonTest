@@ -11,17 +11,23 @@ namespace ExampleTemplate
     {
         #region Fields
 
-        [SerializeField] private string _shakeDataPath;
         [SerializeField] private string _characterDataPath;
         [SerializeField] private string _cameraDataPath;
         [SerializeField] private string _levelsDataPath;
         [SerializeField] private string _enemiesDataPath;
-        [SerializeField] private string _weaponsDataPath;
+        [SerializeField] private string _pistolDataPath;
+        [SerializeField] private string _granadeLauncherDataPath;
+        [SerializeField] private string _bulletDataPath;
+        [SerializeField] private string _granadeDataPath;
 
         private static CharacterData _characterData;
         private static CameraData _cameraData;
         private static LevelsData _levelsData;
         private static EnemiesData _enemiesData;
+        private static WeaponData _pistolData;
+        private static WeaponData _granadeLauncherData;
+        private static AmmunitionData _bulletData;
+        private static GranadeData _granadeData;
 
         private static readonly Lazy<Data> _instance = new Lazy<Data>(() => Load<Data>("Data/" + typeof(Data).Name));
         
@@ -75,6 +81,50 @@ namespace ExampleTemplate
                     _enemiesData = Load<EnemiesData>("Data/" + Instance._enemiesDataPath);
                 }
                 return _enemiesData;
+            }
+        }
+        public WeaponData PistolData
+        {
+            get
+            {
+                if (_pistolData == null)
+                {
+                    _pistolData = Load<WeaponData>("Data/" + Instance._pistolDataPath);
+                }
+                return _pistolData;
+            }
+        }
+        public WeaponData GranadeLauncherData
+        {
+            get
+            {
+                if (_granadeLauncherData == null)
+                {
+                    _granadeLauncherData = Load<WeaponData>("Data/" + Instance._granadeLauncherDataPath);
+                }
+                return _granadeLauncherData;
+            }
+        }
+        public AmmunitionData BulletData
+        {
+            get
+            {
+                if (_bulletData == null)
+                {
+                    _bulletData = Load<AmmunitionData>("Data/" + Instance._bulletDataPath);
+                }
+                return _bulletData;
+            }
+        }
+        public GranadeData GranadeData
+        {
+            get
+            {
+                if (_granadeData == null)
+                {
+                    _granadeData = Load<GranadeData>("Data/" + Instance._granadeDataPath);
+                }
+                return _granadeData;
             }
         }
 

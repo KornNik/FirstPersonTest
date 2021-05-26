@@ -6,23 +6,23 @@ namespace ExampleTemplate
     {
         #region Fields
 
-        private float _radius = 5f;
-        private float _force = 700f;
+        private GranadeData _granadeData;
 
         #endregion
-
 
         #region UnityMethods
 
         protected override void Awake()
         {
+            _ammunitionData = Data.Instance.GranadeData;
+            _granadeData = Data.Instance.GranadeData;
             base.Awake();
-            RegisterBulletModifier(new BonusDamageModifier(this, _bonusDamage));
+            RegisterBulletModifier(new BonusDamageModifier(this, _ammunitionData.GetBonusDamage()));
         }
 
         private void OnCollisionEnter(Collision collision)
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, _radius);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, _granadeData.GetBlastRadius());
 
             ExplosionForce(colliders);
 
@@ -31,7 +31,7 @@ namespace ExampleTemplate
 
         private void OnDrawGizmosSelected()
         {
-            Gizmos.DrawWireSphere(transform.position, _radius);   
+            Gizmos.DrawWireSphere(transform.position, _granadeData.GetBlastRadius());   
         }
 
         #endregion
@@ -47,7 +47,7 @@ namespace ExampleTemplate
                 var damageableObject = items.GetComponent<IDamageable>();
                 if (rigidbody != null)
                 {
-                    rigidbody.AddExplosionForce(_force, transform.position, _radius);
+                    rigidbody.AddExplosionForce(_granadeData.GetBlastForce(), transform.position, _granadeData.GetBlastRadius());
                 }
                 if (damageableObject != null)
                 {

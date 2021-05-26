@@ -53,7 +53,7 @@ namespace ExampleTemplate
 
         private void OnEnemyHealthChanged(float health)
         {
-            _enemyHealth.fillAmount = health/Data.Instance.EnemiesData.GetHealth() ;
+            _enemyHealth.fillAmount = health;
         }
 
         private void Call()

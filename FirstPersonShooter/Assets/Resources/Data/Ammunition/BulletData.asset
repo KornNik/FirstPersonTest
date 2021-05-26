@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b0041b58a6bafe4f8e65c22d8693e31, type: 3}
+  m_Name: BulletData
+  m_EditorClassIdentifier: 
+  _baseDamage: 10
+  _bonusDamage: 5
+  _poisonDamage: 1
+  _poisonDuration: 4
+  _timeToDistract: 5
+  _lossOfDamageAtTime: 0.2

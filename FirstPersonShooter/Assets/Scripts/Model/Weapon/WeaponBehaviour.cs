@@ -8,29 +8,30 @@ namespace ExampleTemplate
     {
         #region Fields
 
+        [SerializeField] protected Transform _barrel;
+        [SerializeField] protected Transform _placeForClip;
+        [SerializeField] protected Transform _placeForMuffler;
+        [SerializeField] protected float _force;
+        [SerializeField] protected float _rechergeTime;
+        [SerializeField] protected float _spreadFactor;
+
         public static Action FireActn;
 
         public Clip Clip;
         public Transform PoolTransform;
-        public AmmunitionPool AmmunitionPool;
         public bool IsClipModificated = false;
         public bool IsMufflerModificated = false;
 
-		protected int _countAmmunition = 30;
-		protected int _countClip = 5;
+        protected int _countAmmunition;
+        protected int _countClip;
         protected bool _isReady = true;
         protected Vector3 _shootDirection;
+        protected WeaponData _weaponData;
+        protected AmmunitionPool _ammunitionPool;
         protected AmmunitionType[] _ammunitionType = { AmmunitionType.Bullet };
 
         private bool _isVisible;
         private Queue<Clip> _clips = new Queue<Clip>();
-
-        [SerializeField] protected Transform _barrel;
-        [SerializeField] protected Transform _placeForClip;
-        [SerializeField] protected Transform _placeForMuffler;
-        [SerializeField] protected float _force = 700;
-        [SerializeField] protected float _rechergeTime = 0.2f;
-        [SerializeField] protected float _spreadFactor = 0.02f;
 
         #endregion
 
@@ -65,6 +66,12 @@ namespace ExampleTemplate
 
         protected virtual void Awake()
         {
+            _countAmmunition = _weaponData.GetCountAmmunition();
+            _countClip = _weaponData.GetCountClip();
+            _force = _weaponData.GetBulletForce();
+            _rechergeTime = _weaponData.GetRechergeTime();
+            _spreadFactor = _weaponData.GetSpreadFactor();
+
             for (var i = 0; i <= _countClip; i++)
             {
                 AddClip(new Clip { CountAmmunition = _countAmmunition });
@@ -72,7 +79,7 @@ namespace ExampleTemplate
 
             ReloadClip();
 
-            AmmunitionPool = new AmmunitionPool(8);
+            _ammunitionPool = new AmmunitionPool(8);
         }
 
         #endregion

@@ -16,7 +16,6 @@ namespace ExampleTemplate
         private CharacterController _characterController;
         private Vector3 _moveVector;
         private float _gravityForce;
-        private float _jumpPower = 10;
 
         #endregion
 
@@ -60,7 +59,7 @@ namespace ExampleTemplate
         {
             if (_characterController.isGrounded)
             {
-                _gravityForce = _jumpPower;
+                _gravityForce = _characterData.GetJumpPower();
             }
         }
 

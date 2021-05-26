@@ -8,10 +8,10 @@ namespace ExampleTemplate
     {
         #region Fields
 
-        [SerializeField] private float _distanceView;
+        [SerializeField] private float _distanceView = 10;
+        [SerializeField] private float _waitForRevive = 5;
         [SerializeField] private int _enemyCount = 5;
-        [SerializeField] private int _health;
-
+        [SerializeField] private int _health = 50;
         [SerializeField] private bool _isAggressive = true;
 
         [HideInInspector] public EnemyBehaviour EnemyBehaviour;
@@ -57,6 +57,10 @@ namespace ExampleTemplate
         public float GetDistanceView()
         {
             return _distanceView;
+        }
+        public float GetReviveTime()
+        {
+            return _waitForRevive;
         }
         public bool GetIsAggressive()
         {

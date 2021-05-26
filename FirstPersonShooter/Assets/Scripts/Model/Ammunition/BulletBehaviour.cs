@@ -6,8 +6,9 @@
 
         protected override void Awake()
         {
+            _ammunitionData = Data.Instance.BulletData;
             base.Awake();
-            RegisterBulletModifier(new PoisonDamageModifier(this, _poisonDamage, _poisonDuration));
+            RegisterBulletModifier(new PoisonDamageModifier(this, _ammunitionData.GetPoisonDamage(), _ammunitionData.GetPoisonDuration()));
         }
 
         private void OnCollisionEnter(UnityEngine.Collision collision)
