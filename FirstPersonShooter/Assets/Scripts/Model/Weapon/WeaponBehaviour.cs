@@ -19,15 +19,18 @@ namespace ExampleTemplate
 
         public Clip Clip;
         public Transform PoolTransform;
-        public bool IsClipModificated = false;
-        public bool IsMufflerModificated = false;
 
         protected int _countAmmunition;
         protected int _countClip;
         protected bool _isReady = true;
+        protected bool _isClipModificated = false;
+        protected bool _isMufflerModificated = false;
+
         protected Vector3 _shootDirection;
         protected WeaponData _weaponData;
         protected AmmunitionPool _ammunitionPool;
+        protected ClipModification _clipModification;
+        protected MufflerModification _mufflerModification;
         protected AmmunitionType[] _ammunitionType = { AmmunitionType.Bullet };
 
         private bool _isVisible;
@@ -37,6 +40,9 @@ namespace ExampleTemplate
 
 
         #region Properties
+
+        public Transform PlaceForClip => _placeForClip;
+        public Transform PlaceForMuffler => _placeForMuffler;
 
         public int CountClip => _clips.Count;
 
@@ -66,6 +72,10 @@ namespace ExampleTemplate
 
         protected virtual void Awake()
         {
+            _ammunitionPool = new AmmunitionPool(8);
+            _mufflerModification = new MufflerModification();
+            _clipModification = new ClipModification();
+
             _countAmmunition = _weaponData.GetCountAmmunition();
             _countClip = _weaponData.GetCountClip();
             _force = _weaponData.GetBulletForce();
@@ -79,7 +89,6 @@ namespace ExampleTemplate
 
             ReloadClip();
 
-            _ammunitionPool = new AmmunitionPool(8);
         }
 
         #endregion
@@ -129,15 +138,29 @@ namespace ExampleTemplate
             Clip = _clips.Dequeue();
         }
 
-        public Transform MufflerTransform()
-        {
-            return _placeForMuffler;
-        }
-        public Transform ClipTransform()
-        {
-            return _placeForClip;
-        }
         public abstract void Fire();
+
+        public void AddModifications()
+        {
+            AddMufflerModificaton();
+            AddClipModification();
+        }
+        public void AddMufflerModificaton()
+        {
+            if (!_isClipModificated)
+            {
+                var clip = _clipModification.AddModification(this);
+                _isClipModificated = true;
+            }
+        }
+        public void AddClipModification()
+        {
+            if (!_isMufflerModificated)
+            {
+                var muffler = _mufflerModification.AddModification(this);
+                _isMufflerModificated = true;
+            }
+        }
 
         #endregion
     }

@@ -53,6 +53,10 @@ namespace ExampleTemplate
             {
                 Services.Instance.WeaponService.ReloadClip();
             }
+            if (Input.GetKeyDown(KeyManager.ADDMODIFICATION))
+            {
+                tempWeapon.AddModifications();
+            }
 
 
         }

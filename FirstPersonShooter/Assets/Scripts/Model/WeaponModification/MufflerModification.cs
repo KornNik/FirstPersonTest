@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 namespace ExampleTemplate
 {
     public class MufflerModification : WeaponModification
@@ -12,12 +11,20 @@ namespace ExampleTemplate
 
         #endregion
 
+
+        #region Properties
+
+        public float ReducingSpread { get { return _reducingSpread; } set { _reducingSpread = value; } }
+
+        #endregion
+
+
         #region Methods
 
         public override Object AddModification(WeaponBehaviour weapon)
         {
             var muffler = Object.Instantiate(Resources.Load<GameObject>(AssetsPathWeaponModification.ModificationsGameObject[ModificationType.Muffler]),
-            weapon.MufflerTransform().position, weapon.MufflerTransform().rotation, weapon.MufflerTransform());
+            weapon.PlaceForMuffler.position, weapon.PlaceForMuffler.rotation, weapon.PlaceForMuffler);
             weapon.RemoveSpread(_reducingSpread);
             return muffler;
         }

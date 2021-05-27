@@ -8,6 +8,8 @@
 		{
             _weaponData = Data.Instance.GranadeLauncherData;
             base.Awake();
+            _isMufflerModificated = true;
+            _clipModification.IncreasAmmo = 4;
 		}
 
         #endregion

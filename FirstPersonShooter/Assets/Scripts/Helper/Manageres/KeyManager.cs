@@ -11,7 +11,9 @@ namespace ExampleTemplate
         public const KeyCode SECONDWEAPON = KeyCode.Alpha2;
         public const KeyCode CANCELWEAPON = KeyCode.Alpha0;
         public const KeyCode RELOADWEAPON = KeyCode.R;
+        public const KeyCode ADDMODIFICATION = KeyCode.Backspace;
 
         #endregion
+
     }
 }
