@@ -11,6 +11,7 @@ namespace ExampleTemplate
         [SerializeField] protected Transform _barrel;
         [SerializeField] protected Transform _placeForClip;
         [SerializeField] protected Transform _placeForMuffler;
+        [SerializeField] protected Transform _crosshair;
         [SerializeField] protected float _force;
         [SerializeField] protected float _rechergeTime;
         [SerializeField] protected float _spreadFactor;
@@ -35,6 +36,7 @@ namespace ExampleTemplate
 
         private bool _isVisible;
         private Queue<Clip> _clips = new Queue<Clip>();
+        public WeaponCrosshair WeaponCrosshair;
 
         #endregion
 
@@ -43,6 +45,8 @@ namespace ExampleTemplate
 
         public Transform PlaceForClip => _placeForClip;
         public Transform PlaceForMuffler => _placeForMuffler;
+
+        public Transform Barrel => _barrel;
 
         public int CountClip => _clips.Count;
 
@@ -75,6 +79,7 @@ namespace ExampleTemplate
             _ammunitionPool = new AmmunitionPool(8);
             _mufflerModification = new MufflerModification();
             _clipModification = new ClipModification();
+            WeaponCrosshair = new WeaponCrosshair(_barrel,_crosshair);
 
             _countAmmunition = _weaponData.GetCountAmmunition();
             _countClip = _weaponData.GetCountClip();
@@ -103,11 +108,10 @@ namespace ExampleTemplate
 
         protected Vector3 SetSpread(Vector3 barrelDirection)
         {
-            var shootDirection = barrelDirection;
-            shootDirection.z += UnityEngine.Random.Range(-_spreadFactor, _spreadFactor);
-            shootDirection.y += UnityEngine.Random.Range(-_spreadFactor, _spreadFactor);
+            barrelDirection.z += UnityEngine.Random.Range(-_spreadFactor, _spreadFactor);
+            barrelDirection.y += UnityEngine.Random.Range(-_spreadFactor, _spreadFactor);
 
-            return shootDirection;
+            return barrelDirection;
         }
 
         protected void AddClip(Clip clip)

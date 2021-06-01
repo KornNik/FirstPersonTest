@@ -2,7 +2,7 @@
 
 
 namespace ExampleTemplate
-{ 
+{
     public static class LayerManager
     {
         #region Fields
@@ -14,12 +14,13 @@ namespace ExampleTemplate
         private const string NON_COLLIDABLE = "Non-Collidable";
         private const string GROUND = "Ground";
         private const string UI = "UI";
+        private const string BULLET_LAYER = "Bullet";
+        private const string CROSSHAIR_LAYER = "Crosshair";
 
         public const int DEFAULT_LAYER = 0;
 
         #endregion
 
-    
 
         #region Proeprties
 
@@ -29,10 +30,12 @@ namespace ExampleTemplate
         public static int GroundLayer { get; }
         public static int UiLayer { get; }
         public static int NonCollidableLayer { get; }
-
+        public static int BulletLayer { get; }
+        public static int CrossHairLayer { get; }
+        
         #endregion
 
-    
+
 
         #region Class lifecycle
 
@@ -44,18 +47,8 @@ namespace ExampleTemplate
             GroundLayer = LayerMask.GetMask(GROUND);
             UiLayer = LayerMask.GetMask(UI);
             NonCollidableLayer = LayerMask.NameToLayer(NON_COLLIDABLE);
-            
-            IgnoreLayerCollision();
-        }
-
-        #endregion
-
-
-        #region Methods
-
-        private static void IgnoreLayerCollision()
-        {
-            
+            BulletLayer = LayerMask.NameToLayer(BULLET_LAYER);
+            CrossHairLayer = LayerMask.NameToLayer(CROSSHAIR_LAYER);
         }
 
         #endregion

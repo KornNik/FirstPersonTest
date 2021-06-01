@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace ExampleTemplate
 {
@@ -46,14 +47,15 @@ namespace ExampleTemplate
             if (Input.GetAxis(AxisManager.FIRE2) != 0)
             {
                 _handWeight += Time.deltaTime * _characterData.GetWeaponAimingSpeed();
+                tempWeapon.WeaponCrosshair.CrossHair(true);
             }
-            else { _handWeight -= Time.deltaTime * _characterData.GetWeaponAimingSpeed(); }
+            else { _handWeight -= Time.deltaTime * _characterData.GetWeaponAimingSpeed();tempWeapon.WeaponCrosshair.CrossHair(false); }
 
-            if (Input.GetKeyDown(KeyManager.RELOADWEAPON))
+            if (Input.GetKeyDown(KeyManager.RELOAD_WEAPON))
             {
                 Services.Instance.WeaponService.ReloadClip();
             }
-            if (Input.GetKeyDown(KeyManager.ADDMODIFICATION))
+            if (Input.GetKeyDown(KeyManager.ADD_MODIFICATION))
             {
                 tempWeapon.AddModifications();
             }

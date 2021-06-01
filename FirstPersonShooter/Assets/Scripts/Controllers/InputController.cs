@@ -54,24 +54,24 @@ namespace ExampleTemplate
             {
                 _characterData.CharacterBehaviour.CharacterJump();
             }
-            if (Input.GetAxis(AxisManager.MOUSESCROLLWHEEL) > 0)
+            if (Input.GetAxis(AxisManager.MOUSE_SCROLL_WHEEL) > 0)
             {
                 MouseScroll(MouseScrollWheel.Up);
             }
-            if (Input.GetAxis(AxisManager.MOUSESCROLLWHEEL) < 0)
+            if (Input.GetAxis(AxisManager.MOUSE_SCROLL_WHEEL) < 0)
             {
                 MouseScroll(MouseScrollWheel.Down);
             }
 
-            if (Input.GetKeyDown(KeyManager.FIRSTWEAPON))
+            if (Input.GetKeyDown(KeyManager.FIRST_WEAPON))
             {
                 SelectWeapon(0);
             }
-            if (Input.GetKeyDown(KeyManager.SECONDWEAPON))
+            if (Input.GetKeyDown(KeyManager.SECOND_WEAPON))
             {
                 SelectWeapon(1);
             }
-            if (Input.GetKeyDown(KeyManager.CANCELWEAPON))
+            if (Input.GetKeyDown(KeyManager.CANCEL_WEAPON))
             {
                 Services.Instance.WeaponService.Off();
             }

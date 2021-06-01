@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1632206037784986084}
   - component: {fileID: 2611896782901794490}
   - component: {fileID: -8693676431195106778}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Prefabs_Ammunition_Granade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,10 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acf67d7a6ac001c498e3332687653819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseDamage: 10
-  _bonusDamage: 5
-  _poisonDamage: 1
-  _poisonDuration: 4
   Type: 2
 --- !u!96 &-8693676431195106778
 TrailRenderer:

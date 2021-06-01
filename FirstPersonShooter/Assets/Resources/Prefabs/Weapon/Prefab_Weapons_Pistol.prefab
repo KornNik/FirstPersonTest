@@ -339,15 +339,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3060d7809646a8a44b2522172df31ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PoolTransform: {fileID: 4019918364103038028}
-  IsClipModificated: 0
-  IsMufflerModificated: 0
   _barrel: {fileID: 2289233472536901119}
   _placeForClip: {fileID: 4579127945463443048}
   _placeForMuffler: {fileID: 2843134823810108497}
+  _crossHair: {fileID: 0}
   _force: 700
   _rechergeTime: 0.3
   _spreadFactor: 0.03
+  PoolTransform: {fileID: 4019918364103038028}
 --- !u!114 &-4260920217990965463
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4776534404720070997}
   - component: {fileID: 2392635498043122666}
   - component: {fileID: 2745094368951380463}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Prefabs_Ammunition_Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,12 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc2a6e4a322194f40bf92645921f413f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseDamage: 10
-  _bonusDamage: 5
-  _poisonDamage: 2
-  _poisonDuration: 4
   Type: 1
-  _currentDamage: 0
 --- !u!54 &2392635498043122666
 Rigidbody:
   m_ObjectHideFlags: 0

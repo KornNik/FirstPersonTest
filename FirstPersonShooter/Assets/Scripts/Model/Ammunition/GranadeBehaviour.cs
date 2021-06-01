@@ -10,6 +10,7 @@ namespace ExampleTemplate
 
         #endregion
 
+
         #region UnityMethods
 
         protected override void Awake()
