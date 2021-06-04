@@ -79,7 +79,7 @@
     <Compile Include="Assets\Scripts\Controllers\Interfaces\ICleanUp.cs" />
     <Compile Include="Assets\Scripts\Controllers\Interfaces\IExecute.cs" />
     <Compile Include="Assets\Scripts\Controllers\Interfaces\IInitialization.cs" />
-    <Compile Include="Assets\Scripts\Controllers\LoadLevelController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\LoadLevel\LoadLevelController.cs" />
     <Compile Include="Assets\Scripts\Controllers\TimeRemaining\ITimeRemaining.cs" />
     <Compile Include="Assets\Scripts\Controllers\TimeRemaining\TimeRemaining.cs" />
     <Compile Include="Assets\Scripts\Controllers\TimeRemaining\TimeRemainingCleanUp.cs" />

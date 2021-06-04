@@ -21,6 +21,13 @@
 
 
         #region Methods
+        protected abstract void Modify();
+
+        #endregion
+
+
+        #region IDamager
+
         public void InflictDamage(IDamageable victim)
         {
             if (!_modifiedDamage.Equals(null))
@@ -30,7 +37,6 @@
             }
         }
 
-        protected abstract void Modify();
         public void AddDamage(float bonusDamage) { }
 
         #endregion

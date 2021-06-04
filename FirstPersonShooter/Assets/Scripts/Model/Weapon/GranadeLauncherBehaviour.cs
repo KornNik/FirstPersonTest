@@ -10,6 +10,7 @@
             base.Awake();
             _isMufflerModificated = true;
             _clipModification.IncreasAmmo = 4;
+            _ammunitionType = AmmunitionType.Granade;
 		}
 
         #endregion
@@ -25,7 +26,7 @@
 
             _shootDirection = SetSpread(_barrel.forward);
 
-            var tempAmmunition = _ammunitionPool.GetAmmunition(AmmunitionType.Granade);
+            var tempAmmunition = _ammunitionPool.GetAmmunition(_ammunitionType);
             tempAmmunition.AddForce(_shootDirection * _force);
 
             Clip.CountAmmunition--;

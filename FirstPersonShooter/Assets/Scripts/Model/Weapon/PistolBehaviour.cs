@@ -9,6 +9,7 @@
 		{
 			_weaponData = Data.Instance.PistolData;
 			base.Awake();
+			_ammunitionType = AmmunitionType.Bullet;
 		}
 
 		#endregion
@@ -23,7 +24,7 @@
 			if (_ammunitionPool == null) return;
 
 			_shootDirection = SetSpread(_barrel.forward);
-			var tempAmmunition = _ammunitionPool.GetAmmunition(AmmunitionType.Bullet);
+			var tempAmmunition = _ammunitionPool.GetAmmunition(_ammunitionType);
 			tempAmmunition.AddForce(_shootDirection * _force);
 			FireActn?.Invoke();
 

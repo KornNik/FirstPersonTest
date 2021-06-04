@@ -29,10 +29,10 @@ namespace ExampleTemplate
 
         protected Vector3 _shootDirection;
         protected WeaponData _weaponData;
+        protected AmmunitionType _ammunitionType;
         protected AmmunitionPool _ammunitionPool;
         protected ClipModification _clipModification;
         protected MufflerModification _mufflerModification;
-        protected AmmunitionType[] _ammunitionType = { AmmunitionType.Bullet };
 
         private bool _isVisible;
         private Queue<Clip> _clips = new Queue<Clip>();
@@ -45,7 +45,6 @@ namespace ExampleTemplate
 
         public Transform PlaceForClip => _placeForClip;
         public Transform PlaceForMuffler => _placeForMuffler;
-
         public Transform Barrel => _barrel;
 
         public int CountClip => _clips.Count;

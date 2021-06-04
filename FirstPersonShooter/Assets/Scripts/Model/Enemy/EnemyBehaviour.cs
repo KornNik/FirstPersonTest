@@ -132,23 +132,6 @@ namespace ExampleTemplate
             Agent.SetDestination(point);
         }
 
-        public void ReceiveDamage(float damage)
-        {
-            if (_stateBot == StateBotType.Died) return;
-            _health -= damage;
-            EnemyHealthChanged?.Invoke(_health / _enemyData.GetHealth());
-            if (_health <= 0 && _stateBot != StateBotType.Died)
-            {
-                _stateBot = StateBotType.Died;
-                _isDead = true;
-            }
-        }
-
-        public void ReceiveDamageOverTime(float damage, float duration)
-        {
-            StartCoroutine(DamageOverTime(damage, duration));
-        }
-
         private void Default()
         {
             ColorExtensions.ChangeColor(Color.white, _materials);
@@ -252,6 +235,29 @@ namespace ExampleTemplate
         }
 
         #endregion
+
+
+        #region IDamageable
+
+        public void ReceiveDamage(float damage)
+        {
+            if (_stateBot == StateBotType.Died) return;
+            _health -= damage;
+            EnemyHealthChanged?.Invoke(_health / _enemyData.GetHealth());
+            if (_health <= 0 && _stateBot != StateBotType.Died)
+            {
+                _stateBot = StateBotType.Died;
+                _isDead = true;
+            }
+        }
+
+        public void ReceiveDamageOverTime(float damage, float duration)
+        {
+            StartCoroutine(DamageOverTime(damage, duration));
+        }
+
+        #endregion
+
 
     }
 }

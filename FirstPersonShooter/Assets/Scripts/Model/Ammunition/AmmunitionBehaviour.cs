@@ -28,24 +28,18 @@ namespace ExampleTemplate
 			_trailRenderer = GetComponent<TrailRenderer>();
 		}
 
-        #endregion
-
-
-        #region Methods
-
-        public void InflictDamage(IDamageable victim)
+		private void OnBecameInvisible()
 		{
-			for (int i = 0; i < _modifiers.Count; i++)
+			if (gameObject.activeSelf)
 			{
-				_modifiers[i].InflictDamage(victim);
+				ReturnToPool();
 			}
-			victim.ReceiveDamage(_currentDamage);
 		}
 
-		public void AddDamage(float extraDamage)
-		{
-			_currentDamage += extraDamage;
-		}
+		#endregion
+
+
+		#region Methods
 
 		public void RegisterBulletModifier(AmmunitionModifier newModifier)
 		{
@@ -89,15 +83,25 @@ namespace ExampleTemplate
 			transform.SetParent(null);
 		}
 
-        private void OnBecameInvisible()
-        {
-            if (gameObject.activeSelf)
-            {
-                ReturnToPool();
-            }
-        }
+		#endregion
 
 
-        #endregion
-    }
+		#region IDamager
+
+		public void InflictDamage(IDamageable victim)
+		{
+			for (int i = 0; i < _modifiers.Count; i++)
+			{
+				_modifiers[i].InflictDamage(victim);
+			}
+			victim.ReceiveDamage(_currentDamage);
+		}
+
+		public void AddDamage(float extraDamage)
+		{
+			_currentDamage += extraDamage;
+		}
+
+		#endregion
+	}
 }
