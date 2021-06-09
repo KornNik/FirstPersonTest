@@ -36,6 +36,7 @@ namespace ExampleTemplate
 
         private Collider[] _bufferColliders = new Collider[64];
         private int _targetColliders;
+        private int _targetLayer = 1 << 8;
 
 
 
@@ -110,6 +111,18 @@ namespace ExampleTemplate
 
         public void Tick()
         {
+            if (_enemyData.GetIsAggressive()&&_stateBot!=StateBotType.Died)
+            {
+                if (FindTarget())
+                {
+                    _stateBot = StateBotType.Detected;
+                }
+                if (!FindTarget() && _stateBot == StateBotType.Detected)
+                {
+                    Agent.ResetPath();
+                    _stateBot = StateBotType.Patrol;
+                }
+            }
             switch (_stateBot)
             {
                 case StateBotType.None:
@@ -119,7 +132,7 @@ namespace ExampleTemplate
                     Patrolling();
                     break;
                 case StateBotType.Detected:
-                    Detecting(_target);
+                    Detecting();
                     break;
                 case StateBotType.Died:
                     Die();
@@ -143,38 +156,36 @@ namespace ExampleTemplate
 
         private void Patrolling()
         {
-            if (_enemyData.GetIsAggressive())
-            {
-                FindEnemy();
-            }
-            if (!Agent.hasPath)
-            {
-                ColorExtensions.ChangeColor(Color.blue, _materials);
-                _point = Patrol.GenericPoint(transform.position);
-                Agent.speed = 3;
-                MovePoint(_point);
-                Agent.stoppingDistance = 0;
-            }
+            if (Agent.hasPath) return;
+            ColorExtensions.ChangeColor(Color.blue, _materials);
+            _point = Patrol.GenericPoint(transform.position);
+            Agent.speed = 3;
+            MovePoint(_point);
+            Agent.stoppingDistance = 0;
+
         }
 
-        private void Detecting(CharacterBehaviour target)
+        private bool FindTarget()
+        {
+            var isFindTarget = Physics.CheckSphere(transform.position, _enemyData.GetDistanceView(), _targetLayer);
+            return isFindTarget;
+        }
+        private void ChaseTarget(Vector3 target)
         {
             ColorExtensions.ChangeColor(Color.red, _materials);
             Agent.speed = 6;
-            MovePoint(target.transform.position);
-            Agent.stoppingDistance = 10;
+            MovePoint(target);
+            Agent.stoppingDistance = 5;
         }
-
-        private void FindEnemy()
+        private void Detecting()
         {
             _targetColliders = Physics.OverlapSphereNonAlloc(transform.position, _enemyData.GetDistanceView(), _bufferColliders);
             for (int i = 0; i < _targetColliders; i++)
             {
                 CharacterBehaviour character = _bufferColliders[i].GetComponent<CharacterBehaviour>();
-                if (character != null && _stateBot != StateBotType.Detected)
+                if (character != null )
                 {
-                    _target = character;
-                    _stateBot = StateBotType.Detected;
+                    ChaseTarget(character.transform.position);
                     break;
                 }
             }
@@ -193,6 +204,7 @@ namespace ExampleTemplate
             IsVisible = false;
             IsColliderActive = false;
             Agent.ResetPath();
+            //StopAllCoroutines();
             Invoke(nameof(Revive), _enemyData.GetReviveTime());
         }
 
@@ -214,6 +226,7 @@ namespace ExampleTemplate
 
         private IEnumerator DamageOverTime(float damage, float duration)
         {
+
             for (int i = 0; i < duration; i++)
             {
                 yield return _waitForDamage;

@@ -576,7 +576,7 @@ GameObject:
   - component: {fileID: 842207359607746238}
   - component: {fileID: 8396611726898533847}
   - component: {fileID: 3809751022508758441}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Prefabs_Characters_FPSCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
