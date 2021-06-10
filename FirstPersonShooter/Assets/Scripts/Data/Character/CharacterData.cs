@@ -16,7 +16,6 @@ namespace ExampleTemplate
         [HideInInspector] public CharacterBehaviour CharacterBehaviour;
         [HideInInspector] public CharacterAnimationBehaviour CharacterAnimationBehaviour;
         [HideInInspector] public CameraBehaviuor CameraBehaviuor;
-        [HideInInspector] public InventoryBehaviour InventoryBehaviour;
         [HideInInspector] public Transform RightHandTarget;
 
         #endregion
@@ -32,7 +31,6 @@ namespace ExampleTemplate
             RightHandTarget = GameObject.FindGameObjectWithTag
                 (TagManager.GetTag(TagType.RightHandTarget)).transform;
             CharacterAnimationBehaviour = CharacterBehaviour.GetComponent<CharacterAnimationBehaviour>();
-            InventoryBehaviour = CharacterBehaviour.GetComponent<InventoryBehaviour>();
             CameraBehaviuor = CharacterBehaviour.GetComponentInChildren<CameraBehaviuor>();
 
         }

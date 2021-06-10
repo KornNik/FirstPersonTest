@@ -92,7 +92,7 @@ namespace ExampleTemplate
         private void SelectWeapon(int value)
         {
 
-            var tempWeapon = _characterData.InventoryBehaviour.SelectWeapon(value);
+            var tempWeapon = _characterData.CharacterBehaviour.Inventory.SelectWeapon(value);
             if (tempWeapon is WeaponBehaviour)
             {
                 SelectWeapon(tempWeapon);
@@ -101,7 +101,7 @@ namespace ExampleTemplate
 
         private void MouseScroll(MouseScrollWheel value)
         {
-            var tempWeapon = _characterData.InventoryBehaviour.SelectWeapon(value);
+            var tempWeapon = _characterData.CharacterBehaviour.Inventory.SelectWeapon(value);
             SelectWeapon(tempWeapon);
         }
 

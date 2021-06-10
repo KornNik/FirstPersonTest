@@ -11,7 +11,7 @@ namespace ExampleTemplate
 
         [HideInInspector] public NavMeshAgent Agent;
 
-        public static Action<float> EnemyHealthChanged;
+        public static event Action<float> EnemyHealthChanged;
 
         private WaitForSeconds _waitForDamage = new WaitForSeconds(1);
         private WaitForSeconds _waitForState = new WaitForSeconds(5);

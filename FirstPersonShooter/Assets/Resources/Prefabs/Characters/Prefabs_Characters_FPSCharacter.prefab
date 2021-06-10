@@ -574,7 +574,6 @@ GameObject:
   - component: {fileID: 8284465449021461463}
   - component: {fileID: 9220810558210820719}
   - component: {fileID: 842207359607746238}
-  - component: {fileID: 8396611726898533847}
   - component: {fileID: 3809751022508758441}
   m_Layer: 8
   m_Name: Prefabs_Characters_FPSCharacter
@@ -643,18 +642,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0112fb60318c2d74a870dfb02eeb8643, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8396611726898533847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3037976429886803134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 717b6a11e658d3f4e9576f7ed93a39e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!143 &3809751022508758441

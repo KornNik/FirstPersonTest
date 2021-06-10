@@ -139,7 +139,7 @@
     <Compile Include="Assets\Scripts\Model\Character\CharacterAnimationBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Character\CharacterBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Enemy\EnemyBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Model\Inventory\InventoryBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Model\Inventory\InventoryWeapons.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\GranadeLauncherBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\PistolBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\WeaponAnimationBehaviour.cs" />

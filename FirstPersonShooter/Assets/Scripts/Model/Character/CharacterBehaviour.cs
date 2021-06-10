@@ -9,8 +9,9 @@ namespace ExampleTemplate
     {
         #region Fields
 
-        public static Action<float> MovingSpeed;
-        public static Action<float> Strafe;
+        public static event Action<float> MovingSpeed;
+        public static event Action<float> Strafe;
+        public InventoryWeapons Inventory;
 
         private CharacterData _characterData;
         private CharacterController _characterController;
@@ -26,6 +27,7 @@ namespace ExampleTemplate
         {
             _characterController = gameObject.GetComponent<CharacterController>();
             _characterData = Data.Instance.Character;
+            Inventory = new InventoryWeapons(this);
         }
 
         #endregion
