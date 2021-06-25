@@ -19,6 +19,7 @@ namespace ExampleTemplate
         [SerializeField] private string _granadeLauncherDataPath;
         [SerializeField] private string _bulletDataPath;
         [SerializeField] private string _granadeDataPath;
+        [SerializeField] private string _flashLightDataPath;
 
         private static CharacterData _characterData;
         private static CameraData _cameraData;
@@ -28,11 +29,12 @@ namespace ExampleTemplate
         private static WeaponData _granadeLauncherData;
         private static AmmunitionData _bulletData;
         private static GranadeData _granadeData;
+        private static FlashLightData _flashLightData;
 
         private static readonly Lazy<Data> _instance = new Lazy<Data>(() => Load<Data>("Data/" + typeof(Data).Name));
-        
+
         #endregion
-        
+
 
         #region Properties
 
@@ -125,6 +127,17 @@ namespace ExampleTemplate
                     _granadeData = Load<GranadeData>("Data/" + Instance._granadeDataPath);
                 }
                 return _granadeData;
+            }
+        }
+        public FlashLightData FlashLightData
+        {
+            get
+            {
+                if (_flashLightData == null)
+                {
+                    _flashLightData = Load<FlashLightData>("Data/" + Instance._flashLightDataPath);
+                }
+                return _flashLightData;
             }
         }
 

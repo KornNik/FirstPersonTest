@@ -8,6 +8,7 @@ namespace ExampleTemplate
 
         private CharacterData _characterData;
         private CameraData _cameraData;
+        private CameraBehaviuor _cameraBehaviuor;
 
         private bool _isActive;
 
@@ -21,6 +22,7 @@ namespace ExampleTemplate
             ScreenInterface.GetInstance().AddObserver(ScreenType.GameMenu, this);
             _characterData = Data.Instance.Character;
             _cameraData = Data.Instance.Camera;
+            _cameraBehaviuor = Services.Instance.CameraServices.CameraMain.GetComponent<CameraBehaviuor>();
         }
 
         #endregion
@@ -36,7 +38,7 @@ namespace ExampleTemplate
             mouseAxis.y = Input.GetAxis("Mouse Y") * _cameraData.GetYSensitivity();
             if (mouseAxis.x != 0 || mouseAxis.y != 0) 
             {
-                _characterData.CameraBehaviuor.LookRotation(mouseAxis,_characterData.CharacterBehaviour.transform);
+                _cameraBehaviuor.LookRotation(mouseAxis,_characterData.CharacterBehaviour.transform);
             }
         }
 

@@ -12,7 +12,8 @@ namespace ExampleTemplate
             {
                 {TagType.Player, "Player"},
                 {TagType.Floor, "Floor"},
-                {TagType.RightHandTarget,"RightHandTarget" }
+                {TagType.RightHandTarget,"RightHandTarget" },
+                { TagType.CameraPlace,"CameraPlace"}
             };
         }
 

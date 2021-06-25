@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\Controllers\Camera\CameraController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Controllers.cs" />
     <Compile Include="Assets\Scripts\Controllers\Enemy\EnemyController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\FlashLight\FlashLightController.cs" />
     <Compile Include="Assets\Scripts\Controllers\GameController.cs" />
     <Compile Include="Assets\Scripts\Controllers\InputController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Interfaces\ICleanUp.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Assets\Scripts\Data\Character\CharacterData.cs" />
     <Compile Include="Assets\Scripts\Data\Data.cs" />
     <Compile Include="Assets\Scripts\Data\Enemy\EnemiesData.cs" />
+    <Compile Include="Assets\Scripts\Data\FlashLight\FlashLightData.cs" />
     <Compile Include="Assets\Scripts\Data\Level\CharacterPosition.cs" />
     <Compile Include="Assets\Scripts\Data\Level\LevelData.cs" />
     <Compile Include="Assets\Scripts\Data\Level\LevelsData.cs" />
@@ -139,7 +141,8 @@
     <Compile Include="Assets\Scripts\Model\Character\CharacterAnimationBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Character\CharacterBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Enemy\EnemyBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Model\Inventory\InventoryWeapons.cs" />
+    <Compile Include="Assets\Scripts\Model\FlashLight\FlashLightBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Model\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\GranadeLauncherBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\PistolBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\WeaponAnimationBehaviour.cs" />
@@ -149,6 +152,7 @@
     <Compile Include="Assets\Scripts\Model\WeaponModification\MufflerModification.cs" />
     <Compile Include="Assets\Scripts\Model\WeaponModification\WeaponModification.cs" />
     <Compile Include="Assets\Scripts\Services\CameraService\CameraServices.cs" />
+    <Compile Include="Assets\Scripts\Services\FlashLightService\FlashLightService.cs" />
     <Compile Include="Assets\Scripts\Services\LoadLevelService\LoadLevelService.cs" />
     <Compile Include="Assets\Scripts\Services\LocalizationService\ILocalization.cs" />
     <Compile Include="Assets\Scripts\Services\PhysicsService\PhysicsService.cs" />

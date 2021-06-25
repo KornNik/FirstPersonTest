@@ -11,10 +11,11 @@ namespace ExampleTemplate
 
         public static event Action<float> MovingSpeed;
         public static event Action<float> Strafe;
-        public InventoryWeapons Inventory;
+        public Inventory Inventory;
 
         private CharacterData _characterData;
         private CharacterController _characterController;
+        private Camera _camera;
         private Vector3 _moveVector;
         private float _gravityForce;
 
@@ -27,7 +28,8 @@ namespace ExampleTemplate
         {
             _characterController = gameObject.GetComponent<CharacterController>();
             _characterData = Data.Instance.Character;
-            Inventory = new InventoryWeapons(this);
+            _camera = Services.Instance.CameraServices.CameraMain;
+            Inventory = new Inventory(this);
         }
 
         #endregion

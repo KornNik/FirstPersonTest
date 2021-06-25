@@ -45,6 +45,8 @@ namespace ExampleTemplate
 
         #region Properties
 
+        public StateBotType StateBot { get => _stateBot; set { _stateBot = value; } }
+
         public bool IsColliderActive
         {
             get => _isColliderActive;
@@ -204,7 +206,7 @@ namespace ExampleTemplate
             IsVisible = false;
             IsColliderActive = false;
             Agent.ResetPath();
-            //StopAllCoroutines();
+            StopAllCoroutines();
             Invoke(nameof(Revive), _enemyData.GetReviveTime());
         }
 

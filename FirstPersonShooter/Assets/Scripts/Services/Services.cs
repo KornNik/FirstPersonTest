@@ -32,6 +32,7 @@ namespace ExampleTemplate
         public JsonService JsonService { get; private set; }
         public LoadLevelService LoadLevelService { get; private set; }
         public WeaponService WeaponService { get; private set; }
+        public FlashLightService FlashLightService { get; private set; }
 
         #endregion
 
@@ -47,6 +48,7 @@ namespace ExampleTemplate
             JsonService = new JsonService();
             LoadLevelService = new LoadLevelService();
             WeaponService = new WeaponService();
+            FlashLightService = new FlashLightService();
         }
         
         #endregion

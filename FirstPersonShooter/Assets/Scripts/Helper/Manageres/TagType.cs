@@ -6,5 +6,6 @@
         Player = 1,
         Floor  = 2,
         RightHandTarget = 3,
+        CameraPlace = 4,
     }
 }

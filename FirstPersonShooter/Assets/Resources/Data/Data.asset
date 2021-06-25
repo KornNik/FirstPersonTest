@@ -20,3 +20,4 @@ MonoBehaviour:
   _granadeLauncherDataPath: Weapon/GranadeLauncherData
   _bulletDataPath: Ammunition/BulletData
   _granadeDataPath: Ammunition/GranadeData
+  _flashLightDataPath: FlashLight/FlashLightData

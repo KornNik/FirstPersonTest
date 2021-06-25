@@ -13,10 +13,12 @@ namespace ExampleTemplate
         [SerializeField] private float _weaponAimingSpeed = 3;
         [SerializeField] private float _jumpPower = 10;
 
+        [HideInInspector] public Camera Camera;
         [HideInInspector] public CharacterBehaviour CharacterBehaviour;
         [HideInInspector] public CharacterAnimationBehaviour CharacterAnimationBehaviour;
-        [HideInInspector] public CameraBehaviuor CameraBehaviuor;
         [HideInInspector] public Transform RightHandTarget;
+        [HideInInspector] public Transform _cameraPlace;
+
 
         #endregion
 
@@ -25,14 +27,21 @@ namespace ExampleTemplate
 
         public void Initialization(CharactersType characterType, CharacterPosition point)
         {
+            Camera = Services.Instance.CameraServices.CameraMain;
             var characterBehaviour = CustomResources.Load<CharacterBehaviour>
                 (AssetsPathCharacters.CharactersGameObject[characterType]);
             CharacterBehaviour = Instantiate(characterBehaviour, point.Position, point.Rotation());
+
             RightHandTarget = GameObject.FindGameObjectWithTag
                 (TagManager.GetTag(TagType.RightHandTarget)).transform;
-            CharacterAnimationBehaviour = CharacterBehaviour.GetComponent<CharacterAnimationBehaviour>();
-            CameraBehaviuor = CharacterBehaviour.GetComponentInChildren<CameraBehaviuor>();
+            _cameraPlace = GameObject.FindGameObjectWithTag
+                (TagManager.GetTag(TagType.CameraPlace)).transform;
 
+            CharacterAnimationBehaviour = CharacterBehaviour.GetComponent<CharacterAnimationBehaviour>();
+
+            Camera.transform.SetParent(_cameraPlace);
+            Camera.transform.localPosition = Vector3.zero;
+            Camera.transform.localRotation = Quaternion.identity;
         }
 
         public float GetSpeed()

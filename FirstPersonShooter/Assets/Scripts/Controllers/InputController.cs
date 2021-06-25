@@ -75,6 +75,10 @@ namespace ExampleTemplate
             {
                 Services.Instance.WeaponService.Off();
             }
+            if (Input.GetKeyUp(KeyManager.FLASH_LIGHT_SWITCH))
+            {
+                SwitchFlashLight();
+            }
         }
 
         #endregion
@@ -111,6 +115,15 @@ namespace ExampleTemplate
             if (weapon != null)
             {
                 Services.Instance.WeaponService.On(weapon);
+            }
+        }
+
+        private void SwitchFlashLight()
+        {
+            var tempFlashLight = _characterData.CharacterBehaviour.Inventory.FlashLight;
+            if(tempFlashLight != null)
+            {
+                Services.Instance.FlashLightService.Switch(tempFlashLight);
             }
         }
 

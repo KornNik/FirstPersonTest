@@ -12,6 +12,7 @@ namespace ExampleTemplate
         public const KeyCode CANCEL_WEAPON = KeyCode.Alpha0;
         public const KeyCode RELOAD_WEAPON = KeyCode.R;
         public const KeyCode ADD_MODIFICATION = KeyCode.Backspace;
+        public const KeyCode FLASH_LIGHT_SWITCH = KeyCode.L;
 
         #endregion
 
