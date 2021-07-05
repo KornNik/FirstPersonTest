@@ -36,7 +36,24 @@ namespace ExampleTemplate
                     Screen = "GUI/Screen/GameMenu/GUI_Screen_GameMenu",
                     Elements = new Dictionary<ScreenElementType, string>()
                 }
-            }
+            },
+            {
+                ScreenType.Settings, new ScreenPath
+                {
+                    Screen = "GUI/Screen/SettingsMenu/GUI_Screen_SetingsMenu",
+                    Elements = new Dictionary<ScreenElementType, string>()
+                }
+            },
+            {
+                ScreenType.VideoSettings,new ScreenPath
+                {
+                    Screen = "GUI/Screen/VideoSettingsMenu/GUI_Screen_VideoSettingsMenu",
+                    Elements = new Dictionary<ScreenElementType, string>()
+                    {
+                        {ScreenElementType.SliderSettings, "GUI/Elements/GUI_Elements_SliderSettings" }
+                    }
+                }
+            },
         };
 
         #endregion

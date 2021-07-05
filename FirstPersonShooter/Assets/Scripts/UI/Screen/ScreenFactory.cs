@@ -9,6 +9,8 @@ namespace ExampleTemplate
 
         private GameMenuBehaviour _gameMenu;
         private MainMenuBehaviour _mainMenu;
+        private SettingsMenuBehaviour _settingsMenu;
+        private VideoSettingsBehaviour _videoSettingsMenu;
         private Canvas _canvas;
 
         #endregion
@@ -45,6 +47,33 @@ namespace ExampleTemplate
                 _mainMenu = Object.Instantiate(resources, _canvas.transform.position, Quaternion.identity, _canvas.transform);
             }
             return _mainMenu;
+        }
+
+        public SettingsMenuBehaviour GetSettingsMenu()
+        {
+            if (_settingsMenu == null)
+            {
+                var resourses = CustomResources.Load<SettingsMenuBehaviour>(AssetsPathScreen.Screens[ScreenType.Settings].Screen);
+                _settingsMenu = Object.Instantiate(resourses, _canvas.transform.position, Quaternion.identity, _canvas.transform);
+            }
+            return _settingsMenu;
+        }
+
+        public VideoSettingsBehaviour GetVideoSettingsMenu()
+        {
+            if (_videoSettingsMenu == null)
+            {
+                var resourses = CustomResources.Load<VideoSettingsBehaviour>(AssetsPathScreen.Screens[ScreenType.VideoSettings].Screen);
+                var element = CustomResources.Load<SettingsSliderBehaviour>
+                    (AssetsPathScreen.Screens[ScreenType.VideoSettings].Elements[ScreenElementType.SliderSettings]);
+                _videoSettingsMenu = Object.Instantiate(resourses, _canvas.transform.position, Quaternion.identity, _canvas.transform);
+                for (int i = 0; i < 4; i++)
+                {
+                    Object.Instantiate(element, _videoSettingsMenu.SettingsPanel.transform.position, 
+                        Quaternion.identity, _videoSettingsMenu.SettingsPanel.transform);
+                }
+            }
+            return _videoSettingsMenu;
         }
 
         #endregion

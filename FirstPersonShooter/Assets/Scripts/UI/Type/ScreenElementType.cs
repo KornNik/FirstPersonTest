@@ -2,6 +2,7 @@
 {
     public enum ScreenElementType
     {
-        None      = 0
+        None      = 0,
+        SliderSettings = 1,
     }
 }

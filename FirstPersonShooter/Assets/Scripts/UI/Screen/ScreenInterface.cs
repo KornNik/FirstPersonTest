@@ -53,6 +53,12 @@ namespace ExampleTemplate
                 case ScreenType.MainMenu:
                     _currentWindow = _screenFactory.GetMainMenu();
                     break;
+                case ScreenType.Settings:
+                    _currentWindow = _screenFactory.GetSettingsMenu();
+                    break;
+                case ScreenType.VideoSettings:
+                    _currentWindow = _screenFactory.GetVideoSettingsMenu();
+                    break;
 
                 default:
                     break;
@@ -75,7 +81,16 @@ namespace ExampleTemplate
                     _screenFactory.GetMainMenu().HideUI += listenerScreen.HideScreen;
                     _screenFactory.GetMainMenu().Hide();
                     break;
-
+                case ScreenType.Settings:
+                    _screenFactory.GetSettingsMenu().ShowUI += listenerScreen.ShowScreen;
+                    _screenFactory.GetSettingsMenu().HideUI += listenerScreen.HideScreen;
+                    _screenFactory.GetSettingsMenu().Hide();
+                    break;
+                case ScreenType.VideoSettings:
+                    _screenFactory.GetVideoSettingsMenu().ShowUI += listenerScreen.ShowScreen;
+                    _screenFactory.GetVideoSettingsMenu().HideUI += listenerScreen.HideScreen;
+                    _screenFactory.GetVideoSettingsMenu().Hide();
+                    break;
                 default:
                     break;
             }
@@ -94,6 +109,16 @@ namespace ExampleTemplate
                     _screenFactory.GetMainMenu().ShowUI -= listenerScreen.ShowScreen;
                     _screenFactory.GetMainMenu().HideUI -= listenerScreen.HideScreen;
                     _screenFactory.GetMainMenu().Hide();
+                    break;
+                case ScreenType.Settings:
+                    _screenFactory.GetSettingsMenu().ShowUI -= listenerScreen.ShowScreen;
+                    _screenFactory.GetSettingsMenu().HideUI -= listenerScreen.HideScreen;
+                    _screenFactory.GetSettingsMenu().Hide();
+                    break;
+                case ScreenType.VideoSettings:
+                    _screenFactory.GetVideoSettingsMenu().ShowUI -= listenerScreen.ShowScreen;
+                    _screenFactory.GetVideoSettingsMenu().HideUI -= listenerScreen.HideScreen;
+                    _screenFactory.GetVideoSettingsMenu().Hide();
                     break;
 
                 default:
