@@ -10,12 +10,10 @@ namespace ExampleTemplate
         #region Fields
 
         [SerializeField] private Button _settingsButton;
-        [SerializeField] private Button _applyButton;
         [SerializeField] private Dropdown _presetsDropdown;
         [SerializeField] private Dropdown _resolutinsDropdown;
         [SerializeField] private GameObject _settingsPanel;
 
-        private SettingsSliderBehaviour[] _settingsSliders;
         private Resolution[] _resolutions;
 
         #endregion
@@ -32,14 +30,13 @@ namespace ExampleTemplate
             _resolutions = Screen.resolutions;
 
             DropdownAction(_presetsDropdown, QualitySettings.names.ToList(), QualitySettings.GetQualityLevel());
-            DropdownAction(_resolutinsDropdown, FillDropdownResolutions(), 
+            DropdownAction(_resolutinsDropdown, FillDropdownResolutions(),
                 GetCurrentResolutionIndex(FillDropdownResolutions()));
         }
 
         private void OnEnable()
         {
             _settingsButton.onClick.AddListener(ShowSettingsMenuButtonClick);
-            _applyButton.onClick.AddListener(ApplySettingsButtonClick);
             _presetsDropdown.onValueChanged.AddListener(delegate { SetQuality(_presetsDropdown.value); });
             _resolutinsDropdown.onValueChanged.AddListener(delegate { SetResolution(_resolutinsDropdown.value); });
         }
@@ -47,7 +44,6 @@ namespace ExampleTemplate
         private void OnDisable()
         {
             _settingsButton.onClick.RemoveListener(ShowSettingsMenuButtonClick);
-            _applyButton.onClick.RemoveListener(ApplySettingsButtonClick);
             _presetsDropdown.onValueChanged.RemoveListener(delegate { SetQuality(_presetsDropdown.value); });
             _resolutinsDropdown.onValueChanged.RemoveListener(delegate { SetResolution(_resolutinsDropdown.value); });
         }
@@ -67,11 +63,6 @@ namespace ExampleTemplate
         {
             gameObject.SetActive(false);
             HideUI.Invoke();
-        }
-
-        private void ApplySettingsButtonClick()
-        {
-
         }
 
         private void SetQuality(int qualityLevel)

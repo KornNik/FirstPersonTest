@@ -64,14 +64,7 @@ namespace ExampleTemplate
             if (_videoSettingsMenu == null)
             {
                 var resourses = CustomResources.Load<VideoSettingsBehaviour>(AssetsPathScreen.Screens[ScreenType.VideoSettings].Screen);
-                var element = CustomResources.Load<SettingsSliderBehaviour>
-                    (AssetsPathScreen.Screens[ScreenType.VideoSettings].Elements[ScreenElementType.SliderSettings]);
                 _videoSettingsMenu = Object.Instantiate(resourses, _canvas.transform.position, Quaternion.identity, _canvas.transform);
-                for (int i = 0; i < 4; i++)
-                {
-                    Object.Instantiate(element, _videoSettingsMenu.SettingsPanel.transform.position, 
-                        Quaternion.identity, _videoSettingsMenu.SettingsPanel.transform);
-                }
             }
             return _videoSettingsMenu;
         }

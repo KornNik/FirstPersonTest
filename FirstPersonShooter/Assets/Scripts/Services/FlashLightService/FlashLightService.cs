@@ -26,11 +26,9 @@ namespace ExampleTemplate
         public void On()
         {
             if (_isFlashLight) { return; }
-
             _isFlashLight = true;
 
             if (_flashLight == null) { return; }
-
             if (_flashLight.BatteryChargeCurrent <= 0) return;
 
             _flashLight.Switch(true);
