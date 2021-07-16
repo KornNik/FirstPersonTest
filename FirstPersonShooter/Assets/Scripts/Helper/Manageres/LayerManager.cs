@@ -14,8 +14,10 @@ namespace ExampleTemplate
         private const string NON_COLLIDABLE = "Non-Collidable";
         private const string GROUND = "Ground";
         private const string UI = "UI";
-        private const string BULLET_LAYER = "Bullet";
-        private const string CROSSHAIR_LAYER = "Crosshair";
+        private const string BULLET = "Bullet";
+        private const string CROSSHAIR = "Crosshair";
+        private const string ENEMY = "Enemy";
+        private const string PLAYER = "Player";
 
         public const int DEFAULT_LAYER = 0;
 
@@ -32,6 +34,8 @@ namespace ExampleTemplate
         public static int NonCollidableLayer { get; }
         public static int BulletLayer { get; }
         public static int CrossHairLayer { get; }
+        public static int EnemyLayer { get; }
+        public static int PlayerLayer { get; }
         
         #endregion
 
@@ -46,9 +50,11 @@ namespace ExampleTemplate
             DefaultLayer = LayerMask.GetMask(DEFAULT);
             GroundLayer = LayerMask.GetMask(GROUND);
             UiLayer = LayerMask.GetMask(UI);
-            NonCollidableLayer = LayerMask.NameToLayer(NON_COLLIDABLE);
-            BulletLayer = LayerMask.NameToLayer(BULLET_LAYER);
-            CrossHairLayer = LayerMask.NameToLayer(CROSSHAIR_LAYER);
+            NonCollidableLayer = LayerMask.GetMask(NON_COLLIDABLE);
+            BulletLayer = LayerMask.GetMask(BULLET);
+            CrossHairLayer = LayerMask.GetMask(CROSSHAIR);
+            EnemyLayer = LayerMask.GetMask(ENEMY);
+            PlayerLayer = LayerMask.GetMask(PLAYER);
         }
 
         #endregion

@@ -30,15 +30,10 @@ namespace ExampleTemplate
         private LevelsData _levelsData;
         private EnemiesData _enemyData;
         private CharacterBehaviour _target;
-
-
-
+        private TextRendererParticleSystem _textParticle;
 
         private Collider[] _bufferColliders = new Collider[64];
         private int _targetColliders;
-        private int _targetLayer = 1 << 8;
-
-
 
         #endregion
 
@@ -100,9 +95,15 @@ namespace ExampleTemplate
             _characterData = Data.Instance.Character;
             _levelsData = Data.Instance.LevelsData;
 
+            var textParticle = CustomResources.Load<TextRendererParticleSystem>
+                (AssetsPathParticles.ParticlesGameObject[VFXType.TextParticle]);
+            _textParticle = Instantiate(textParticle, transform.position, transform.rotation, transform);
+
             _health = _enemyData.GetHealth();
 
             Agent = gameObject.GetComponent<NavMeshAgent>();
+            Agent.autoRepath = true;
+
             _materials = gameObject.GetComponentsInChildren<Renderer>();
         }
 
@@ -169,7 +170,7 @@ namespace ExampleTemplate
 
         private bool FindTarget()
         {
-            var isFindTarget = Physics.CheckSphere(transform.position, _enemyData.GetDistanceView(), _targetLayer);
+            var isFindTarget = Physics.CheckSphere(transform.position, _enemyData.GetDistanceView(), LayerManager.PlayerLayer);
             return isFindTarget;
         }
         private void ChaseTarget(Vector3 target)
@@ -234,6 +235,7 @@ namespace ExampleTemplate
                 yield return _waitForDamage;
                 _health -= damage;
                 EnemyHealthChanged?.Invoke(_health / _enemyData.GetHealth());
+                _textParticle.SpawnParticle(transform.position, _health, Color.red);
             }
             if (_health <= 0 && _stateBot != StateBotType.Died)
             {
@@ -259,6 +261,7 @@ namespace ExampleTemplate
             if (_stateBot == StateBotType.Died) return;
             _health -= damage;
             EnemyHealthChanged?.Invoke(_health / _enemyData.GetHealth());
+            _textParticle.SpawnParticle(transform.position, _health, Color.red);
             if (_health <= 0 && _stateBot != StateBotType.Died)
             {
                 _stateBot = StateBotType.Died;

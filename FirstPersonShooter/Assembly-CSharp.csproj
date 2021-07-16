@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\AssetsPath\AssetsPathCharacters.cs" />
     <Compile Include="Assets\Scripts\AssetsPath\AssetsPathEnemies.cs" />
     <Compile Include="Assets\Scripts\AssetsPath\AssetsPathGameObject.cs" />
+    <Compile Include="Assets\Scripts\AssetsPath\AssetsPathParticles.cs" />
     <Compile Include="Assets\Scripts\AssetsPath\AssetsPathScreen.cs" />
     <Compile Include="Assets\Scripts\AssetsPath\AssetsPathWeaponModification.cs" />
     <Compile Include="Assets\Scripts\AssetsPath\AssetsPathWeapons.cs" />
@@ -143,6 +144,8 @@
     <Compile Include="Assets\Scripts\Model\Enemy\EnemyBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\FlashLight\FlashLightBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Inventory\Inventory.cs" />
+    <Compile Include="Assets\Scripts\Model\ParticleText\SymbolsTextureData.cs" />
+    <Compile Include="Assets\Scripts\Model\ParticleText\TextRendererParticleSystem.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\GranadeLauncherBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\PistolBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\WeaponAnimationBehaviour.cs" />
@@ -172,6 +175,7 @@
     <Compile Include="Assets\Scripts\Type\ModificationType.cs" />
     <Compile Include="Assets\Scripts\Type\MouseScrollWheel.cs" />
     <Compile Include="Assets\Scripts\Type\StateBotType.cs" />
+    <Compile Include="Assets\Scripts\Type\VFXType.cs" />
     <Compile Include="Assets\Scripts\Type\WeaponType.cs" />
     <Compile Include="Assets\Scripts\UI\BaseUi.cs" />
     <Compile Include="Assets\Scripts\UI\Interfaces\IListenerScreen.cs" />
@@ -185,6 +189,7 @@
     <Compile Include="Assets\Scripts\UI\Type\QualitySettingsType.cs" />
     <Compile Include="Assets\Scripts\UI\Type\ScreenElementType.cs" />
     <Compile Include="Assets\Scripts\UI\Type\ScreenType.cs" />
+    <None Include="Assets\Shaders\TextParticlesShader.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/ETC/Programs/GitPrograms/FirstPersonShooter/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
