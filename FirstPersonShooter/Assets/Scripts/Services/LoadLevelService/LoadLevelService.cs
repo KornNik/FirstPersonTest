@@ -40,7 +40,6 @@ namespace ExampleTemplate
             if (_currentLevel == null) return;
             GameObject.Destroy(_currentLevel);
             GameObject.Destroy(Data.Instance.Character.CharacterBehaviour.gameObject);
-            GameObject.Destroy(Data.Instance.EnemiesData.EnemyBehaviour.gameObject);
         }
 
         public bool IsLvlLoaded()

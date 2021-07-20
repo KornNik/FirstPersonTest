@@ -8,13 +8,14 @@ namespace ExampleTemplate
     {
         #region Fields
 
-        [SerializeField] private float _distanceView = 10;
-        [SerializeField] private float _waitForRevive = 5;
+        [SerializeField] private float _distanceView = 20f;
+        [SerializeField] private float _waitForRevive = 5f;
         [SerializeField] private int _enemyCount = 5;
         [SerializeField] private int _health = 50;
         [SerializeField] private bool _isAggressive = true;
+        [SerializeField] private float _shootingDistance = 10f;
+        [SerializeField] private float _shootingDelay = 2f;
 
-        [HideInInspector] public EnemyBehaviour EnemyBehaviour;
         [HideInInspector] public HashSet<EnemyBehaviour> GetBotList { get; } = new HashSet<EnemyBehaviour>();
 
         #endregion
@@ -29,9 +30,9 @@ namespace ExampleTemplate
                 (AssetsPathEnemies.EnemiesGameObject[enemyType]);
             for (int index = 0; index < _enemyCount; index++)
             {
-                EnemyBehaviour = Instantiate(enemyBehaviour, Patrol.GenericPoint(point.Position), point.Rotation());
-                EnemyBehaviour.Agent.avoidancePriority = index;
-                AddBotToList(EnemyBehaviour);
+                var enemy = Instantiate(enemyBehaviour, Patrol.GenericPoint(point.Position), point.Rotation());
+                enemy.Agent.avoidancePriority = index;
+                AddBotToList(enemy);
             }
         }
 
@@ -65,6 +66,14 @@ namespace ExampleTemplate
         public bool GetIsAggressive()
         {
             return _isAggressive;
+        }
+        public float GetShootingDistance()
+        {
+            return _shootingDistance;
+        }
+        public float GetShootingDelay()
+        {
+            return _shootingDelay;
         }
 
         #endregion

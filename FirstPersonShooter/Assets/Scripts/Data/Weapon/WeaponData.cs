@@ -8,7 +8,7 @@ namespace ExampleTemplate
 
         [SerializeField] private int _countAmmunition = 10;
         [SerializeField] private int _countClip = 5;
-        [SerializeField] private float _bulletForce = 600;
+        [SerializeField] private float _bulletForce = 600f;
         [SerializeField] private float _spreadFactor = 0.03f;
         [SerializeField] private float _rechergeTime = 0.3f;
 

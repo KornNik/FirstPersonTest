@@ -8,10 +8,11 @@ namespace ExampleTemplate
     {
         #region Fields
 
-        [SerializeField] private float _speed = 10;
-        [SerializeField] private float _health = 100;
-        [SerializeField] private float _weaponAimingSpeed = 3;
-        [SerializeField] private float _jumpPower = 10;
+        [SerializeField] private float _baseSpeed = 10;
+        [SerializeField] private float _baseHealth = 100;
+        [SerializeField] private float _baseWeaponAimingSpeed = 3;
+        [SerializeField] private float _baseJumpPower = 10;
+        [SerializeField] private float _baseArmor = 3;
 
         [HideInInspector] public Camera Camera;
         [HideInInspector] public CharacterBehaviour CharacterBehaviour;
@@ -44,21 +45,25 @@ namespace ExampleTemplate
             Camera.transform.localRotation = Quaternion.identity;
         }
 
-        public float GetSpeed()
+        public float GetBaseSpeed()
         {
-            return _speed;
+            return _baseSpeed;
         }
-        public float GetHealth()
+        public float GetBaseHealth()
         {
-            return _health;
+            return _baseHealth;
         }
-        public float GetWeaponAimingSpeed()
+        public float GetBaseWeaponAimingSpeed()
         {
-            return _weaponAimingSpeed;
+            return _baseWeaponAimingSpeed;
         }
-        public float GetJumpPower()
+        public float GetBaseJumpPower()
         {
-            return _jumpPower;
+            return _baseJumpPower;
+        }
+        public float GetBaseArmor()
+        {
+            return _baseArmor;
         }
 
         #endregion

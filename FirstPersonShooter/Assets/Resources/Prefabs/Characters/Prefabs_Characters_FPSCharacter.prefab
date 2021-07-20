@@ -575,6 +575,7 @@ GameObject:
   - component: {fileID: 9220810558210820719}
   - component: {fileID: 842207359607746238}
   - component: {fileID: 3809751022508758441}
+  - component: {fileID: -3150348854159531988}
   m_Layer: 8
   m_Name: Prefabs_Characters_FPSCharacter
   m_TagString: Untagged
@@ -590,7 +591,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3037976429886803134}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6006436, y: -1.2999787, z: 3.7589371}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1983981053211892779}
@@ -656,13 +657,27 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
+  m_Height: 1.8
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
+  m_MinMoveDistance: 0
+  m_Center: {x: 0, y: 1.15, z: 0}
+--- !u!136 &-3150348854159531988
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3037976429886803134}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.7708837
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.98210484, z: 0}
 --- !u!1 &3105768643581669863
 GameObject:
   m_ObjectHideFlags: 0

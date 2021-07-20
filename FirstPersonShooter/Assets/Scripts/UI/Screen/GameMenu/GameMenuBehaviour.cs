@@ -13,6 +13,7 @@ namespace ExampleTemplate
         [SerializeField] private Text _flashLightChargeNum;
 
         [SerializeField] private Image _enemyHealth;
+        [SerializeField] private Image _playerHealth;
         [SerializeField] private Image _flashLightChargeFill;
         
         #endregion
@@ -25,6 +26,7 @@ namespace ExampleTemplate
             EnemyBehaviour.EnemyHealthChanged += OnEnemyHealthChanged;
             WeaponService.AmmunitionChanged += OnAmmunitionChange;
             FlashLightBehaviour.ChargeChange += OnChargeChanged;
+            CharacterBehaviour.CharacterHealthChanged += OnPlayerHealthChanged;
         }
 
         private void OnDisable()
@@ -32,6 +34,7 @@ namespace ExampleTemplate
             EnemyBehaviour.EnemyHealthChanged -= OnEnemyHealthChanged;
             WeaponService.AmmunitionChanged -= OnAmmunitionChange;
             FlashLightBehaviour.ChargeChange -= OnChargeChanged;
+            CharacterBehaviour.CharacterHealthChanged -= OnPlayerHealthChanged;
         }
 
         #endregion
@@ -64,6 +67,10 @@ namespace ExampleTemplate
         {
             _flashLightChargeFill.fillAmount = charge;
             _flashLightChargeNum.text = charge.ToString();
+        }
+        private void OnPlayerHealthChanged(float health)
+        {
+            _playerHealth.fillAmount = health;
         }
 
         private void Call()

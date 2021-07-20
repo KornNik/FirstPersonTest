@@ -20,6 +20,7 @@ namespace ExampleTemplate
 
         public Clip Clip;
         public Transform PoolTransform;
+        public WeaponCrosshair WeaponCrosshair;
 
         protected int _countAmmunition;
         protected int _countClip;
@@ -36,7 +37,6 @@ namespace ExampleTemplate
 
         private bool _isVisible;
         private Queue<Clip> _clips = new Queue<Clip>();
-        public WeaponCrosshair WeaponCrosshair;
 
         #endregion
 
@@ -75,7 +75,7 @@ namespace ExampleTemplate
 
         protected virtual void Awake()
         {
-            _ammunitionPool = new AmmunitionPool(8);
+            _ammunitionPool = new AmmunitionPool(8,PoolTransform);
             _mufflerModification = new MufflerModification();
             _clipModification = new ClipModification();
             WeaponCrosshair = new WeaponCrosshair(_barrel,_crosshair);

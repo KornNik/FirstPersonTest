@@ -25,12 +25,13 @@ namespace ExampleTemplate
         private bool _isColliderActive;
         private bool _isVisible;
         private bool _isDead;
+        private bool _isDelay;
 
-        private CharacterData _characterData;
         private LevelsData _levelsData;
         private EnemiesData _enemyData;
         private CharacterBehaviour _target;
         private TextRendererParticleSystem _textParticle;
+        private WeaponBehaviour _weapon;
 
         private Collider[] _bufferColliders = new Collider[64];
         private int _targetColliders;
@@ -92,7 +93,6 @@ namespace ExampleTemplate
         private void Awake()
         {
             _enemyData = Data.Instance.EnemiesData;
-            _characterData = Data.Instance.Character;
             _levelsData = Data.Instance.LevelsData;
 
             var textParticle = CustomResources.Load<TextRendererParticleSystem>
@@ -105,6 +105,7 @@ namespace ExampleTemplate
             Agent.autoRepath = true;
 
             _materials = gameObject.GetComponentsInChildren<Renderer>();
+            _weapon = gameObject.GetComponentInChildren<WeaponBehaviour>();
         }
 
         #endregion
@@ -114,6 +115,10 @@ namespace ExampleTemplate
 
         public void Tick()
         {
+            if (_weapon.Clip.CountAmmunition == 0)
+            {
+                _weapon.ReloadClip();
+            }
             if (_enemyData.GetIsAggressive()&&_stateBot!=StateBotType.Died)
             {
                 if (FindTarget())
@@ -156,7 +161,6 @@ namespace ExampleTemplate
                 _waitStateRoutine = StartCoroutine(WaitState(StateBotType.Patrol));
             }
         }
-
         private void Patrolling()
         {
             if (Agent.hasPath) return;
@@ -167,7 +171,6 @@ namespace ExampleTemplate
             Agent.stoppingDistance = 0;
 
         }
-
         private bool FindTarget()
         {
             var isFindTarget = Physics.CheckSphere(transform.position, _enemyData.GetDistanceView(), LayerManager.PlayerLayer);
@@ -178,7 +181,27 @@ namespace ExampleTemplate
             ColorExtensions.ChangeColor(Color.red, _materials);
             Agent.speed = 6;
             MovePoint(target);
-            Agent.stoppingDistance = 5;
+            Agent.stoppingDistance = 10;
+            if (AimedAtTheTarget()&&!_isDelay)
+            {
+                _weapon.Fire();
+                _isDelay = true;
+                Invoke(nameof(ReadyShoot), _enemyData.GetShootingDelay());
+            }
+        }
+        private bool AimedAtTheTarget()
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(_weapon.Barrel.position, _weapon.Barrel.forward,out hit,
+                LayerManager.PlayerLayer))
+            { 
+                return true;
+            }
+            return false;
+        }
+        private void ReadyShoot()
+        {
+            _isDelay = false;
         }
         private void Detecting()
         {
@@ -189,6 +212,7 @@ namespace ExampleTemplate
                 if (character != null )
                 {
                     ChaseTarget(character.transform.position);
+                    gameObject.transform.LookAt(character.transform);
                     break;
                 }
             }

@@ -141,6 +141,7 @@
     <Compile Include="Assets\Scripts\Model\Camera\CameraBehaviuor.cs" />
     <Compile Include="Assets\Scripts\Model\Character\CharacterAnimationBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Character\CharacterBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Model\Character\CharacterStats.cs" />
     <Compile Include="Assets\Scripts\Model\Enemy\EnemyBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\FlashLight\FlashLightBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Inventory\Inventory.cs" />

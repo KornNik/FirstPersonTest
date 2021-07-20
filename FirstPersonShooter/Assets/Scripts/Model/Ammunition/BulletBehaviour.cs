@@ -19,7 +19,6 @@
             {
                 InflictDamage(tempObj);
             }
-
             ReturnToPool();
         }
 
