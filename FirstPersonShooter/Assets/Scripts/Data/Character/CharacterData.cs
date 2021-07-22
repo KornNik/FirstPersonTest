@@ -4,15 +4,12 @@
 namespace ExampleTemplate
 {
     [CreateAssetMenu(fileName = "CharacterData", menuName = "Data/Character/CharacterData")]
-    public sealed class CharacterData : ScriptableObject
+    public sealed class CharacterData : UnitsData
     {
         #region Fields
 
-        [SerializeField] private float _baseSpeed = 10;
-        [SerializeField] private float _baseHealth = 100;
         [SerializeField] private float _baseWeaponAimingSpeed = 3;
         [SerializeField] private float _baseJumpPower = 10;
-        [SerializeField] private float _baseArmor = 3;
 
         [HideInInspector] public Camera Camera;
         [HideInInspector] public CharacterBehaviour CharacterBehaviour;
@@ -45,14 +42,6 @@ namespace ExampleTemplate
             Camera.transform.localRotation = Quaternion.identity;
         }
 
-        public float GetBaseSpeed()
-        {
-            return _baseSpeed;
-        }
-        public float GetBaseHealth()
-        {
-            return _baseHealth;
-        }
         public float GetBaseWeaponAimingSpeed()
         {
             return _baseWeaponAimingSpeed;
@@ -60,10 +49,6 @@ namespace ExampleTemplate
         public float GetBaseJumpPower()
         {
             return _baseJumpPower;
-        }
-        public float GetBaseArmor()
-        {
-            return _baseArmor;
         }
 
         #endregion

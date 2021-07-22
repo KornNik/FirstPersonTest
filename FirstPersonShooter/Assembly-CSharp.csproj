@@ -98,6 +98,7 @@
     <Compile Include="Assets\Scripts\Data\Level\CharacterPosition.cs" />
     <Compile Include="Assets\Scripts\Data\Level\LevelData.cs" />
     <Compile Include="Assets\Scripts\Data\Level\LevelsData.cs" />
+    <Compile Include="Assets\Scripts\Data\Units\UnitsData.cs" />
     <Compile Include="Assets\Scripts\Data\Weapon\WeaponData.cs" />
     <Compile Include="Assets\Scripts\Helper\Ciphers\CaesarCipher.cs" />
     <Compile Include="Assets\Scripts\Helper\Ciphers\Crypto.cs" />
@@ -142,11 +143,14 @@
     <Compile Include="Assets\Scripts\Model\Character\CharacterAnimationBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Character\CharacterBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Character\CharacterStats.cs" />
+    <Compile Include="Assets\Scripts\Model\Enemy\EnemyAi.cs" />
     <Compile Include="Assets\Scripts\Model\Enemy\EnemyBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Model\Enemy\EnemyStats.cs" />
     <Compile Include="Assets\Scripts\Model\FlashLight\FlashLightBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Model\ParticleText\SymbolsTextureData.cs" />
     <Compile Include="Assets\Scripts\Model\ParticleText\TextRendererParticleSystem.cs" />
+    <Compile Include="Assets\Scripts\Model\Units\UnitsStats.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\GranadeLauncherBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\PistolBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\WeaponAnimationBehaviour.cs" />

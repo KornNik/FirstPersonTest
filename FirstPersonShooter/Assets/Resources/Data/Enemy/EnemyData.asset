@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89fd949419e59504ab7bdf834547386b, type: 3}
   m_Name: EnemyData
   m_EditorClassIdentifier: 
-  _distanceView: 20
+  _baseMovingSpeed: 6
+  _baseHealth: 100
+  _baseArmor: 3
   _waitForRevive: 5
   _enemyCount: 5
-  _health: 50
   _isAggressive: 1
+  _distanceView: 20
   _shootingDistance: 10
-  EnemyBehaviour: {fileID: 0}
+  _shootingDelay: 2

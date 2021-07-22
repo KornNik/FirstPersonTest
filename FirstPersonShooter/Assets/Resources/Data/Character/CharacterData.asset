@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d5a691293053b4c9b28d0e0646643a, type: 3}
   m_Name: CharacterData
   m_EditorClassIdentifier: 
-  _speed: 10
-  _health: 100
-  _weaponAimingSpeed: 3
-  _jumpPower: 10
+  _baseMovingSpeed: 10
+  _baseHealth: 100
+  _baseArmor: 3
+  _waitForRevive: 3
+  _baseWeaponAimingSpeed: 3
+  _baseJumpPower: 10
+  Camera: {fileID: 0}
   CharacterBehaviour: {fileID: 0}
   CharacterAnimationBehaviour: {fileID: 0}
-  CameraBehaviuor: {fileID: 0}
-  InventoryBehaviour: {fileID: 0}
   RightHandTarget: {fileID: 0}
+  _cameraPlace: {fileID: 0}

@@ -13,6 +13,7 @@ namespace ExampleTemplate
         public static event Action<float> MovingSpeed;
         public static event Action<float> Strafe;
         public static event Action<float> CharacterHealthChanged;
+
         public Inventory Inventory;
 
         private CharacterController _characterController;

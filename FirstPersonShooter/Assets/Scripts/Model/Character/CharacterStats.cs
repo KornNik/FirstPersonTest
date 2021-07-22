@@ -1,16 +1,11 @@
-﻿using UnityEngine;
-
-namespace ExampleTemplate
+﻿namespace ExampleTemplate
 {
-    public sealed class CharacterStats
+    public sealed class CharacterStats : UnitsStats
     {
         #region Fields
 
         public CharacterData CharacterData;
 
-        private float _health;
-        private float _speed;
-        private float _armor;
         private float _jumpPower;
 
         #endregion
@@ -22,7 +17,7 @@ namespace ExampleTemplate
         {
             CharacterData = Data.Instance.Character;
             _health = CharacterData.GetBaseHealth();
-            _speed = CharacterData.GetBaseSpeed();
+            _speed = CharacterData.GetBaseMovingSpeed();
             _armor = CharacterData.GetBaseArmor();
             _jumpPower = CharacterData.GetBaseJumpPower();
         }
@@ -32,18 +27,6 @@ namespace ExampleTemplate
 
         #region Properties
 
-        public float Health 
-        { 
-            get { return _health; }
-        }
-        public float Speed 
-        { 
-            get { return _speed; }
-        }
-        public float Armor 
-        { 
-            get { return _armor; } 
-        }
         public float JumpPower
         {
             get { return _jumpPower; }
@@ -52,13 +35,9 @@ namespace ExampleTemplate
         #endregion
 
 
-        #region Methods 
+        #region Methods
 
-        public void TakeDamage(float damage)
-        {
-            _health -= damage / Armor;
-        }
-        public void ResetHealth()
+        public override void ResetHealth()
         {
             _health = CharacterData.GetBaseHealth();
         }
