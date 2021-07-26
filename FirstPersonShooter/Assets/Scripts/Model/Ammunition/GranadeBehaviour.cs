@@ -18,12 +18,18 @@ namespace ExampleTemplate
             _ammunitionData = Data.Instance.GranadeData;
             _granadeData = Data.Instance.GranadeData;
             base.Awake();
+            _ammunitionVFX = new WeaponVFX(VFXType.HitFlash);
             RegisterBulletModifier(new BonusDamageModifier(this, _ammunitionData.GetBonusDamage()));
         }
 
         private void OnCollisionEnter(Collision collision)
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, _granadeData.GetBlastRadius());
+
+            foreach (UnityEngine.ContactPoint contact in collision.contacts)
+            {
+                _ammunitionVFX.PlayWeaponParticle(contact.point);
+            }
 
             ExplosionForce(colliders);
 

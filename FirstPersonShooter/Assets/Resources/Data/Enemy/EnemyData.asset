@@ -16,7 +16,7 @@ MonoBehaviour:
   _baseHealth: 100
   _baseArmor: 3
   _waitForRevive: 5
-  _enemyCount: 5
+  _enemyCount: 0
   _isAggressive: 1
   _distanceView: 20
   _shootingDistance: 10

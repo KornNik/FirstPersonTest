@@ -8,6 +8,7 @@
         {
             _ammunitionData = Data.Instance.BulletData;
             base.Awake();
+            _ammunitionVFX = new WeaponVFX(VFXType.HitFlash);
             RegisterBulletModifier(new PoisonDamageModifier(this, _ammunitionData.GetPoisonDamage(), _ammunitionData.GetPoisonDuration()));
         }
 
@@ -15,6 +16,10 @@
         {
             var tempObj = collision.gameObject.GetComponent<IDamageable>();
 
+            foreach(UnityEngine.ContactPoint contact in collision.contacts)
+            {
+                _ammunitionVFX.PlayWeaponParticle(contact.point);
+            }
             if (tempObj != null)
             {
                 InflictDamage(tempObj);

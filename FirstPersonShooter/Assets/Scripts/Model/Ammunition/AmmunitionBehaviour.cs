@@ -13,6 +13,7 @@ namespace ExampleTemplate
 
 		protected float _currentDamage;
 		protected AmmunitionData _ammunitionData;
+		protected WeaponVFX _ammunitionVFX;
 
 		private Rigidbody _rigidbody;
 		private TrailRenderer _trailRenderer;

@@ -34,6 +34,7 @@ namespace ExampleTemplate
         protected AmmunitionPool _ammunitionPool;
         protected ClipModification _clipModification;
         protected MufflerModification _mufflerModification;
+        protected WeaponVFX _weaponVFX;
 
         private bool _isVisible;
         private Queue<Clip> _clips = new Queue<Clip>();
@@ -75,6 +76,7 @@ namespace ExampleTemplate
 
         protected virtual void Awake()
         {
+
             _ammunitionPool = new AmmunitionPool(8,PoolTransform);
             _mufflerModification = new MufflerModification();
             _clipModification = new ClipModification();
