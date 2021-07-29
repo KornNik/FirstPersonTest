@@ -6,6 +6,8 @@
         TextParticle = 1,
         MuzzleFlash = 2,
         HitFlash = 3,
+        BloodSplash = 4,
+        GranadeExplosion = 5,
 
     }
 }

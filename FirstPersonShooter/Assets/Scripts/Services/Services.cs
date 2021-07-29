@@ -33,6 +33,7 @@ namespace ExampleTemplate
         public LoadLevelService LoadLevelService { get; private set; }
         public WeaponService WeaponService { get; private set; }
         public FlashLightService FlashLightService { get; private set; }
+        public BulletVFX BulletVFX { get; private set; }
 
         #endregion
 
@@ -49,6 +50,7 @@ namespace ExampleTemplate
             LoadLevelService = new LoadLevelService();
             WeaponService = new WeaponService();
             FlashLightService = new FlashLightService();
+            BulletVFX = new BulletVFX();
         }
         
         #endregion

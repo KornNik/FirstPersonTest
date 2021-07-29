@@ -1,4 +1,6 @@
-﻿namespace ExampleTemplate
+﻿using UnityEngine;
+
+namespace ExampleTemplate
 {
     public sealed class BulletBehaviour : AmmunitionBehaviour
     {
@@ -8,7 +10,6 @@
         {
             _ammunitionData = Data.Instance.BulletData;
             base.Awake();
-            _ammunitionVFX = new WeaponVFX(VFXType.HitFlash);
             RegisterBulletModifier(new PoisonDamageModifier(this, _ammunitionData.GetPoisonDamage(), _ammunitionData.GetPoisonDuration()));
         }
 
@@ -18,7 +19,7 @@
 
             foreach(UnityEngine.ContactPoint contact in collision.contacts)
             {
-                _ammunitionVFX.PlayWeaponParticle(contact.point);
+                Services.Instance.BulletVFX.GetHitImpactParticle(LayerMask.GetMask(LayerMask.LayerToName(collision.gameObject.layer)), contact.point);
             }
             if (tempObj != null)
             {

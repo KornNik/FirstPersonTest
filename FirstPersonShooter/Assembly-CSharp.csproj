@@ -162,6 +162,7 @@
     <Compile Include="Assets\Scripts\Model\WeaponModification\ClipModification.cs" />
     <Compile Include="Assets\Scripts\Model\WeaponModification\MufflerModification.cs" />
     <Compile Include="Assets\Scripts\Model\WeaponModification\WeaponModification.cs" />
+    <Compile Include="Assets\Scripts\Services\BulletVFXService\BulletVFX.cs" />
     <Compile Include="Assets\Scripts\Services\CameraService\CameraServices.cs" />
     <Compile Include="Assets\Scripts\Services\FlashLightService\FlashLightService.cs" />
     <Compile Include="Assets\Scripts\Services\LoadLevelService\LoadLevelService.cs" />

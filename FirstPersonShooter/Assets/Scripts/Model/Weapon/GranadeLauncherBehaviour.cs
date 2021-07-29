@@ -11,6 +11,7 @@
             _weaponVFX = new WeaponVFX(_barrel, VFXType.MuzzleFlash);
             _isMufflerModificated = true;
             _clipModification.IncreasAmmo = 4;
+            _weaponType = WeaponType.GranadeLauncher;
             _ammunitionType = AmmunitionType.Granade;
 		}
 

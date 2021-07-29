@@ -31,6 +31,7 @@ namespace ExampleTemplate
         protected Vector3 _shootDirection;
         protected WeaponData _weaponData;
         protected AmmunitionType _ammunitionType;
+        protected WeaponType _weaponType;
         protected AmmunitionPool _ammunitionPool;
         protected ClipModification _clipModification;
         protected MufflerModification _mufflerModification;

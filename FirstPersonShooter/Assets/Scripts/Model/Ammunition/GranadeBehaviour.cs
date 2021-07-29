@@ -17,8 +17,8 @@ namespace ExampleTemplate
         {
             _ammunitionData = Data.Instance.GranadeData;
             _granadeData = Data.Instance.GranadeData;
+            Type = AmmunitionType.Granade;
             base.Awake();
-            _ammunitionVFX = new WeaponVFX(VFXType.HitFlash);
             RegisterBulletModifier(new BonusDamageModifier(this, _ammunitionData.GetBonusDamage()));
         }
 
@@ -26,9 +26,9 @@ namespace ExampleTemplate
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, _granadeData.GetBlastRadius());
 
-            foreach (UnityEngine.ContactPoint contact in collision.contacts)
+            foreach (ContactPoint contact in collision.contacts)
             {
-                _ammunitionVFX.PlayWeaponParticle(contact.point);
+                Services.Instance.BulletVFX.GetHitParticle(Type, contact.point);
             }
 
             ExplosionForce(colliders);
