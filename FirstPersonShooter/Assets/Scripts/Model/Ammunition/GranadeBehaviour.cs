@@ -17,6 +17,7 @@ namespace ExampleTemplate
         {
             _ammunitionData = Data.Instance.GranadeData;
             _granadeData = Data.Instance.GranadeData;
+            Type = AmmunitionType.Granade;
             base.Awake();
             RegisterBulletModifier(new BonusDamageModifier(this, _ammunitionData.GetBonusDamage()));
         }
@@ -24,6 +25,11 @@ namespace ExampleTemplate
         private void OnCollisionEnter(Collision collision)
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, _granadeData.GetBlastRadius());
+
+            foreach (ContactPoint contact in collision.contacts)
+            {
+                Services.Instance.BulletVFX.GetHitParticle(Type, contact.point);
+            }
 
             ExplosionForce(colliders);
 

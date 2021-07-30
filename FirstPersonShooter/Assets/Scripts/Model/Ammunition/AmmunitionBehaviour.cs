@@ -5,7 +5,9 @@ namespace ExampleTemplate
 {
     public abstract class AmmunitionBehaviour : MonoBehaviour, IDamager
     {
-        #region Fields
+		#region Fields
+
+		[HideInInspector] public Transform PoolTransform;
 
 		public AmmunitionType Type = AmmunitionType.Bullet;
 
@@ -60,7 +62,7 @@ namespace ExampleTemplate
 
         protected void ReturnToPool()
 		{
-            transform.SetParent(Services.Instance.WeaponService.Weapon.PoolTransform);
+            transform.SetParent(PoolTransform);
             transform.localPosition = Vector3.zero;
 			transform.localRotation = Quaternion.identity;
 			_rigidbody.velocity = Vector3.zero;
@@ -68,7 +70,7 @@ namespace ExampleTemplate
 			gameObject.SetActive(false);
 			CancelInvoke(nameof(ReturnToPool));
 
-            if (!Services.Instance.WeaponService.Weapon.PoolTransform)
+            if (!PoolTransform)
             {
                 Destroy(gameObject);
             }

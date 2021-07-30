@@ -4,7 +4,7 @@
     {
         None,
         Pistol,
-        Shotgun,
+        GranadeLauncher,
 
     }
 }

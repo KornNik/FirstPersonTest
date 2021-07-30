@@ -12,7 +12,7 @@ namespace ExampleTemplate
                 WeaponType.Pistol, "Prefabs/Weapons/Prefab_Weapons_Pistol" 
             },
             {
-                WeaponType.Shotgun, "Prefabs/Weapons/Prefab_Weapons_GranadeLauncher"
+                WeaponType.GranadeLauncher, "Prefabs/Weapons/Prefab_Weapons_GranadeLauncher"
             }
         };
 

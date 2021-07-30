@@ -12,17 +12,18 @@ namespace ExampleTemplate
 
         private readonly Dictionary<AmmunitionType, HashSet<AmmunitionBehaviour>> _ammunitionPool;
         private readonly int _capacityPool;
+        private readonly Transform _poolTransform;
 
         #endregion
 
 
         #region ClassLifeCycles
 
-        public AmmunitionPool(int capacityPool)
+        public AmmunitionPool(int capacityPool,Transform poolTransform)
         {
             _ammunitionPool = new Dictionary<AmmunitionType, HashSet<AmmunitionBehaviour>>();
             _capacityPool = capacityPool;
-
+            _poolTransform = poolTransform;
         }
 
         #endregion
@@ -62,6 +63,7 @@ namespace ExampleTemplate
                 {
                     var instantiate = Object.Instantiate(bullet);
                     ReturnToPool(instantiate.transform);
+                    instantiate.PoolTransform = _poolTransform;
                     ammunitions.Add(instantiate);
                 }
 
@@ -80,6 +82,7 @@ namespace ExampleTemplate
                 {
                     var instantiate = Object.Instantiate(granade);
                     ReturnToPool(instantiate.transform);
+                    instantiate.PoolTransform = _poolTransform;
                     ammunitions.Add(instantiate);
                 }
 
@@ -91,7 +94,7 @@ namespace ExampleTemplate
 
         private void ReturnToPool(Transform transform)
         {
-            transform.SetParent(Services.Instance.WeaponService.Weapon.PoolTransform);
+            transform.SetParent(_poolTransform);
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
             transform.gameObject.SetActive(false);
@@ -99,7 +102,7 @@ namespace ExampleTemplate
 
         public void RemovePool()
         {
-            Object.Destroy(Services.Instance.WeaponService.Weapon.PoolTransform.gameObject);
+            Object.Destroy(_poolTransform.gameObject);
         }
 
         #endregion

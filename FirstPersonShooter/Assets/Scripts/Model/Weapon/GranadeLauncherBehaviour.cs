@@ -8,8 +8,10 @@
 		{
             _weaponData = Data.Instance.GranadeLauncherData;
             base.Awake();
+            _weaponVFX = new WeaponVFX(_barrel, VFXType.MuzzleFlash);
             _isMufflerModificated = true;
             _clipModification.IncreasAmmo = 4;
+            _weaponType = WeaponType.GranadeLauncher;
             _ammunitionType = AmmunitionType.Granade;
 		}
 
@@ -28,6 +30,7 @@
 
             var tempAmmunition = _ammunitionPool.GetAmmunition(_ammunitionType);
             tempAmmunition.AddForce(_shootDirection * _force);
+            _weaponVFX.PlayWeaponParticle(_barrel.position);
 
             Clip.CountAmmunition--;
 			_isReady = false;

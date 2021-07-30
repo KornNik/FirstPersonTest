@@ -1,4 +1,6 @@
-﻿namespace ExampleTemplate
+﻿using UnityEngine;
+
+namespace ExampleTemplate
 {
     public sealed class BulletBehaviour : AmmunitionBehaviour
     {
@@ -15,11 +17,14 @@
         {
             var tempObj = collision.gameObject.GetComponent<IDamageable>();
 
+            foreach(UnityEngine.ContactPoint contact in collision.contacts)
+            {
+                Services.Instance.BulletVFX.GetHitImpactParticle(LayerMask.GetMask(LayerMask.LayerToName(collision.gameObject.layer)), contact.point);
+            }
             if (tempObj != null)
             {
                 InflictDamage(tempObj);
             }
-
             ReturnToPool();
         }
 

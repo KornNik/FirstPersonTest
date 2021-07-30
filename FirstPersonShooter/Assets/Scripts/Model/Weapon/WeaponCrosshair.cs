@@ -10,7 +10,7 @@ namespace ExampleTemplate
         private Transform _crosshair;
 
         private float _rayDistance = 200f;
-        private float _scaleMulty = 0.015f;
+        private float _scaleMulty = 0.01f;
         private int _bulletLayer = 1 << 10;
         private int _crosshairLayer = 1 << 11;
         private int _ignoreLayer;

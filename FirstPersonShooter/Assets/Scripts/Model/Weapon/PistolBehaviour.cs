@@ -9,8 +9,10 @@
 		{
 			_weaponData = Data.Instance.PistolData;
 			base.Awake();
+			_weaponType = WeaponType.Pistol;
 			_ammunitionType = AmmunitionType.Bullet;
-		}
+            _weaponVFX = new WeaponVFX(_barrel, VFXType.MuzzleFlash);
+        }
 
 		#endregion
 
@@ -27,8 +29,9 @@
 			var tempAmmunition = _ammunitionPool.GetAmmunition(_ammunitionType);
 			tempAmmunition.AddForce(_shootDirection * _force);
 			FireActn?.Invoke();
+            _weaponVFX.PlayWeaponParticle(_barrel.position);
 
-			Clip.CountAmmunition--;
+            Clip.CountAmmunition--;
 			_isReady = false;
 			Invoke(nameof(ReadyShoot), _rechergeTime);
 		}

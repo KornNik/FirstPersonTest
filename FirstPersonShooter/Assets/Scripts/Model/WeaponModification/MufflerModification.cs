@@ -14,7 +14,7 @@ namespace ExampleTemplate
 
         #region Properties
 
-        public float ReducingSpread { get { return _reducingSpread; } set { _reducingSpread = value; } }
+        public float ReducingSpread { get { return _reducingSpread; } private set { } }
 
         #endregion
 

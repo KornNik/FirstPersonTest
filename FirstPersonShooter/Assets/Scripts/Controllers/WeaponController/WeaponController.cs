@@ -45,10 +45,14 @@ namespace ExampleTemplate
             }
             if (Input.GetAxis(AxisManager.FIRE2) != 0)
             {
-                _handWeight += Time.deltaTime * _characterData.GetWeaponAimingSpeed();
+                _handWeight += Time.deltaTime * _characterData.GetBaseWeaponAimingSpeed();
                 tempWeapon.WeaponCrosshair.CrossHair(true);
             }
-            else { _handWeight -= Time.deltaTime * _characterData.GetWeaponAimingSpeed();tempWeapon.WeaponCrosshair.CrossHair(false); }
+            else
+            {
+                _handWeight -= Time.deltaTime * _characterData.GetBaseWeaponAimingSpeed()
+                    ; tempWeapon.WeaponCrosshair.CrossHair(false);
+            }
 
             if (Input.GetKeyDown(KeyManager.RELOAD_WEAPON))
             {

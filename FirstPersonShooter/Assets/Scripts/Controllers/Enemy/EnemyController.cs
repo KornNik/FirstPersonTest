@@ -1,17 +1,15 @@
-﻿using UnityEngine;
-using System.Linq;
-using System.Collections.Generic;
+﻿using System.Linq;
 
 namespace ExampleTemplate
 {
-    public class EnemyController : IExecute,IInitialization,IListenerScreen
-    {
-        #region Fields
+	public class EnemyController : IExecute, IInitialization, IListenerScreen
+	{
+		#region Fields
 
 		private bool _isActive;
 		private EnemiesData _enemiesData;
 
-        #endregion
+		#endregion
 
 
 		#region IInitialization
@@ -22,17 +20,17 @@ namespace ExampleTemplate
 			_enemiesData = Data.Instance.EnemiesData;
 		}
 
-        #endregion
+		#endregion
 
 
-        #region IExecute
+		#region IExecute
 
-        public void Execute()
+		public void Execute()
 		{
 			if (!_isActive) return;
-			for (var i = 0; i <_enemiesData.GetBotList.Count; i++)
+			for (var i = 0; i < _enemiesData.GetAiList.Count; i++)
 			{
-				var bot = _enemiesData.GetBotList.ElementAt(i);
+				var bot = _enemiesData.GetAiList.ElementAt(i);
 				bot.Tick();
 			}
 		}
