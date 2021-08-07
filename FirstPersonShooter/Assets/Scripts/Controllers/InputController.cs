@@ -79,6 +79,10 @@ namespace ExampleTemplate
             {
                 SwitchFlashLight();
             }
+            if (Input.GetKeyUp(KeyManager.GRANADE_SELECT))
+            {
+                SelectGranade();
+            }
         }
 
         #endregion
@@ -124,6 +128,16 @@ namespace ExampleTemplate
             if(tempFlashLight != null)
             {
                 Services.Instance.FlashLightService.Switch(tempFlashLight);
+            }
+        }
+
+        private void SelectGranade()
+        {
+            Services.Instance.GranadeService.Off();
+            var tempGranade = _characterData.CharacterBehaviour.Inventory.SelectGranade();
+            if (tempGranade != null)
+            {
+                Services.Instance.GranadeService.On(tempGranade);
             }
         }
 

@@ -7,7 +7,7 @@ namespace ExampleTemplate
     {
         #region Fields
 
-        private static readonly int _fireTrigger = Animator.StringToHash("Fire");
+        private static readonly int _fireTrigger = Animator.StringToHash(WeaponParametersManager.FIRE);
         private Animator _weaponAnimator;
 
         #endregion

@@ -6,7 +6,7 @@ namespace ExampleTemplate
     public sealed class Services
     {
         #region Fields
-        
+
         private static readonly Lazy<Services> _instance = new Lazy<Services>();
 
         #endregion
@@ -20,8 +20,8 @@ namespace ExampleTemplate
         }
 
         #endregion
-        
-        
+
+
         #region Properties
 
         public static Services Instance => _instance.Value;
@@ -34,6 +34,7 @@ namespace ExampleTemplate
         public WeaponService WeaponService { get; private set; }
         public FlashLightService FlashLightService { get; private set; }
         public BulletVFX BulletVFX { get; private set; }
+        public GranadeService GranadeService { get; private set; }
 
         #endregion
 
@@ -51,6 +52,7 @@ namespace ExampleTemplate
             WeaponService = new WeaponService();
             FlashLightService = new FlashLightService();
             BulletVFX = new BulletVFX();
+            GranadeService = new GranadeService();
         }
         
         #endregion

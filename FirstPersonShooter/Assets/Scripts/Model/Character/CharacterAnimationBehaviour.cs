@@ -7,8 +7,9 @@ namespace ExampleTemplate
     {
         #region Fields
 
-        private static readonly int _movingSpeed = Animator.StringToHash("MovingSpeed");
-        private static readonly int _strafe = Animator.StringToHash("Strafe");
+        private static readonly int _movingSpeed = Animator.StringToHash(CharacterParametersManager.MOVING_SPEED);
+        private static readonly int _strafe = Animator.StringToHash(CharacterParametersManager.STRAFE);
+        private static readonly int _jump = Animator.StringToHash(CharacterParametersManager.JUMP);
 
         private Animator _characterAnimator;
         private CharacterData _characterData;
@@ -22,12 +23,14 @@ namespace ExampleTemplate
         {
             CharacterBehaviour.MovingSpeed += CharacterMovingSpeed;
             CharacterBehaviour.Strafe += CharacterStrafeSpeed;
+            CharacterBehaviour.Jump += CharacterJump;
         }
 
         private void OnDisable()
         {
             CharacterBehaviour.MovingSpeed -= CharacterMovingSpeed;
             CharacterBehaviour.Strafe -= CharacterStrafeSpeed;
+            CharacterBehaviour.Jump -= CharacterJump;
         }
 
         private void Awake()
@@ -59,6 +62,10 @@ namespace ExampleTemplate
         private void CharacterStrafeSpeed(float obj)
         {
             _characterAnimator.SetFloat(_strafe, obj);
+        }
+        private void CharacterJump()
+        {
+            _characterAnimator.SetTrigger(_jump);
         }
         public void SetHandWeight(float handWeight)
         {

@@ -77,7 +77,7 @@ namespace ExampleTemplate
             var ammunition = ammunitions.FirstOrDefault(a => !a.gameObject.activeSelf);
             if (ammunition == null)
             {
-                var granade = CustomResources.Load<GranadeBehaviour>(AssetsPathAmmunition.AmmunitionsGameObject[AmmunitionType.Granade]);
+                var granade = CustomResources.Load<ExplosionAmmunitionBehaviour>(AssetsPathAmmunition.AmmunitionsGameObject[AmmunitionType.Granade]);
                 for (var i = 0; i < _capacityPool; i++)
                 {
                     var instantiate = Object.Instantiate(granade);

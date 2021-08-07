@@ -38,7 +38,6 @@ namespace ExampleTemplate
             if (!_isFlashLight) { return; }
             _isFlashLight = false;
             _flashLight.Switch(false);
-
         }
 
         public void Switch(FlashLightBehaviour flashLightBehaviour)

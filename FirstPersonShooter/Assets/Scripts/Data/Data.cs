@@ -18,8 +18,9 @@ namespace ExampleTemplate
         [SerializeField] private string _pistolDataPath;
         [SerializeField] private string _granadeLauncherDataPath;
         [SerializeField] private string _bulletDataPath;
-        [SerializeField] private string _granadeDataPath;
+        [SerializeField] private string _explosionAmmunitionDataPath;
         [SerializeField] private string _flashLightDataPath;
+        [SerializeField] private string _granadeDataPath;
 
         private static CharacterData _characterData;
         private static CameraData _cameraData;
@@ -28,8 +29,10 @@ namespace ExampleTemplate
         private static WeaponData _pistolData;
         private static WeaponData _granadeLauncherData;
         private static AmmunitionData _bulletData;
-        private static GranadeData _granadeData;
+        private static ExplosionAmmunitionData _explosionAmmunitionData;
         private static FlashLightData _flashLightData;
+        private static GranadeData _granadeData;
+
 
         private static readonly Lazy<Data> _instance = new Lazy<Data>(() => Load<Data>("Data/" + typeof(Data).Name));
 
@@ -118,15 +121,15 @@ namespace ExampleTemplate
                 return _bulletData;
             }
         }
-        public GranadeData GranadeData
+        public ExplosionAmmunitionData ExplosionAmmunitionData
         {
             get
             {
-                if (_granadeData == null)
+                if (_explosionAmmunitionData == null)
                 {
-                    _granadeData = Load<GranadeData>("Data/" + Instance._granadeDataPath);
+                    _explosionAmmunitionData = Load<ExplosionAmmunitionData>("Data/" + Instance._explosionAmmunitionDataPath);
                 }
-                return _granadeData;
+                return _explosionAmmunitionData;
             }
         }
         public FlashLightData FlashLightData
@@ -138,6 +141,17 @@ namespace ExampleTemplate
                     _flashLightData = Load<FlashLightData>("Data/" + Instance._flashLightDataPath);
                 }
                 return _flashLightData;
+            }
+        }
+        public GranadeData GranadeData
+        {
+            get
+            {
+                if (_granadeData == null)
+                {
+                    _granadeData = Load<GranadeData>("Data/" + Instance._granadeDataPath);
+                }
+                return _granadeData;
             }
         }
 

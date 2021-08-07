@@ -13,6 +13,7 @@ namespace ExampleTemplate
         public static event Action<float> MovingSpeed;
         public static event Action<float> Strafe;
         public static event Action<float> CharacterHealthChanged;
+        public static event Action Jump;
 
         public Inventory Inventory;
 
@@ -68,6 +69,7 @@ namespace ExampleTemplate
             if (_characterController.isGrounded)
             {
                 _gravityForce = _characterStats.JumpPower;
+                Jump?.Invoke();
             }
         }
 

@@ -36,7 +36,6 @@ namespace ExampleTemplate
 
         private void Awake()
         {
-			_light = GetComponent<Light>();
 			_camera = Services.Instance.CameraServices.CameraMain;
 			_flashLightData = Data.Instance.FlashLightData;
 
@@ -63,10 +62,8 @@ namespace ExampleTemplate
 
         public void Switch(bool value)
 		{
-            if (!_light) { return; }
-            Debug.Log(_light);
+            if(!TryGetComponent<Light>(out _light)) { return; }
 			_light.enabled = value;
-			Debug.Log(_light.enabled);
 			if (!value) return;
 
 			transform.position = _goFollow.position + _vecOffset;
@@ -76,7 +73,6 @@ namespace ExampleTemplate
 		public void Rotation()
 		{
 			if (!_light) return;
-
 			transform.position = _goFollow.position + _vecOffset;
 			transform.rotation = Quaternion.Lerp(transform.rotation, _goFollow.rotation, 
 				_flashLightData.GetRotationSpeed() * Time.deltaTime);

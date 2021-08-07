@@ -8,6 +8,7 @@
         HitFlash = 3,
         BloodSplash = 4,
         GranadeExplosion = 5,
+        PoisonExplosion = 6,
 
     }
 }
