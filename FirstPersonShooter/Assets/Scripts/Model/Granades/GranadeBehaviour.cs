@@ -7,7 +7,6 @@ namespace ExampleTemplate
     {
         #region Fields
 
-        public Rigidbody Rigidbody;
 
         protected GranadeData _granadeData;
         protected ParticleSystem _particleSystem;
@@ -17,9 +16,12 @@ namespace ExampleTemplate
         protected GranadeType _type = GranadeType.Poison;
         protected bool _isReady;
 
+
+        private Rigidbody _rigidbody;
+        private List<AmmunitionModifier> _modifiers = new List<AmmunitionModifier>();
+
         private bool _isVisible;
         private bool _isColliderActive;
-        private List<AmmunitionModifier> _modifiers = new List<AmmunitionModifier>();
 
         #endregion
 
@@ -76,7 +78,7 @@ namespace ExampleTemplate
 
         protected virtual void Awake()
         {
-            Rigidbody = GetComponent<Rigidbody>();
+            _rigidbody = GetComponent<Rigidbody>();
 
             _particleSystem = GetComponent<ParticleSystem>();
             _granadeData = Data.Instance.GranadeData;
@@ -98,9 +100,9 @@ namespace ExampleTemplate
 
         protected void AddForce(Vector3 direction)
         {
-            if (!Rigidbody) return;
-            Rigidbody.isKinematic = false;
-            Rigidbody.AddForce(direction*600);
+            if (!_rigidbody) return;
+            _rigidbody.isKinematic = false;
+            _rigidbody.AddForce(direction*_granadeData.GetTrowForce());
 
         }
 
@@ -112,11 +114,11 @@ namespace ExampleTemplate
         protected void ReadyThrow()
         {
             _isReady = true;
+            _rigidbody.isKinematic = true;
+            _rigidbody.velocity = Vector3.zero;
             gameObject.transform.SetParent(_parentTransform);
             gameObject.transform.localPosition = Vector3.zero;
             gameObject.transform.localRotation = Quaternion.identity;
-            Rigidbody.velocity = Vector3.zero;
-            Rigidbody.isKinematic = true;
         }
 
         private ParticleSystem.EmitParams SetParticle(Color color,Vector3 position)

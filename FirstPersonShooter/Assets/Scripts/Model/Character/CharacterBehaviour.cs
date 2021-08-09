@@ -10,10 +10,11 @@ namespace ExampleTemplate
     {
         #region Fields
 
-        public static event Action<float> MovingSpeed;
-        public static event Action<float> Strafe;
         public static event Action<float> CharacterHealthChanged;
-        public static event Action Jump;
+
+        public event Action<float> MovingSpeed;
+        public event Action<float> Strafe;
+        public event Action Jump;
 
         public Inventory Inventory;
 
@@ -32,7 +33,7 @@ namespace ExampleTemplate
 
         private void Awake()
         {
-            _characterController = gameObject.GetComponent<CharacterController>();
+            _characterController = GetComponent<CharacterController>();
             Inventory = new Inventory(this);
             _characterStats = new CharacterStats();
         }

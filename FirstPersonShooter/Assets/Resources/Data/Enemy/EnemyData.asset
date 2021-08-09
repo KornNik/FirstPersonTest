@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnemyData
   m_EditorClassIdentifier: 
   _baseMovingSpeed: 6
-  _baseHealth: 100
+  _baseHealth: 50
   _baseArmor: 3
   _waitForRevive: 5
   _enemyCount: 5

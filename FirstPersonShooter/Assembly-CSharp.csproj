@@ -130,12 +130,12 @@
     <Compile Include="Assets\Scripts\Helper\Extensions\Vector3Extensions.cs" />
     <Compile Include="Assets\Scripts\Helper\LoadLevelFromEditor.cs" />
     <Compile Include="Assets\Scripts\Helper\Manageres\AxisManager.cs" />
-    <Compile Include="Assets\Scripts\Helper\Manageres\CharacterParametersManager.cs" />
     <Compile Include="Assets\Scripts\Helper\Manageres\KeyManager.cs" />
     <Compile Include="Assets\Scripts\Helper\Manageres\LayerManager.cs" />
     <Compile Include="Assets\Scripts\Helper\Manageres\NameManager.cs" />
     <Compile Include="Assets\Scripts\Helper\Manageres\TagManager.cs" />
     <Compile Include="Assets\Scripts\Helper\Manageres\TagType.cs" />
+    <Compile Include="Assets\Scripts\Helper\Manageres\UnitParametrsManager.cs" />
     <Compile Include="Assets\Scripts\Helper\Manageres\WeaponParametersManager.cs" />
     <Compile Include="Assets\Scripts\Model\Ammunition\AmmunitionBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Ammunition\AmmunitionModifier.cs" />
@@ -151,6 +151,7 @@
     <Compile Include="Assets\Scripts\Model\Character\CharacterBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Character\CharacterStats.cs" />
     <Compile Include="Assets\Scripts\Model\Enemy\EnemyAi.cs" />
+    <Compile Include="Assets\Scripts\Model\Enemy\EnemyAnimationBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Enemy\EnemyBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Enemy\EnemyStats.cs" />
     <Compile Include="Assets\Scripts\Model\FlashLight\FlashLightBehaviour.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="Assets\Scripts\Model\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Model\ParticleText\SymbolsTextureData.cs" />
     <Compile Include="Assets\Scripts\Model\ParticleText\TextRendererParticleSystem.cs" />
+    <Compile Include="Assets\Scripts\Model\UnitAnimationBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Units\UnitsStats.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\GranadeLauncherBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\PistolBehaviour.cs" />

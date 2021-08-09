@@ -12,7 +12,14 @@ namespace ExampleTemplate
         [HideInInspector] public NavMeshAgent Agent;
         [HideInInspector] public EnemyStats EnemyStats;
 
-        public event Action IsDead;
+        public Transform RightHandTarget;
+
+        public Action<float> MovingSpeed;
+        public Action<float> Strafe;
+        public Action Impact;
+        public Action Jump;
+        public Action Death;
+        public Action Revive;
 
         private StateBotType _stateBot;
         private WeaponBehaviour _weapon;
@@ -22,8 +29,9 @@ namespace ExampleTemplate
 
         private bool _isDelay;
         private int _targetColliders;
-        private Collider[] _bufferColliders = new Collider[64];
+        private float _handWeight;
 
+        private Collider[] _bufferColliders = new Collider[64];
         private WaitForSeconds _waitForState = new WaitForSeconds(5);
 
 
@@ -37,13 +45,13 @@ namespace ExampleTemplate
         #endregion
 
 
-        #region ClassLyfeCycle
+        #region UnityMethods
 
         public void Awake()
         {
-            _materials = gameObject.GetComponentsInChildren<Renderer>();
-            _weapon = gameObject.GetComponentInChildren<WeaponBehaviour>();
-            Agent = gameObject.GetComponent<NavMeshAgent>();
+            _materials = GetComponentsInChildren<Renderer>();
+            _weapon = GetComponentInChildren<WeaponBehaviour>();
+            Agent = GetComponent<NavMeshAgent>();
             EnemyStats = new EnemyStats();
 
             Agent.autoRepath = true;
@@ -56,6 +64,8 @@ namespace ExampleTemplate
 
         public void Tick()
         {
+            MovingSpeed?.Invoke(Agent.velocity.normalized.magnitude);
+
             if (_weapon.Clip.CountAmmunition == 0)
             {
                 _weapon.ReloadClip();
@@ -121,14 +131,14 @@ namespace ExampleTemplate
             Agent.speed = EnemyStats.Speed * 2;
             MovePoint(target);
             Agent.stoppingDistance = 10;
-            if (AimedAtTheTarget() && !_isDelay)
+            if (AtGunpoint() && !_isDelay)
             {
                 _weapon.Fire();
                 _isDelay = true;
                 Invoke(nameof(ReadyShoot), EnemyStats.EnemyData.GetShootingDelay());
             }
         }
-        private bool AimedAtTheTarget()
+        private bool AtGunpoint()
         {
             RaycastHit hit;
             if (Physics.Raycast(_weapon.Barrel.position, _weapon.Barrel.forward, out hit,
@@ -159,7 +169,7 @@ namespace ExampleTemplate
 
         private void Die()
         {
-            IsDead?.Invoke();
+            Death?.Invoke();
         }
         private void ReadyState(StateBotType stateBot)
         {

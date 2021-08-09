@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _radius: 15
   _damage: 10
-  _poisonDamage: 0
-  _poisonDuration: 0
+  _poisonDamage: 3
+  _poisonDuration: 5
   _delayExplosion: 4
   _timeToDistract: 5
+  _throwForce: 800

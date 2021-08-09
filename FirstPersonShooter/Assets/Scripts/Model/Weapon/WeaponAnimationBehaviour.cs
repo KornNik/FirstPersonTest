@@ -8,6 +8,7 @@ namespace ExampleTemplate
         #region Fields
 
         private static readonly int _fireTrigger = Animator.StringToHash(WeaponParametersManager.FIRE);
+        private WeaponBehaviour _weaponBehaviour;
         private Animator _weaponAnimator;
 
         #endregion
@@ -17,17 +18,18 @@ namespace ExampleTemplate
 
         private void OnEnable()
         {
-            WeaponBehaviour.FireActn += OnFire;
+            _weaponBehaviour.FireActn += OnFire;
         }
 
         private void OnDisable()
         {
-            WeaponBehaviour.FireActn -= OnFire;
+            _weaponBehaviour.FireActn -= OnFire;
         }
 
         private void Awake()
         {
-            _weaponAnimator = gameObject.GetComponent<Animator>();
+            _weaponAnimator = GetComponent<Animator>();
+            _weaponBehaviour = GetComponent<WeaponBehaviour>();
         }
         #endregion
 

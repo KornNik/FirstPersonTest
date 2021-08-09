@@ -4,11 +4,11 @@ using System.Collections;
 
 namespace ExampleTemplate
 {
+
     public sealed class EnemyBehaviour : MonoBehaviour, IDamageable
     {
         #region Fields
 
-        [HideInInspector] public EnemyAi EnemyAi;
 
         public static event Action<float> EnemyHealthChanged;
 
@@ -18,6 +18,7 @@ namespace ExampleTemplate
         private bool _isVisible;
         private bool _isDead;
 
+        private EnemyAi _enemyAi;
         private LevelsData _levelsData;
         private TextRendererParticleSystem _textParticle;
 
@@ -75,16 +76,16 @@ namespace ExampleTemplate
 
         private void OnEnable()
         {
-            EnemyAi.IsDead += OnDie;
+            _enemyAi.Death += OnDie;
         }
         private void OnDisable()
         {
-            EnemyAi.IsDead -= OnDie;
+            _enemyAi.Death -= OnDie;
         }
         private void Awake()
         {
             _levelsData = Data.Instance.LevelsData;
-            EnemyAi = GetComponent<EnemyAi>();
+            _enemyAi = GetComponent<EnemyAi>();
 
             var textParticle = CustomResources.Load<TextRendererParticleSystem>
                 (AssetsPathParticles.ParticlesGameObject[VFXType.TextParticle]);
@@ -100,22 +101,24 @@ namespace ExampleTemplate
         {
             if (!_isDead) { return; }
             _isDead = false;
-            IsVisible = false;
-            IsColliderActive = false;
-            EnemyAi.Agent.ResetPath();
+            _enemyAi.Agent.ResetPath();
             StopAllCoroutines();
-            Invoke(nameof(Revive), EnemyAi.EnemyStats.EnemyData.GetReviveTime());
+            Invoke(nameof(Revive), _enemyAi.EnemyStats.EnemyData.GetReviveTime());
         }
-
         private void Revive()
         {
-            EnemyAi.StateBot = StateBotType.None;
+            _enemyAi.StateBot = StateBotType.None;
             transform.position = Patrol.GenericPoint(_levelsData.GetEnemyPosition(LevelsType.TestLevel).Position);
             transform.rotation = _levelsData.GetEnemyPosition(LevelsType.TestLevel).Rotation();
-            EnemyAi.EnemyStats.ResetHealth();
-            EnemyHealthChanged?.Invoke(EnemyAi.EnemyStats.Health / EnemyAi.EnemyStats.EnemyData.GetBaseHealth());
-            IsVisible = true;
-            IsColliderActive = true;
+            _enemyAi.EnemyStats.ResetHealth();
+            EnemyHealthChanged?.Invoke(_enemyAi.EnemyStats.Health / _enemyAi.EnemyStats.EnemyData.GetBaseHealth());
+            _enemyAi.Revive?.Invoke();
+        }
+
+        private void SwitchVisibility()
+        {
+            IsVisible = !IsVisible;
+            IsColliderActive = !IsColliderActive;
         }
 
         #endregion
@@ -129,13 +132,13 @@ namespace ExampleTemplate
             for (int i = 0; i < duration; i++)
             {
                 yield return _waitForDamage;
-                EnemyAi.EnemyStats.TakeDamage(damage);
-                EnemyHealthChanged?.Invoke(EnemyAi.EnemyStats.Health / EnemyAi.EnemyStats.EnemyData.GetBaseHealth());
-                _textParticle.SpawnParticle(transform.position, EnemyAi.EnemyStats.Health, Color.red);
+                _enemyAi.EnemyStats.TakeDamage(damage);
+                EnemyHealthChanged?.Invoke(_enemyAi.EnemyStats.Health / _enemyAi.EnemyStats.EnemyData.GetBaseHealth());
+                _textParticle.SpawnParticle(transform.position, _enemyAi.EnemyStats.Health, Color.red);
             }
-            if (EnemyAi.EnemyStats.Health <= 0 && EnemyAi.StateBot != StateBotType.Died)
+            if (_enemyAi.EnemyStats.Health <= 0 && _enemyAi.StateBot != StateBotType.Died)
             {
-                EnemyAi.StateBot = StateBotType.Died;
+                _enemyAi.StateBot = StateBotType.Died;
                 _isDead = true;
             }
         }
@@ -147,13 +150,14 @@ namespace ExampleTemplate
 
         public void ReceiveDamage(float damage)
         {
-            if (EnemyAi.StateBot == StateBotType.Died) return;
-            EnemyAi.EnemyStats.TakeDamage(damage);
-            EnemyHealthChanged?.Invoke(EnemyAi.EnemyStats.Health / EnemyAi.EnemyStats.EnemyData.GetBaseHealth());
-            _textParticle.SpawnParticle(transform.position, EnemyAi.EnemyStats.Health, Color.red);
-            if (EnemyAi.EnemyStats.Health <= 0 && EnemyAi.StateBot != StateBotType.Died)
+            if (_enemyAi.StateBot == StateBotType.Died) return;
+            _enemyAi.EnemyStats.TakeDamage(damage);
+            _enemyAi.Impact?.Invoke();
+            EnemyHealthChanged?.Invoke(_enemyAi.EnemyStats.Health / _enemyAi.EnemyStats.EnemyData.GetBaseHealth());
+            _textParticle.SpawnParticle(transform.position, _enemyAi.EnemyStats.Health, Color.red);
+            if (_enemyAi.EnemyStats.Health <= 0 && _enemyAi.StateBot != StateBotType.Died)
             {
-                EnemyAi.StateBot = StateBotType.Died;
+                _enemyAi.StateBot = StateBotType.Died;
                 _isDead = true;
             }
         }

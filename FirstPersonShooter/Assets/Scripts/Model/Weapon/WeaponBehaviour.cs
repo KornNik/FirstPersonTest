@@ -16,7 +16,7 @@ namespace ExampleTemplate
         [SerializeField] protected float _rechergeTime;
         [SerializeField] protected float _spreadFactor;
 
-        public static Action FireActn;
+        public Action FireActn;
 
         public Clip Clip;
         public Transform PoolTransform;

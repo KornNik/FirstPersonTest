@@ -50,8 +50,8 @@ namespace ExampleTemplate
             }
             else
             {
-                _handWeight -= Time.deltaTime * _characterData.GetBaseWeaponAimingSpeed()
-                    ; tempWeapon.WeaponCrosshair.CrossHair(false);
+                _handWeight -= Time.deltaTime * _characterData.GetBaseWeaponAimingSpeed();
+                tempWeapon.WeaponCrosshair.CrossHair(false);
             }
 
             if (Input.GetKeyDown(KeyManager.RELOAD_WEAPON))
