@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace ExampleTemplate
 {
@@ -17,10 +18,13 @@ namespace ExampleTemplate
         private bool _isColliderActive;
         private bool _isVisible;
         private bool _isDead;
+        private float _ragdollTime = 2f;
 
         private EnemyAi _enemyAi;
         private LevelsData _levelsData;
         private TextRendererParticleSystem _textParticle;
+
+        private Rigidbody[] _rigidbodies;
 
         #endregion
 
@@ -86,10 +90,14 @@ namespace ExampleTemplate
         {
             _levelsData = Data.Instance.LevelsData;
             _enemyAi = GetComponent<EnemyAi>();
+            _rigidbodies = GetComponentsInChildren<Rigidbody>();
 
             var textParticle = CustomResources.Load<TextRendererParticleSystem>
                 (AssetsPathParticles.ParticlesGameObject[VFXType.TextParticle]);
             _textParticle = Instantiate(textParticle, transform.position, transform.rotation, transform);
+
+            SwitchRagdoll();
+
         }
 
         #endregion
@@ -104,15 +112,34 @@ namespace ExampleTemplate
             _enemyAi.Agent.ResetPath();
             StopAllCoroutines();
             Invoke(nameof(Revive), _enemyAi.EnemyStats.EnemyData.GetReviveTime());
+            Invoke(nameof(SwitchAnimator), _ragdollTime);
+            Invoke(nameof(SwitchRagdoll), _ragdollTime);
+
         }
         private void Revive()
         {
+            SwitchAnimator();
+            SwitchRagdoll();
             _enemyAi.StateBot = StateBotType.None;
             transform.position = Patrol.GenericPoint(_levelsData.GetEnemyPosition(LevelsType.TestLevel).Position);
             transform.rotation = _levelsData.GetEnemyPosition(LevelsType.TestLevel).Rotation();
             _enemyAi.EnemyStats.ResetHealth();
             EnemyHealthChanged?.Invoke(_enemyAi.EnemyStats.Health / _enemyAi.EnemyStats.EnemyData.GetBaseHealth());
             _enemyAi.Revive?.Invoke();
+        }
+
+        private void SwitchRagdoll()
+        {
+            foreach (var item in _rigidbodies)
+            {
+                item.isKinematic = !item.isKinematic;
+            }
+        }
+
+        private void SwitchAnimator()
+        {
+            var animator = GetComponent<Animator>();
+            animator.enabled = !animator.isActiveAndEnabled;
         }
 
         private void SwitchVisibility()

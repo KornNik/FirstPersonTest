@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levels:
   - LevelType: 1
-    LocationPrefab: {fileID: 7401709698281076387, guid: 57fa1d5b53dda73408474d20e4775bd4,
+    LocationPrefab: {fileID: 6185204251371301598, guid: bd2d5d907db4ace489ae67b53ddb91fa,
       type: 3}
     HeroPosition:
       Position: {x: 0, y: 2, z: 0}

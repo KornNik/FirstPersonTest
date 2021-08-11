@@ -16,4 +16,4 @@ MonoBehaviour:
   _countClip: 5
   _bulletForce: 900
   _spreadFactor: 0.03
-  _rechergeTime: 0.2
+  _rechergeTime: 0.5

@@ -17,6 +17,7 @@ namespace ExampleTemplate
         [SerializeField] protected float _spreadFactor;
 
         public Action FireActn;
+        public Action ReloadActn;
 
         public Clip Clip;
         public Transform PoolTransform;
@@ -29,6 +30,8 @@ namespace ExampleTemplate
         protected bool _isMufflerModificated = false;
 
         protected Vector3 _shootDirection;
+        protected Vector3 _weaponOriginPosition;
+
         protected WeaponData _weaponData;
         protected AmmunitionType _ammunitionType;
         protected WeaponType _weaponType;
@@ -102,6 +105,13 @@ namespace ExampleTemplate
 
 
         #region Methods
+
+        protected void SetWeaponRecoil()
+        {
+        }
+        protected void ReturnFromRecoil(Vector3 _weaponPosition)
+        {
+        }
 
         protected void ReadyShoot()
         {

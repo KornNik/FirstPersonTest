@@ -19,4 +19,4 @@ MonoBehaviour:
   _timeToDistract: 5
   _lossOfDamageAtTime: 0.2
   _blastRadius: 5
-  _blastForce: 700
+  _blastForce: 1000
