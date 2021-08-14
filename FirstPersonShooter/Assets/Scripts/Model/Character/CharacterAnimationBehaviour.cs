@@ -16,16 +16,20 @@ namespace ExampleTemplate
         #region UnityMethods
         private void OnEnable()
         {
-            _characterBehaviour.MovingSpeed += UnitMovingSpeed;
-            _characterBehaviour.Strafe += UnitStrafeSpeed;
-            _characterBehaviour.Jump += UnitJump;
+            _characterBehaviour.MovingSpeed += OnUnitMovingSpeed;
+            _characterBehaviour.Strafe += OnUnitStrafeSpeed;
+            _characterBehaviour.Jump += OnUnitJump;
+            _characterBehaviour.Impact += OnUnitImpact;
+            _characterBehaviour.Death += OnUnitDeath;
         }
 
         private void OnDisable()
         {
-            _characterBehaviour.MovingSpeed -= UnitMovingSpeed;
-            _characterBehaviour.Strafe -= UnitStrafeSpeed;
-            _characterBehaviour.Jump -= UnitJump;
+            _characterBehaviour.MovingSpeed -= OnUnitMovingSpeed;
+            _characterBehaviour.Strafe -= OnUnitStrafeSpeed;
+            _characterBehaviour.Jump -= OnUnitJump;
+            _characterBehaviour.Impact -= OnUnitImpact;
+            _characterBehaviour.Death -= OnUnitDeath;
         }
         private void OnAnimatorIK()
         {

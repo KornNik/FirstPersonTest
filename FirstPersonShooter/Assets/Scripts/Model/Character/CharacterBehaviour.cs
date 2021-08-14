@@ -12,9 +12,14 @@ namespace ExampleTemplate
 
         public static event Action<float> CharacterHealthChanged;
 
+        public Action Impact;
+        public Action Death;
+        public Action Revive;
+        public Action Aiming;
+        public event Action Jump;
+        public Action TossGranade;
         public event Action<float> MovingSpeed;
         public event Action<float> Strafe;
-        public event Action Jump;
 
         public Inventory Inventory;
 

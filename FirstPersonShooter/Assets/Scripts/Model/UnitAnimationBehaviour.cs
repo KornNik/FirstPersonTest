@@ -11,6 +11,9 @@ namespace ExampleTemplate
         protected static readonly int _jump = Animator.StringToHash(UnitParametrsManager.JUMP);
         protected static readonly int _impact = Animator.StringToHash(UnitParametrsManager.IMPACT);
         protected static readonly int _death = Animator.StringToHash(UnitParametrsManager.DEATH);
+        protected static readonly int _punch = Animator.StringToHash(UnitParametrsManager.PUNCH);
+        protected static readonly int _aiming = Animator.StringToHash(UnitParametrsManager.AIMING);
+        protected static readonly int _tossGranade = Animator.StringToHash(UnitParametrsManager.TOSS_GRANADE);
 
         protected Animator _unitAnimator;
         protected float _handWeight;
@@ -29,23 +32,35 @@ namespace ExampleTemplate
 
         #region Methods
 
-        protected virtual void UnitMovingSpeed(float obj)
+        protected virtual void OnUnitMovingSpeed(float obj)
         {
             _unitAnimator.SetFloat(_movingSpeed, obj);
         }
-        protected virtual void UnitStrafeSpeed(float obj)
+        protected virtual void OnUnitStrafeSpeed(float obj)
         {
             _unitAnimator.SetFloat(_strafe, obj);
         }
-        protected virtual void UnitJump()
+        protected virtual void OnUnitJump()
         {
             _unitAnimator.SetTrigger(_jump);
         }
-        protected virtual void UnitImpact()
+        protected virtual void OnUnitImpact()
         {
             _unitAnimator.SetTrigger(_impact);
         }
-        protected virtual void UnitDeath()
+        protected virtual void OnUnitPunch()
+        {
+            _unitAnimator.SetTrigger(_punch);
+        }
+        protected virtual void OnUnitTossGranade()
+        {
+            _unitAnimator.SetTrigger(_tossGranade);
+        }
+        protected virtual void OnUnitAiming()
+        {
+            _unitAnimator.SetBool(_aiming, !_unitAnimator.GetBool(_aiming));
+        }
+        protected virtual void OnUnitDeath()
         {
             _unitAnimator.SetBool(_death, true);
         }

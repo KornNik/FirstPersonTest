@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace ExampleTemplate
@@ -29,6 +30,7 @@ namespace ExampleTemplate
         protected bool _isClipModificated = false;
         protected bool _isMufflerModificated = false;
 
+        protected Vector3 _weaponRecoil;
         protected Vector3 _shootDirection;
         protected Vector3 _weaponOriginPosition;
 
@@ -42,6 +44,8 @@ namespace ExampleTemplate
 
         private bool _isVisible;
         private Queue<Clip> _clips = new Queue<Clip>();
+
+        private Coroutine _recoilCoroutine;
 
         #endregion
 
@@ -99,37 +103,14 @@ namespace ExampleTemplate
 
             ReloadClip();
 
+            _weaponOriginPosition = transform.localEulerAngles;
+
         }
 
         #endregion
 
 
         #region Methods
-
-        protected void SetWeaponRecoil()
-        {
-        }
-        protected void ReturnFromRecoil(Vector3 _weaponPosition)
-        {
-        }
-
-        protected void ReadyShoot()
-        {
-            _isReady = true;
-        }
-
-        protected Vector3 SetSpread(Vector3 barrelDirection)
-        {
-            barrelDirection.z += UnityEngine.Random.Range(-_spreadFactor, _spreadFactor);
-            barrelDirection.y += UnityEngine.Random.Range(-_spreadFactor, _spreadFactor);
-
-            return barrelDirection;
-        }
-
-        protected void AddClip(Clip clip)
-        {
-            _clips.Enqueue(clip);
-        }
 
         public void AddAmmunition(int ammo)
         {
@@ -142,12 +123,10 @@ namespace ExampleTemplate
             ReloadClip();
             WeaponService.AmmunitionChanged?.Invoke(CountClip, Clip.CountAmmunition);
         }
-
         public void RemoveSpread(float value)
         {
             _spreadFactor -= value;
         }
-
         public void ReloadClip()
         {
             if (CountClip <= 0) return;
@@ -175,6 +154,74 @@ namespace ExampleTemplate
             {
                 var muffler = _mufflerModification.AddModification(this);
                 _isMufflerModificated = true;
+            }
+        }
+
+        protected void WeaponRecoil()
+        {
+            _weaponRecoil = new Vector3(UnityEngine.Random.Range(-_weaponData.GetWeaponRecoilX(), _weaponData.GetWeaponRecoilX()),
+                UnityEngine.Random.Range(0, _weaponData.GetWeaponRecoilY()), 0);
+            transform.localEulerAngles -= _weaponRecoil;
+            if (_recoilCoroutine == null)
+            {
+                _recoilCoroutine = StartCoroutine(nameof(RecoilReturn));
+            }
+        }
+        //protected void WeaponRecoil()
+        //{
+        //    var elapsed = 0f;
+        //    var duration = 0.1f;
+        //    var magnitude = 5f;
+
+        //    Vector2 noizeStartPoint0 = UnityEngine.Random.insideUnitCircle * 10;
+        //    Vector2 noizeStartPoint1 = UnityEngine.Random.insideUnitCircle * 10;
+
+        //    Vector2 currentNoizePoint0 = Vector2.Lerp(noizeStartPoint0, Vector2.zero, elapsed / duration);
+        //    Vector2 currentNoizePoint1 = Vector2.Lerp(noizeStartPoint1, Vector2.zero, elapsed / duration);
+
+        //    _weaponRecoil = new Vector3(Mathf.PerlinNoise(currentNoizePoint0.x, currentNoizePoint0.y), Mathf.PerlinNoise(currentNoizePoint1.x, currentNoizePoint1.y), 0);
+        //    _weaponRecoil *= magnitude;
+
+        //    transform.localEulerAngles -= _weaponRecoil;
+        //    if (_recoilCoroutine == null)
+        //    {
+        //        _recoilCoroutine = StartCoroutine(nameof(RecoilReturn));
+        //    }
+        //}
+        protected void ReadyShoot()
+        {
+            _isReady = true;
+        }
+        protected Vector3 SetSpread(Vector3 barrelDirection)
+        {
+            barrelDirection.z += UnityEngine.Random.Range(-_spreadFactor, _spreadFactor);
+            barrelDirection.y += UnityEngine.Random.Range(-_spreadFactor, _spreadFactor);
+
+            return barrelDirection;
+        }
+        protected void AddClip(Clip clip)
+        {
+            _clips.Enqueue(clip);
+        }
+
+        private void ReturnFromRecoil()
+        {
+            float x = Mathf.LerpAngle(transform.localEulerAngles.x, _weaponOriginPosition.x, Time.deltaTime * _weaponData.GetRecoilTimeMultiplier());
+            float y = Mathf.LerpAngle(transform.localEulerAngles.y, _weaponOriginPosition.y, Time.deltaTime * _weaponData.GetRecoilTimeMultiplier());
+            float z = Mathf.LerpAngle(transform.localEulerAngles.z, _weaponOriginPosition.z, Time.deltaTime * _weaponData.GetRecoilTimeMultiplier());
+            transform.localEulerAngles = new Vector3(x, y, z);
+        }
+
+        #endregion
+
+        #region IEnumarator
+
+        private IEnumerator RecoilReturn()
+        {
+            while (transform.localEulerAngles != _weaponOriginPosition)
+            {
+                yield return _weaponData.GetReturnRecoilDelay();
+                ReturnFromRecoil();
             }
         }
 

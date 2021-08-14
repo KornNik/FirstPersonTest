@@ -31,6 +31,7 @@
             var tempAmmunition = _ammunitionPool.GetAmmunition(_ammunitionType);
             tempAmmunition.AddForce(_shootDirection * _force);
             _weaponVFX.PlayWeaponParticle(_barrel.position);
+            WeaponRecoil();
 
             Clip.CountAmmunition--;
 			_isReady = false;

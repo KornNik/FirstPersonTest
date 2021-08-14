@@ -16,4 +16,6 @@ MonoBehaviour:
   _countClip: 4
   _bulletForce: 600
   _spreadFactor: 0.09
-  _rechergeTime: 0.8
+  _rechergeTime: 1.4
+  _weaponRecoilX: 3.24
+  _weaponRecoilY: 12.14

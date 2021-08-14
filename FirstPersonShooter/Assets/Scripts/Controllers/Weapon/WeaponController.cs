@@ -38,7 +38,7 @@ namespace ExampleTemplate
             _handWeight = Mathf.Clamp(_handWeight, 0, 1);
             _characterData.CharacterAnimationBehaviour.SetHandWeight(_handWeight);
 
-            if (Input.GetAxis(AxisManager.FIRE1) != 0 && _handWeight != 0)
+            if (Input.GetAxisRaw(AxisManager.FIRE1) != 0 && _handWeight != 0)
             {
                 tempWeapon.Fire();
                 WeaponService.AmmunitionChanged?.Invoke(tempWeapon.CountClip, tempWeapon.Clip.CountAmmunition);

@@ -7,5 +7,8 @@
         public const string JUMP = "Jump";
         public const string DEATH = "Death";
         public const string IMPACT = "Impact";
+        public const string AIMING = "Aiming";
+        public const string TOSS_GRANADE = "TossGranade";
+        public const string PUNCH = "Punch";
     }
 }

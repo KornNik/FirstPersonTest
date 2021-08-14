@@ -16,6 +16,7 @@ MonoBehaviour:
   _baseHealth: 50
   _baseArmor: 3
   _waitForRevive: 10
+  _switchToRagdollTime: 2
   _enemyCount: 5
   _isAggressive: 0
   _distanceView: 20

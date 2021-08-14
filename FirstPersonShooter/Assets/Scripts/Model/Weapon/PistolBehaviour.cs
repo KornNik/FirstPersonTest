@@ -30,7 +30,7 @@
 			tempAmmunition.AddForce(_shootDirection * _force);
 			FireActn?.Invoke();
             _weaponVFX.PlayWeaponParticle(_barrel.position);
-			SetWeaponRecoil();
+			WeaponRecoil();
 
             Clip.CountAmmunition--;
 			_isReady = false;

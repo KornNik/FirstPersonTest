@@ -27,5 +27,13 @@ namespace ExampleTemplate
             value.y *= multiplayer;
             return value;
         }
+        public static Vector3 ClampVector(this Vector3 fromClamp, Vector3 clampTo)
+        {
+            var tempVector = Vector3.zero;
+            tempVector.x = Mathf.Clamp(tempVector.x, fromClamp.x, clampTo.x);
+            tempVector.y = Mathf.Clamp(tempVector.y, fromClamp.y, clampTo.y);
+            tempVector.z = Mathf.Clamp(tempVector.z, fromClamp.z, clampTo.z);
+            return tempVector;
+        }
     }
 }

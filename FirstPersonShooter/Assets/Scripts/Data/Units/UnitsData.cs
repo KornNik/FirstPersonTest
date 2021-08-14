@@ -10,6 +10,7 @@ namespace ExampleTemplate
         [SerializeField] protected float _baseHealth = 50f;
         [SerializeField] protected float _baseArmor = 3f;
         [SerializeField] protected float _waitForRevive = 3f;
+        [SerializeField] protected float _switchToRagdollTime = 2f;
 
         #endregion
 
@@ -31,6 +32,10 @@ namespace ExampleTemplate
         public float GetReviveTime()
         {
             return _waitForRevive;
+        }
+        public float GetRagdollTime()
+        {
+            return _switchToRagdollTime;
         }
 
         #endregion

@@ -10,9 +10,7 @@ namespace ExampleTemplate
         private Transform _crosshair;
 
         private float _rayDistance = 200f;
-        private float _scaleMulty = 0.01f;
-        private int _bulletLayer = 1 << 10;
-        private int _crosshairLayer = 1 << 11;
+        private float _scaleMulty = 0.006f;
         private int _ignoreLayer;
 
         #endregion
@@ -24,7 +22,7 @@ namespace ExampleTemplate
         {
             _barrel = barrel;
             _crosshair = crosshair;
-            _ignoreLayer = ~(_bulletLayer | _crosshairLayer);
+            _ignoreLayer = ~(LayerManager.BulletLayer | LayerManager.CrossHairLayer);
         }
 
         #endregion

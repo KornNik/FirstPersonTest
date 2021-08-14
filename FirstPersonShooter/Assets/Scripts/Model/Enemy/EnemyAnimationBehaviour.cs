@@ -17,20 +17,20 @@ namespace ExampleTemplate
 
         private void OnEnable()
         {
-            _enemyAi.MovingSpeed += UnitMovingSpeed;
-            _enemyAi.Strafe += UnitStrafeSpeed;
-            _enemyAi.Jump += UnitJump;
-            _enemyAi.Impact += UnitImpact;
-            _enemyAi.Death += UnitDeath;
+            _enemyAi.MovingSpeed += OnUnitMovingSpeed;
+            _enemyAi.Strafe += OnUnitStrafeSpeed;
+            _enemyAi.Jump += OnUnitJump;
+            _enemyAi.Impact += OnUnitImpact;
+            _enemyAi.Death += OnUnitDeath;
             _enemyAi.Revive += OnRevive;
         }
         private void OnDisable()
         {
-            _enemyAi.MovingSpeed -= UnitMovingSpeed;
-            _enemyAi.Strafe -= UnitStrafeSpeed;
-            _enemyAi.Jump -= UnitJump;
-            _enemyAi.Impact -= UnitImpact;
-            _enemyAi.Death -= UnitDeath;
+            _enemyAi.MovingSpeed -= OnUnitMovingSpeed;
+            _enemyAi.Strafe -= OnUnitStrafeSpeed;
+            _enemyAi.Jump -= OnUnitJump;
+            _enemyAi.Impact -= OnUnitImpact;
+            _enemyAi.Death -= OnUnitDeath;
             _enemyAi.Revive -= OnRevive;
         }
         private void OnAnimatorIK()
@@ -51,9 +51,9 @@ namespace ExampleTemplate
 
         #region Mehtods
 
-        protected override void UnitDeath()
+        protected override void OnUnitDeath()
         {
-            base.UnitDeath();
+            base.OnUnitDeath();
             _handWeight = 0;
         }
 
