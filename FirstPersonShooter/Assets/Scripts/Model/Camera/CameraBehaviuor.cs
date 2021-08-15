@@ -73,7 +73,8 @@ namespace ExampleTemplate
             //Ибо сначала отклонение будет идти на увеличение, а затем на уменьшение
             float halfDuration = duration / 2;
             //Приводим направляющий вектор к единичному вектору, дабы не портить вычисления
-            direction = direction.normalized;
+            direction = (transform.forward+(Vector3)direction).normalized;
+
             while (elapsed < duration)
             {
                 //Сохраняем текущее направление ибо мы будем менять данный вектор
@@ -88,11 +89,11 @@ namespace ExampleTemplate
                 //Что угол отклонения должен находится в следующем диапазоне (0..90)
                 currentDirection *= Mathf.Tan(currentAngle * Mathf.Deg2Rad);
                 //Сумма векторов - получаем направление взгляда на текущей итерации
-                Vector3 resDirection = ((Vector3)currentDirection + Vector3.forward).normalized;
+                Vector3 resDirection = ((Vector3)currentDirection + transform.forward).normalized;
                 //С помощью Quaternion.FromToRotation получаем новое вращение
                 //Изменяем локальное вращение, дабы во время вращения, если игрок будет управлять камерой
                 //Все работало корректно
-                transform.localRotation = Quaternion.FromToRotation(Vector3.forward, resDirection);
+                transform.localRotation = Quaternion.FromToRotation(transform.forward, resDirection);
 
                 elapsed += Time.deltaTime;
                 yield return null;

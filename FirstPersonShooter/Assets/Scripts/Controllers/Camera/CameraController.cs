@@ -38,7 +38,7 @@ namespace ExampleTemplate
             mouseAxis.y = Input.GetAxis("Mouse Y") * _cameraData.GetYSensitivity();
             if (mouseAxis.x != 0 || mouseAxis.y != 0) 
             {
-                _cameraBehaviuor.LookRotation(mouseAxis,_characterData.CharacterBehaviour.transform);
+                _cameraBehaviuor.LookRotation(mouseAxis, _characterData.CharacterBehaviour.transform);
             }
         }
 

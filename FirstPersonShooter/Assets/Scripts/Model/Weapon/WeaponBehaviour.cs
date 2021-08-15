@@ -167,27 +167,6 @@ namespace ExampleTemplate
                 _recoilCoroutine = StartCoroutine(nameof(RecoilReturn));
             }
         }
-        //protected void WeaponRecoil()
-        //{
-        //    var elapsed = 0f;
-        //    var duration = 0.1f;
-        //    var magnitude = 5f;
-
-        //    Vector2 noizeStartPoint0 = UnityEngine.Random.insideUnitCircle * 10;
-        //    Vector2 noizeStartPoint1 = UnityEngine.Random.insideUnitCircle * 10;
-
-        //    Vector2 currentNoizePoint0 = Vector2.Lerp(noizeStartPoint0, Vector2.zero, elapsed / duration);
-        //    Vector2 currentNoizePoint1 = Vector2.Lerp(noizeStartPoint1, Vector2.zero, elapsed / duration);
-
-        //    _weaponRecoil = new Vector3(Mathf.PerlinNoise(currentNoizePoint0.x, currentNoizePoint0.y), Mathf.PerlinNoise(currentNoizePoint1.x, currentNoizePoint1.y), 0);
-        //    _weaponRecoil *= magnitude;
-
-        //    transform.localEulerAngles -= _weaponRecoil;
-        //    if (_recoilCoroutine == null)
-        //    {
-        //        _recoilCoroutine = StartCoroutine(nameof(RecoilReturn));
-        //    }
-        //}
         protected void ReadyShoot()
         {
             _isReady = true;

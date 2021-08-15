@@ -108,7 +108,7 @@ namespace ExampleTemplate
 
         protected void PlayParticle()
         {
-           _particleSystem.Emit(SetParticle(Color.green, transform.position), 1);
+           _particleSystem.Emit(SetParticle(Color.green, transform.position), 20);
         }
 
         protected void ReadyThrow()
