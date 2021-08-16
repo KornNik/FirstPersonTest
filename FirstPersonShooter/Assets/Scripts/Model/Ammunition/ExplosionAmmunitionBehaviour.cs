@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
+using System;
 
 namespace ExampleTemplate
 {
     public sealed class ExplosionAmmunitionBehaviour : AmmunitionBehaviour
     {
         #region Fields
+
+        public static event Action<float,float,float> AmmunitionExplode;
 
         private ExplosionAmmunitionData _explosionData;
 
@@ -31,6 +34,7 @@ namespace ExampleTemplate
                 Services.Instance.BulletVFX.GetHitParticle(Type, contact.point);
             }
 
+            AmmunitionExplode?.Invoke(0.3f,_explosionData.GetCameraShakeForce(),100f);
             ExplosionForce(colliders);
 
             ReturnToPool();

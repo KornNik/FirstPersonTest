@@ -8,7 +8,6 @@ namespace ExampleTemplate
         #region Fields
 
         private CharacterData _characterData;
-        private CameraBehaviuor _camera;
 
         private float _handWeight;
         private bool _isActive;
@@ -22,7 +21,6 @@ namespace ExampleTemplate
         {
             ScreenInterface.GetInstance().AddObserver(ScreenType.GameMenu, this);
             _characterData = Data.Instance.Character;
-            _camera = Services.Instance.CameraServices.CameraMain.GetComponent<CameraBehaviuor>();
         }
 
         #endregion

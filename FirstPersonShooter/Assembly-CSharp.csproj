@@ -103,8 +103,6 @@
     <Compile Include="Assets\Scripts\Data\Level\LevelsData.cs" />
     <Compile Include="Assets\Scripts\Data\Units\UnitsData.cs" />
     <Compile Include="Assets\Scripts\Data\Weapon\WeaponData.cs" />
-    <Compile Include="Assets\Scripts\Helper\ChainMethods\GameHandler.cs" />
-    <Compile Include="Assets\Scripts\Helper\ChainMethods\IGameHandler.cs" />
     <Compile Include="Assets\Scripts\Helper\Ciphers\CaesarCipher.cs" />
     <Compile Include="Assets\Scripts\Helper\Ciphers\Crypto.cs" />
     <Compile Include="Assets\Scripts\Helper\Ciphers\ICipher.cs" />
@@ -173,8 +171,6 @@
     <Compile Include="Assets\Scripts\Model\WeaponModification\WeaponModification.cs" />
     <Compile Include="Assets\Scripts\Services\BulletVFXService\BulletVFX.cs" />
     <Compile Include="Assets\Scripts\Services\CameraService\CameraServices.cs" />
-    <Compile Include="Assets\Scripts\Services\CameraService\CameraShake.cs" />
-    <Compile Include="Assets\Scripts\Services\CameraService\CameraShakeRotation.cs" />
     <Compile Include="Assets\Scripts\Services\FlashLightService\FlashLightService.cs" />
     <Compile Include="Assets\Scripts\Services\GranadeService\GranadeService.cs" />
     <Compile Include="Assets\Scripts\Services\LoadLevelService\LoadLevelService.cs" />

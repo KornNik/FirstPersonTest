@@ -9,7 +9,8 @@ namespace ExampleTemplate
 
         private CameraData _cameraData;
         private Quaternion _cameraTargetRot;
-        private Coroutine _shakeCoroutine;
+        private Coroutine _shakeCoroutinePosition;
+        private Coroutine _shakeCoroutineRotation;
 
         #endregion
 
@@ -20,6 +21,16 @@ namespace ExampleTemplate
 		{
 			_cameraData = Data.Instance.Camera;
             _cameraTargetRot = gameObject.transform.localRotation;
+            
+        }
+
+        private void OnEnable()
+        {
+            ExplosionAmmunitionBehaviour.AmmunitionExplode += ShakeCamera;
+        }
+        private void OnDisable()
+        {
+            ExplosionAmmunitionBehaviour.AmmunitionExplode -= ShakeCamera;
         }
 
         #endregion
@@ -36,6 +47,20 @@ namespace ExampleTemplate
             { _cameraTargetRot = ClampRotationAroundXAxis(_cameraTargetRot); }
 
             gameObject.transform.localRotation = _cameraTargetRot;
+        }
+        public void ShakeRotateCamera(float duration, float angleDeg, Vector2 direction)
+        {
+            if (_shakeCoroutineRotation == null)
+            {
+                _shakeCoroutineRotation = StartCoroutine(ShakeRotateCor(duration, angleDeg, direction));
+            }
+        }
+        public void ShakeCamera(float duration, float magnitude, float noize)
+        {
+            if (_shakeCoroutinePosition == null)
+            {
+                _shakeCoroutinePosition = StartCoroutine(ShakeCameraCor(duration, magnitude, noize));
+            }
         }
 
         private Quaternion ClampRotationAroundXAxis(Quaternion q)
@@ -54,53 +79,58 @@ namespace ExampleTemplate
             return q;
         }
 
-        public void ShakeRotateCamera(float duration, float angleDeg, Vector2 direction)
-        {
-            if (_shakeCoroutine == null)
-            {
-                _shakeCoroutine = StartCoroutine(ShakeRotateCor(duration, angleDeg, direction));
-            }
-        }
+        #endregion
 
+        #region IEnumerator
 
         private IEnumerator ShakeRotateCor(float duration, float angleDeg, Vector2 direction)
         {
-            //Счетчик прошедшего времени
             float elapsed = 0f;
-            //Запоминаем начальное вращение камеры по аналогии с вибрацией камеры
             Quaternion startRotation = transform.localRotation;
-            //Для удобства добавляем переменную середину нашего таймера
-            //Ибо сначала отклонение будет идти на увеличение, а затем на уменьшение
             float halfDuration = duration / 2;
-            //Приводим направляющий вектор к единичному вектору, дабы не портить вычисления
-            direction = (transform.forward+(Vector3)direction).normalized;
+
+            direction = direction.normalized;
 
             while (elapsed < duration)
             {
-                //Сохраняем текущее направление ибо мы будем менять данный вектор
                 Vector2 currentDirection = direction;
-                //Подсчёт процентного коэффициента для функции Lerp[0..1]
-                //До середины таймера процент увеличивается, затем уменьшается
                 float t = elapsed < halfDuration ? elapsed / halfDuration : (duration - elapsed) / halfDuration;
-                //Текущий угол отклонения
                 float currentAngle = Mathf.Lerp(0f, angleDeg, t);
-                //Вычисляем длину направляющего вектора из тангенса угла.
-                //Недостатком данного решения будет являться то
-                //Что угол отклонения должен находится в следующем диапазоне (0..90)
-                currentDirection *= Mathf.Tan(currentAngle * Mathf.Deg2Rad);
-                //Сумма векторов - получаем направление взгляда на текущей итерации
-                Vector3 resDirection = ((Vector3)currentDirection + transform.forward).normalized;
-                //С помощью Quaternion.FromToRotation получаем новое вращение
-                //Изменяем локальное вращение, дабы во время вращения, если игрок будет управлять камерой
-                //Все работало корректно
-                transform.localRotation = Quaternion.FromToRotation(transform.forward, resDirection);
+                currentDirection *= Mathf.Tan(currentAngle*Mathf.Deg2Rad);
+                Vector3 resDirection = ((Vector3)currentDirection + Vector3.forward).normalized;
+
+                transform.localRotation = Quaternion.FromToRotation(Vector3.forward, resDirection);
 
                 elapsed += Time.deltaTime;
                 yield return null;
             }
 
             transform.localRotation = startRotation;
-            _shakeCoroutine = null;
+            _shakeCoroutineRotation = null;
+        }
+        private IEnumerator ShakeCameraCor(float duration, float magnitude, float noize)
+        {
+            float elapsed = 0f;
+            Vector3 startPosition = transform.localPosition;
+            Vector2 noizeStartPoint0 = Random.insideUnitCircle * noize;
+            Vector2 noizeStartPoint1 = Random.insideUnitCircle * noize;
+
+            while (elapsed < duration)
+            {
+                Vector2 currentNoizePoint0 = Vector2.Lerp(noizeStartPoint0, Vector2.zero, elapsed / duration);
+                Vector2 currentNoizePoint1 = Vector2.Lerp(noizeStartPoint1, Vector2.zero, elapsed / duration);
+                Vector2 cameraPostionDelta = new Vector2(Mathf.PerlinNoise(currentNoizePoint0.x, currentNoizePoint0.y), Mathf.PerlinNoise(currentNoizePoint1.x, currentNoizePoint1.y));
+                cameraPostionDelta *= magnitude;
+
+                transform.localPosition = startPosition + (Vector3)cameraPostionDelta;
+
+                elapsed += Time.deltaTime;
+
+                yield return null;
+            }
+
+            transform.localPosition = startPosition;
+            _shakeCoroutinePosition = null;
         }
 
         #endregion
