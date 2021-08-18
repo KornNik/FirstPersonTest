@@ -9,7 +9,7 @@ namespace ExampleTemplate
         #region Fields
 
         [SerializeField] private float _range = 10;
-        [SerializeField] private float _spotAngle = 25;
+        [SerializeField] private float _spotAngle = 45;
         [SerializeField] private float _batteryChargeMax = 10.0f;
         [SerializeField] private float _maxIntensity = 1.5f;
         [SerializeField] private float _rotationSpeed = 10.0f;

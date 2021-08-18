@@ -12,6 +12,7 @@ namespace ExampleTemplate
         [SerializeField] private float _delayExplosion = 5;
         [SerializeField] private float _timeToDistract = 5;
         [SerializeField] private float _throwForce = 800;
+        [SerializeField] private int _particlesCount = 20;
 
         public float GetRadius()
         {
@@ -40,6 +41,10 @@ namespace ExampleTemplate
         public float GetTrowForce()
         {
             return _throwForce;
+        }
+        public int GetParticlesCount()
+        {
+            return _particlesCount;
         }
     }
 }

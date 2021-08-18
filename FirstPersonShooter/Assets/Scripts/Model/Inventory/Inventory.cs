@@ -43,7 +43,7 @@
                 granade.IsColliderActive = false;
             }
 
-            FlashLight.Switch(false);
+            _flashLight.Switch(false);
 
         }
 

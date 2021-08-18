@@ -6,6 +6,9 @@ namespace ExampleTemplate
     public sealed class FlashLightBehaviour : MonoBehaviour
     {
 		#region Fields
+		public float BatteryChargeCurrent { get; private set; }
+
+		public static event Action<float> ChargeChange;
 
         private Light _light;
 		private Camera _camera;
@@ -16,10 +19,8 @@ namespace ExampleTemplate
 		private float _share;
 		private float _batteryChargeMax;
 		private float _takeAwayTheIntensity;
+		private bool _lightIsConfigure;
 
-		public float BatteryChargeCurrent { get; private set; }
-
-		public static event Action<float> ChargeChange;
 
 		#endregion
 
@@ -29,27 +30,23 @@ namespace ExampleTemplate
 		public float Charge => BatteryChargeCurrent / BatteryChargeMax;
 		public float BatteryChargeMax => _batteryChargeMax;
 
-        #endregion
+		#endregion
 
 
-        #region UnityMethods
+		#region UnityMethods
 
-        private void Awake()
-        {
+		private void Awake()
+		{
 			_camera = Services.Instance.CameraServices.CameraMain;
 			_flashLightData = Data.Instance.FlashLightData;
 
 			_batteryChargeMax = _flashLightData.GetBatteryChargeMax();
-			_light.spotAngle = _flashLightData.GetSpotAngle();
-			_light.range = _flashLightData.GetRange();
-			_light.color = _flashLightData.GetColor();
 
 			_goFollow = _camera.transform;
 			transform.position = _camera.transform.position;
 			_vecOffset = transform.position - _goFollow.position;
 
 			BatteryChargeCurrent = BatteryChargeMax;
-			_light.intensity = _flashLightData.GetMaxIntensity();
 			_share = BatteryChargeMax / 4;
 			_takeAwayTheIntensity = _flashLightData.GetMaxIntensity() / (BatteryChargeMax * 200);
 
@@ -62,9 +59,12 @@ namespace ExampleTemplate
 
         public void Switch(bool value)
 		{
-            if(!TryGetComponent<Light>(out _light)) { return; }
-			_light.enabled = value;
-			if (!value) return;
+            if (!TryGetComponent<Light>(out _light)) { return; }
+
+            _light.enabled = value;
+
+			if (!value) { return; }
+            if (!_lightIsConfigure) { ConfigureLight(_light); }
 
 			transform.position = _goFollow.position + _vecOffset;
 			transform.rotation = _goFollow.rotation;
@@ -108,6 +108,15 @@ namespace ExampleTemplate
 				return true;
 			}
 			return false;
+		}
+
+		private void ConfigureLight(Light light)
+        {
+			light.intensity = _flashLightData.GetMaxIntensity();
+			light.spotAngle = _flashLightData.GetSpotAngle();
+			light.range = _flashLightData.GetRange();
+			light.color = _flashLightData.GetColor();
+			_lightIsConfigure = true;
 		}
 
         #endregion

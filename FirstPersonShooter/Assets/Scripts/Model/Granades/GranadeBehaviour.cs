@@ -79,12 +79,12 @@ namespace ExampleTemplate
         protected virtual void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
-
             _particleSystem = GetComponent<ParticleSystem>();
+
             _granadeData = Data.Instance.GranadeData;
             _parentTransform = Services.Instance.CameraServices.CameraMain.transform;
-
             _currentDamage = _granadeData.GetDamage();
+
             ReadyThrow();
         }
 
@@ -108,7 +108,7 @@ namespace ExampleTemplate
 
         protected void PlayParticle()
         {
-           _particleSystem.Emit(SetParticle(Color.green, transform.position), 20);
+           _particleSystem.Emit(SetParticle(Color.green, transform.position), _granadeData.GetParticlesCount());
         }
 
         protected void ReadyThrow()

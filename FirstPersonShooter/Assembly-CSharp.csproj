@@ -158,7 +158,7 @@
     <Compile Include="Assets\Scripts\Model\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Model\ParticleText\SymbolsTextureData.cs" />
     <Compile Include="Assets\Scripts\Model\ParticleText\TextRendererParticleSystem.cs" />
-    <Compile Include="Assets\Scripts\Model\UnitAnimationBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Model\Units\UnitAnimationBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Units\UnitsStats.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\GranadeLauncherBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\PistolBehaviour.cs" />

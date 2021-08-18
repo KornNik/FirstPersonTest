@@ -13,10 +13,6 @@ namespace ExampleTemplate
 
         #region ClassLyfeCycle
 
-        public WeaponVFX(VFXType weaponVFX)
-        {
-            LoadWeaponParticle(weaponVFX);
-        }
         public WeaponVFX(Transform parentTransform, VFXType weaponVFX)
         {
             LoadWeaponParticle(parentTransform, weaponVFX);
@@ -27,12 +23,6 @@ namespace ExampleTemplate
 
         #region Methods
 
-        private void LoadWeaponParticle(VFXType weaponVFX)
-        {
-            var particle = CustomResources.Load<ParticleSystem>(AssetsPathParticles.ParticlesGameObject[weaponVFX]);
-            _weaponParticle = Object.Instantiate(particle);
-            _weaponParticle.Stop(true);
-        }
         private void LoadWeaponParticle(Transform parentTransform, VFXType weaponVFX)
         {
             var particle = CustomResources.Load<ParticleSystem>(AssetsPathParticles.ParticlesGameObject[weaponVFX]);
