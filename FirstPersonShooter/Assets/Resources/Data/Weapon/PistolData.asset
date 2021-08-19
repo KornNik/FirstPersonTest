@@ -19,5 +19,5 @@ MonoBehaviour:
   _rechergeTime: 0.5
   _waitForReturnRecoil: 0.01
   _recoilTimeMultiplier: 2
-  _weaponRecoilX: 2.86
-  _weaponRecoilY: 8
+  _weaponRecoilX: 7
+  _weaponRecoilY: 15
