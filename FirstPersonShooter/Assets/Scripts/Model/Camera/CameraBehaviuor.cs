@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using DG.Tweening;
 
 namespace ExampleTemplate
 {
@@ -20,16 +21,17 @@ namespace ExampleTemplate
 		{
 			_cameraData = Data.Instance.Camera;
             _cameraTargetRot = gameObject.transform.localRotation;
-            
         }
 
         private void OnEnable()
         {
-            ExplosionAmmunitionBehaviour.AmmunitionExplode += ShakeCamera;
+            //ExplosionAmmunitionBehaviour.AmmunitionExplode += ShakeCamera;
+            ExplosionAmmunitionBehaviour.AmmunitionExplodeTween += CreateShake;
         }
         private void OnDisable()
         {
-            ExplosionAmmunitionBehaviour.AmmunitionExplode -= ShakeCamera;
+            //ExplosionAmmunitionBehaviour.AmmunitionExplode -= ShakeCamera;
+            ExplosionAmmunitionBehaviour.AmmunitionExplodeTween -= CreateShake;
         }
 
         #endregion
@@ -55,6 +57,10 @@ namespace ExampleTemplate
             }
         }
 
+        private void CreateShake(float duration, float strength, int vibrato, float randomness)
+        {
+            Tweener tweener = DOTween.Shake(() => transform.localPosition, pos => transform.localPosition = pos, duration, strength, vibrato, randomness, true);
+        }
         private Quaternion ClampRotationAroundXAxis(Quaternion q)
         {
             q.x /= q.w;
@@ -72,6 +78,7 @@ namespace ExampleTemplate
         }
 
         #endregion
+
 
         #region IEnumerator
 

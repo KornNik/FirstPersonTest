@@ -30,20 +30,20 @@ namespace ExampleTemplate
 			_trailRenderer = GetComponent<TrailRenderer>();
 		}
 
-		private void OnBecameInvisible()
-		{
-			if (gameObject.activeSelf)
-			{
-				ReturnToPool();
-			}
-		}
+        //private void OnBecameInvisible()
+        //{
+        //    if (gameObject.activeSelf)
+        //    {
+        //        ReturnToPool();
+        //    }
+        //}
 
-		#endregion
+        #endregion
 
 
-		#region Methods
+        #region Methods
 
-		public void RegisterBulletModifier(AmmunitionModifier newModifier)
+        public void RegisterBulletModifier(AmmunitionModifier newModifier)
 		{
 			_modifiers.Add(newModifier);
 		}

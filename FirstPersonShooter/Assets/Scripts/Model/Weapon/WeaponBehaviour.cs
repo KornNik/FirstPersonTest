@@ -202,6 +202,7 @@ namespace ExampleTemplate
                 yield return _weaponData.GetReturnRecoilDelay();
                 ReturnFromRecoil();
             }
+            //_recoilCoroutine = null;
         }
 
         #endregion

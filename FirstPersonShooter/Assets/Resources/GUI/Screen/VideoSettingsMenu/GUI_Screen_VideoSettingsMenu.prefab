@@ -626,7 +626,7 @@ MonoBehaviour:
   _settingsButton: {fileID: 5149778280461526181}
   _presetsDropdown: {fileID: 1929935578856679393}
   _resolutinsDropdown: {fileID: 8981818645239944410}
-  _settingsPanel: {fileID: 4427119635551242268}
+  _middlePanel: {fileID: 448335641320582588}
 --- !u!1 &2860458985418277580
 GameObject:
   m_ObjectHideFlags: 0

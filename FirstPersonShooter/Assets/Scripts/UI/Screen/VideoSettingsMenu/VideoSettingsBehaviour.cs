@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
+using DG.Tweening;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
@@ -12,15 +13,11 @@ namespace ExampleTemplate
         [SerializeField] private Button _settingsButton;
         [SerializeField] private Dropdown _presetsDropdown;
         [SerializeField] private Dropdown _resolutinsDropdown;
-        [SerializeField] private GameObject _settingsPanel;
+        [SerializeField] private RectTransform _middlePanel;
 
         private Resolution[] _resolutions;
-
-        #endregion
-
-        #region Properties
-
-        public GameObject SettingsPanel { get { return _settingsPanel; } private set { } }
+        private SettingsPanelTween _panelTween;
+        private Sequence _sequence;
 
         #endregion
 
@@ -36,6 +33,9 @@ namespace ExampleTemplate
 
         private void OnEnable()
         {
+            
+            _panelTween = new SettingsPanelTween(_middlePanel);
+
             _settingsButton.onClick.AddListener(ShowSettingsMenuButtonClick);
             _presetsDropdown.onValueChanged.AddListener(delegate { SetQuality(_presetsDropdown.value); });
             _resolutinsDropdown.onValueChanged.AddListener(delegate { SetResolution(_resolutinsDropdown.value); });
@@ -43,6 +43,8 @@ namespace ExampleTemplate
 
         private void OnDisable()
         {
+            _panelTween = null;
+
             _settingsButton.onClick.RemoveListener(ShowSettingsMenuButtonClick);
             _presetsDropdown.onValueChanged.RemoveListener(delegate { SetQuality(_presetsDropdown.value); });
             _resolutinsDropdown.onValueChanged.RemoveListener(delegate { SetResolution(_resolutinsDropdown.value); });
@@ -52,16 +54,39 @@ namespace ExampleTemplate
 
 
         #region Methods
+        private Sequence Move(MoveMode mode)
+        {
+            float timeScale = 1.0f;
+
+            if (_sequence != null)
+            {
+                timeScale = _sequence.position / _sequence.Duration();
+                _sequence.Kill();
+            }
+
+            _sequence = DOTween.Sequence();
+            _sequence.Join(_panelTween.Move(mode, timeScale));
+            _sequence.AppendCallback(() =>
+            {
+                _sequence = null;
+
+            });
+
+            return _sequence;
+        }
 
         public override void Show()
         {
             gameObject.SetActive(true);
+            _panelTween.GoToEnd(MoveMode.Hide);
+            Move(MoveMode.Show);
             ShowUI.Invoke();
         }
 
         public override void Hide()
         {
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
+            Move(MoveMode.Hide).AppendCallback(() => gameObject.SetActive(false));
             HideUI.Invoke();
         }
 

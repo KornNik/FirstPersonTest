@@ -204,6 +204,8 @@
     <Compile Include="Assets\Scripts\UI\Screen\ScreenInterface.cs" />
     <Compile Include="Assets\Scripts\UI\Screen\SettingsMenu\SettingsMenuBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\Screen\VideoSettingsMenu\VideoSettingsBehaviour.cs" />
+    <Compile Include="Assets\Scripts\UI\Tween\PanelTween.cs" />
+    <Compile Include="Assets\Scripts\UI\Type\MoveMode.cs" />
     <Compile Include="Assets\Scripts\UI\Type\QualitySettingsType.cs" />
     <Compile Include="Assets\Scripts\UI\Type\ScreenElementType.cs" />
     <Compile Include="Assets\Scripts\UI\Type\ScreenType.cs" />
@@ -411,6 +413,9 @@
     </Reference>
     <Reference Include="UnityEngine.XRModule">
       <HintPath>C:/ETC/Programs/2019.3.7f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween">
+      <HintPath>C:/ETC/Programs/GitPrograms/FirstPersonShooter/Assets/Plugins/Demigiant/DOTween/DOTween.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:/ETC/Programs/2019.3.7f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

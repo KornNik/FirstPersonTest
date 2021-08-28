@@ -7,7 +7,14 @@ namespace ExampleTemplate
     {
         #region Fields
 
-        public static event Action<float,float,float> AmmunitionExplode;
+        /// <summary>
+        /// float - duartion, float - magnitude, float - noize
+        /// </summary>
+        public static event Action<float, float, float> AmmunitionExplode;
+        /// <summary>
+        /// float - duration, float - strength, int - vibrato, float - randomness
+        /// </summary>
+        public static event Action<float, float, int, float> AmmunitionExplodeTween;
 
         private ExplosionAmmunitionData _explosionData;
 
@@ -35,6 +42,7 @@ namespace ExampleTemplate
             }
 
             AmmunitionExplode?.Invoke(0.3f,_explosionData.GetCameraShakeForce(),100f);
+            AmmunitionExplodeTween?.Invoke(0.3f, _explosionData.GetCameraShakeForce(), 10, 90f);
             ExplosionForce(colliders);
 
             ReturnToPool();
