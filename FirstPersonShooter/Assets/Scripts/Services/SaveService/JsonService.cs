@@ -9,42 +9,36 @@ namespace ExampleTemplate
     {
         #region Fields
 
-        private readonly string _folderName = "dataSave";
-        private readonly string _path;
+        private Crypto _crypto;
 
         #endregion
-        
+
 
         #region ClassLifeCycles
 
         public JsonService()
         {
-            _path = Path.Combine(Application.dataPath, _folderName);
+            _crypto = new Crypto();
         }
 
         #endregion
-        
+
 
         #region Methods
 
-        public void Save<T>(string fileName, T dataSave) where T : Type
+        public void Save(SerializableGameObject dataSave, string fileName)
         {
-            if (!Directory.Exists(Path.Combine(_path)))
-            {
-                Directory.CreateDirectory(_path);
-            }
-
-            var filePath = Path.Combine(_path, fileName);
             var json = JsonUtility.ToJson(dataSave);
-            File.WriteAllText(filePath, json);
+            //File.WriteAllText(filePath, json);
+            File.WriteAllText(fileName, _crypto.CryptoXOR(json));
+
         }
 
-        public void Load<T>(string fileName, T dataSave) where T : Type
+        public SerializableGameObject Load<SerializableGameObject>(string fileName)
         {
-            var filePath = Path.Combine(_path, fileName);
-            if(!File.Exists(filePath)) return;
-            var json = File.ReadAllText(filePath);
-            JsonUtility.FromJson(json, dataSave);
+            var json = File.ReadAllText(fileName);
+            //JsonUtility.FromJson(json, dataSave);
+            return JsonUtility.FromJson<SerializableGameObject>(_crypto.CryptoXOR(json));
         }
 
         #endregion

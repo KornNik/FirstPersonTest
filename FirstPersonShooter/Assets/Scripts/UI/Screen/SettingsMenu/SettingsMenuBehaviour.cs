@@ -13,7 +13,7 @@ namespace ExampleTemplate
         [SerializeField] private RectTransform _middlePanel;
 
         private SettingsPanelTween _panelTween;
-        private Sequence _sequence;
+        private SequenceSettings _sequenceSettings;
 
         #endregion
 
@@ -23,6 +23,8 @@ namespace ExampleTemplate
         private void OnEnable()
         {
             _panelTween = new SettingsPanelTween(_middlePanel);
+            _sequenceSettings = new SequenceSettings(_panelTween);
+
 
             _mainMenuButton.onClick.AddListener(ShowMainMenuButtonClick);
             _videoSettingsButton.onClick.AddListener(ShowVideoSettingsMenuButtonClick);
@@ -30,6 +32,7 @@ namespace ExampleTemplate
         private void OnDisable()
         {
             _panelTween = null;
+            _sequenceSettings = null;
 
             _mainMenuButton.onClick.RemoveListener(ShowMainMenuButtonClick);
             _videoSettingsButton.onClick.RemoveListener(ShowVideoSettingsMenuButtonClick);
@@ -40,39 +43,17 @@ namespace ExampleTemplate
 
         #region Methods
 
-        private Sequence Move(MoveMode mode)
-        {
-            float timeScale = 1.0f;
-
-            if (_sequence != null)
-            {
-                timeScale = _sequence.position / _sequence.Duration();
-                _sequence.Kill();
-            }
-
-            _sequence = DOTween.Sequence();
-            _sequence.Join(_panelTween.Move(mode, timeScale));
-            _sequence.AppendCallback(() =>
-            {
-                _sequence = null;
-
-            });
-
-            return _sequence;
-        }
-
         public override void Show()
         {
             gameObject.SetActive(true);
             _panelTween.GoToEnd(MoveMode.Hide);
-            Move(MoveMode.Show);
+            _sequenceSettings.Move(MoveMode.Show);
             ShowUI.Invoke();
         }
 
         public override void Hide()
         {
-            //gameObject.SetActive(false);
-            Move(MoveMode.Hide).AppendCallback(() => gameObject.SetActive(false));
+            _sequenceSettings.Move(MoveMode.Hide).AppendCallback(() => gameObject.SetActive(false));
             HideUI.Invoke();
         }
 

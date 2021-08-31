@@ -47,6 +47,10 @@ namespace ExampleTemplate
 
         private Coroutine _recoilCoroutine;
 
+        float yvelocity = 0.0f;
+        float xvelocity = 0.0f;
+        float zvelocity = 0.0f;
+
         #endregion
 
 
@@ -85,10 +89,10 @@ namespace ExampleTemplate
         protected virtual void Awake()
         {
 
-            _ammunitionPool = new AmmunitionPool(8,PoolTransform);
+            _ammunitionPool = new AmmunitionPool(8, PoolTransform);
             _mufflerModification = new MufflerModification();
             _clipModification = new ClipModification();
-            WeaponCrosshair = new WeaponCrosshair(_barrel,_crosshair);
+            WeaponCrosshair = new WeaponCrosshair(_barrel, _crosshair);
 
             _countAmmunition = _weaponData.GetCountAmmunition();
             _countClip = _weaponData.GetCountClip();
@@ -165,6 +169,7 @@ namespace ExampleTemplate
             if (_recoilCoroutine == null)
             {
                 _recoilCoroutine = StartCoroutine(nameof(RecoilReturn));
+                Debug.Log("CoroutineStart");
             }
         }
         protected void ReadyShoot()
@@ -185,9 +190,15 @@ namespace ExampleTemplate
 
         private void ReturnFromRecoil()
         {
-            float x = Mathf.LerpAngle(transform.localEulerAngles.x, _weaponOriginPosition.x, Time.deltaTime * _weaponData.GetRecoilTimeMultiplier());
-            float y = Mathf.LerpAngle(transform.localEulerAngles.y, _weaponOriginPosition.y, Time.deltaTime * _weaponData.GetRecoilTimeMultiplier());
-            float z = Mathf.LerpAngle(transform.localEulerAngles.z, _weaponOriginPosition.z, Time.deltaTime * _weaponData.GetRecoilTimeMultiplier());
+
+            //float x = Mathf.LerpAngle(transform.localEulerAngles.x, _weaponOriginPosition.x, Time.deltaTime * _weaponData.GetRecoilTimeMultiplier());
+            //float y = Mathf.LerpAngle(transform.localEulerAngles.y, _weaponOriginPosition.y, Time.deltaTime * _weaponData.GetRecoilTimeMultiplier());
+            //float z = Mathf.LerpAngle(transform.localEulerAngles.z, _weaponOriginPosition.z, Time.deltaTime * _weaponData.GetRecoilTimeMultiplier());
+            //transform.localEulerAngles = new Vector3(x, y, z);
+
+            float x = Mathf.SmoothDampAngle(transform.localEulerAngles.x, _weaponOriginPosition.x, ref xvelocity, _weaponData.GetRecoilTimeMultiplier());
+            float y = Mathf.SmoothDampAngle(transform.localEulerAngles.y, _weaponOriginPosition.y, ref yvelocity, _weaponData.GetRecoilTimeMultiplier());
+            float z = Mathf.SmoothDampAngle(transform.localEulerAngles.z, _weaponOriginPosition.z, ref zvelocity, _weaponData.GetRecoilTimeMultiplier());
             transform.localEulerAngles = new Vector3(x, y, z);
         }
 
@@ -197,12 +208,12 @@ namespace ExampleTemplate
 
         private IEnumerator RecoilReturn()
         {
-            while (transform.localEulerAngles != _weaponOriginPosition)
+            while (transform.localEulerAngles!=_weaponOriginPosition)
             {
                 yield return _weaponData.GetReturnRecoilDelay();
                 ReturnFromRecoil();
             }
-            //_recoilCoroutine = null;
+            _recoilCoroutine = null;
         }
 
         #endregion

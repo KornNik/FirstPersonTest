@@ -7,8 +7,8 @@ namespace ExampleTemplate
     {
         static readonly Vector2 InAnchorMin = new Vector2(0.0f, 0.5f);
         static readonly Vector2 InAnchorMax = new Vector2(1.0f, 0.5f);
-        static readonly Vector2 OutAnchorMin = new Vector2(-1.0f,0.0f);
-        static readonly Vector2 OutAnchorMax = new Vector2(0.0f, 1.0f);
+        static readonly Vector2 OutAnchorMin = new Vector2(0.0f,1.0f);
+        static readonly Vector2 OutAnchorMax = new Vector2(1.0f, 1.0f);
 
         readonly RectTransform _moveRoot;
 

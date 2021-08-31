@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\Controllers\Interfaces\IExecute.cs" />
     <Compile Include="Assets\Scripts\Controllers\Interfaces\IInitialization.cs" />
     <Compile Include="Assets\Scripts\Controllers\LoadLevel\LoadLevelController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\SaveData\SaveDataController.cs" />
     <Compile Include="Assets\Scripts\Controllers\TimeRemaining\ITimeRemaining.cs" />
     <Compile Include="Assets\Scripts\Controllers\TimeRemaining\TimeRemaining.cs" />
     <Compile Include="Assets\Scripts\Controllers\TimeRemaining\TimeRemainingCleanUp.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Assets\Scripts\Helper\Manageres\TagType.cs" />
     <Compile Include="Assets\Scripts\Helper\Manageres\UnitParametrsManager.cs" />
     <Compile Include="Assets\Scripts\Helper\Manageres\WeaponParametersManager.cs" />
+    <Compile Include="Assets\Scripts\Helper\SerializableGameObject.cs" />
     <Compile Include="Assets\Scripts\Model\Ammunition\AmmunitionBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Ammunition\AmmunitionModifier.cs" />
     <Compile Include="Assets\Scripts\Model\Ammunition\AmmunitionPool.cs" />
@@ -205,6 +207,7 @@
     <Compile Include="Assets\Scripts\UI\Screen\SettingsMenu\SettingsMenuBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\Screen\VideoSettingsMenu\VideoSettingsBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\Tween\PanelTween.cs" />
+    <Compile Include="Assets\Scripts\UI\Tween\SequenceSettings.cs" />
     <Compile Include="Assets\Scripts\UI\Type\MoveMode.cs" />
     <Compile Include="Assets\Scripts\UI\Type\QualitySettingsType.cs" />
     <Compile Include="Assets\Scripts\UI\Type\ScreenElementType.cs" />

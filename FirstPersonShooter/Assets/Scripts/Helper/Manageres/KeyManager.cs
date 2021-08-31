@@ -15,6 +15,8 @@ namespace ExampleTemplate
         public const KeyCode FLASH_LIGHT_SWITCH = KeyCode.L;
         public const KeyCode GRANADE_SELECT = KeyCode.Alpha9;
         public const KeyCode THROW_GRANADE = KeyCode.G;
+        public const KeyCode SAVE = KeyCode.F5;
+        public const KeyCode LOAD = KeyCode.F6;
 
         #endregion
 

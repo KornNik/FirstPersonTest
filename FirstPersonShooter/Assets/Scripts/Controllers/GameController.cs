@@ -19,6 +19,7 @@ namespace ExampleTemplate
             _controllers = new Controllers();
             Initialization();
             ScreenInterface.GetInstance().Execute(ScreenType.MainMenu);
+            Application.targetFrameRate = 60;
         }
 
         private void Update()
