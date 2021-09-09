@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ExampleTemplate
 {
     [System.Serializable]
-    public struct SerializableGameObject
+    public class SerializableGameObject
     {
         public string Name;
         public SerializableVector3 Position;

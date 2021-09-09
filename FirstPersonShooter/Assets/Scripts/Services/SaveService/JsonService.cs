@@ -9,6 +9,9 @@ namespace ExampleTemplate
     {
         #region Fields
 
+        private const string _folderName = "dataSave";
+        private const string _fileName = "data.bat";
+        private string _path;
         private Crypto _crypto;
 
         #endregion
@@ -19,6 +22,7 @@ namespace ExampleTemplate
         public JsonService()
         {
             _crypto = new Crypto();
+            _path = Path.Combine(Application.dataPath, _folderName);
         }
 
         #endregion
@@ -26,19 +30,22 @@ namespace ExampleTemplate
 
         #region Methods
 
-        public void Save(SerializableGameObject dataSave, string fileName)
+        public void Save<T>(T dataSave, string fileName) where T : SerializableGameObject
         {
+            if (!Directory.Exists(Path.Combine(_path)))
+            {
+                Directory.CreateDirectory(_path);
+            }
+            var filePath = Path.Combine(_path, fileName);
             var json = JsonUtility.ToJson(dataSave);
-            //File.WriteAllText(filePath, json);
-            File.WriteAllText(fileName, _crypto.CryptoXOR(json));
-
+            File.WriteAllText(filePath, _crypto.CryptoXOR(json));
         }
-
-        public SerializableGameObject Load<SerializableGameObject>(string fileName)
+        public void Load<T>(string fileName, T dataSave) where T : SerializableGameObject
         {
-            var json = File.ReadAllText(fileName);
-            //JsonUtility.FromJson(json, dataSave);
-            return JsonUtility.FromJson<SerializableGameObject>(_crypto.CryptoXOR(json));
+            var filePath = Path.Combine(_path, fileName);
+            if (!File.Exists(filePath)) return;
+            var json = File.ReadAllText(filePath);
+            JsonUtility.FromJson<T>(_crypto.CryptoXOR(json));
         }
 
         #endregion

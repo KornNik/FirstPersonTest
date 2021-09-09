@@ -9,7 +9,7 @@ namespace ExampleTemplate
         {
             Vector3 result;
 
-            var dis = Random.Range(5, 50);
+            var dis = Random.Range(10, 50);
             var randomPoint = Random.insideUnitSphere * dis;
 
             NavMesh.SamplePosition(position + randomPoint, out var hit, dis, NavMesh.AllAreas);

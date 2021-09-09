@@ -200,7 +200,7 @@ OffMeshLink:
   m_AgentTypeID: 0
   m_Start: {fileID: 0}
   m_End: {fileID: 0}
-  m_CostOverride: -1
+  m_CostOverride: 0
   m_BiDirectional: 1
   m_Activated: 1
   m_AutoUpdatePositions: 0
@@ -311,7 +311,7 @@ OffMeshLink:
   m_AgentTypeID: 0
   m_Start: {fileID: 0}
   m_End: {fileID: 0}
-  m_CostOverride: -1
+  m_CostOverride: 0
   m_BiDirectional: 1
   m_Activated: 1
   m_AutoUpdatePositions: 0
@@ -515,7 +515,7 @@ OffMeshLink:
   m_AgentTypeID: 0
   m_Start: {fileID: 0}
   m_End: {fileID: 0}
-  m_CostOverride: -1
+  m_CostOverride: 0
   m_BiDirectional: 1
   m_Activated: 1
   m_AutoUpdatePositions: 0
