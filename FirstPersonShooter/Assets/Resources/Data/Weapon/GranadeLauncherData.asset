@@ -18,6 +18,6 @@ MonoBehaviour:
   _spreadFactor: 0.09
   _rechergeTime: 1.4
   _waitForReturnRecoil: 0.005
-  _recoilTimeMultiplier: 0.4
+  _recoilTimeMultiplier: 0.3
   _weaponRecoilX: 3.24
   _weaponRecoilY: 12.14

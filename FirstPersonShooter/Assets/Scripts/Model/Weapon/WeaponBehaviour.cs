@@ -208,7 +208,7 @@ namespace ExampleTemplate
 
         private IEnumerator RecoilReturn()
         {
-            while (transform.localEulerAngles!=_weaponOriginPosition)
+            while (!Mathf.Approximately(_weaponOriginPosition.x, transform.localEulerAngles.x) && !Mathf.Approximately(_weaponOriginPosition.y, transform.localEulerAngles.y))
             {
                 yield return _weaponData.GetReturnRecoilDelay();
                 ReturnFromRecoil();
