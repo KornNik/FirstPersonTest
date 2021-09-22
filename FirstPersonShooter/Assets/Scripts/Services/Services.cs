@@ -29,7 +29,6 @@ namespace ExampleTemplate
         public ITimeService TimeService { get; private set; }
         public PhysicsService PhysicsService { get; private set; }
         public ISaveData SaveData { get; private set; }
-        public JsonService JsonService { get; private set; }
         public LoadLevelService LoadLevelService { get; private set; }
         public WeaponService WeaponService { get; private set; }
         public FlashLightService FlashLightService { get; private set; }
@@ -47,7 +46,6 @@ namespace ExampleTemplate
             TimeService = new UnityTimeService();
             PhysicsService = new PhysicsService(CameraServices);
             SaveData = new PrefsService();
-            JsonService = new JsonService();
             LoadLevelService = new LoadLevelService();
             WeaponService = new WeaponService();
             FlashLightService = new FlashLightService();

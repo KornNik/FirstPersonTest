@@ -84,6 +84,8 @@
     <Compile Include="Assets\Scripts\Controllers\Interfaces\IExecute.cs" />
     <Compile Include="Assets\Scripts\Controllers\Interfaces\IInitialization.cs" />
     <Compile Include="Assets\Scripts\Controllers\LoadLevel\LoadLevelController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Save\DeserializationSavingData.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Save\SaveController.cs" />
     <Compile Include="Assets\Scripts\Controllers\TimeRemaining\ITimeRemaining.cs" />
     <Compile Include="Assets\Scripts\Controllers\TimeRemaining\TimeRemaining.cs" />
     <Compile Include="Assets\Scripts\Controllers\TimeRemaining\TimeRemainingCleanUp.cs" />
@@ -135,7 +137,7 @@
     <Compile Include="Assets\Scripts\Helper\Manageres\TagType.cs" />
     <Compile Include="Assets\Scripts\Helper\Manageres\UnitParametrsManager.cs" />
     <Compile Include="Assets\Scripts\Helper\Manageres\WeaponParametersManager.cs" />
-    <Compile Include="Assets\Scripts\Helper\SerializableGameObject.cs" />
+    <Compile Include="Assets\Scripts\Helper\SaveData.cs" />
     <Compile Include="Assets\Scripts\Model\Ammunition\AmmunitionBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Ammunition\AmmunitionModifier.cs" />
     <Compile Include="Assets\Scripts\Model\Ammunition\AmmunitionPool.cs" />
@@ -159,6 +161,8 @@
     <Compile Include="Assets\Scripts\Model\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Model\ParticleText\SymbolsTextureData.cs" />
     <Compile Include="Assets\Scripts\Model\ParticleText\TextRendererParticleSystem.cs" />
+    <Compile Include="Assets\Scripts\Model\Save\ISaveSystem.cs" />
+    <Compile Include="Assets\Scripts\Model\Save\JsonService.cs" />
     <Compile Include="Assets\Scripts\Model\Units\UnitAnimationBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Units\UnitsStats.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\GranadeLauncherBehaviour.cs" />
@@ -178,7 +182,6 @@
     <Compile Include="Assets\Scripts\Services\LocalizationService\ILocalization.cs" />
     <Compile Include="Assets\Scripts\Services\PhysicsService\PhysicsService.cs" />
     <Compile Include="Assets\Scripts\Services\SaveService\ISaveData.cs" />
-    <Compile Include="Assets\Scripts\Services\SaveService\JsonService.cs" />
     <Compile Include="Assets\Scripts\Services\SaveService\PrefsService.cs" />
     <Compile Include="Assets\Scripts\Services\Service.cs" />
     <Compile Include="Assets\Scripts\Services\Services.cs" />
@@ -211,6 +214,7 @@
     <Compile Include="Assets\Scripts\UI\Type\QualitySettingsType.cs" />
     <Compile Include="Assets\Scripts\UI\Type\ScreenElementType.cs" />
     <Compile Include="Assets\Scripts\UI\Type\ScreenType.cs" />
+    <None Include="Assets\dataSave\data.txt" />
     <None Include="Assets\Shaders\TextParticlesShader.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/ETC/Programs/GitPrograms/FirstPersonShooter/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

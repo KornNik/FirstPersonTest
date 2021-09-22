@@ -1,23 +1,30 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ExampleTemplate
 {
-    [System.Serializable]
-    public class SerializableGameObject
+    [Serializable]
+    public class SaveData
+    {
+        public string Level;
+        public List<SerializableGameObject> serializableGameObjects = new List<SerializableGameObject>();
+    }
+    [Serializable]
+    public struct SerializableGameObject
     {
         public string Name;
         public SerializableVector3 Position;
         public SerializableQuaternion Rotation;
-        public SerializableVector3 Scale;
+        //public SerializableVector3 Scale;
         public bool IsEnable;
 
         public override string ToString()
         {
-            return $"Name = {Name}; IsEnable = {IsEnable}; Pos ({Position});";
+            return $"Name = {Name}; IsEnable = {IsEnable}; Pos ({Position}); Rot ({Rotation}); ";
         }
     }
-    [System.Serializable]
+    [Serializable]
     public struct SerializableVector3
     {
         public float X;
@@ -42,7 +49,7 @@ namespace ExampleTemplate
             return $"X = {X}; Y = {Y}; Z = {Z}";
         }
     }
-    [System.Serializable]
+    [Serializable]
     public struct SerializableQuaternion
     {
         public float X;
