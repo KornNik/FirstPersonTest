@@ -163,7 +163,9 @@
     <Compile Include="Assets\Scripts\Model\ParticleText\TextRendererParticleSystem.cs" />
     <Compile Include="Assets\Scripts\Model\Save\ISaveSystem.cs" />
     <Compile Include="Assets\Scripts\Model\Save\JsonService.cs" />
+    <Compile Include="Assets\Scripts\Model\Units\IMotor.cs" />
     <Compile Include="Assets\Scripts\Model\Units\UnitAnimationBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Model\Units\UnitsBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Units\UnitsStats.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\GranadeLauncherBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\PistolBehaviour.cs" />

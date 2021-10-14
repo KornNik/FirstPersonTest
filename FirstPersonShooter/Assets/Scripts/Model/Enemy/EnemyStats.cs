@@ -4,9 +4,10 @@
     {
         #region Fields
 
-        public EnemiesData EnemyData;
+        private EnemiesData _enemyData;
 
         private float _distanceView;
+        private bool _isAggressive = false;
 
         #endregion
 
@@ -15,11 +16,11 @@
 
         public EnemyStats()
         {
-            EnemyData = Data.Instance.EnemiesData;
-            _health = EnemyData.GetBaseHealth();
-            _speed = EnemyData.GetBaseMovingSpeed();
-            _armor = EnemyData.GetBaseArmor();
-            _distanceView = EnemyData.GetDistanceView();
+            _enemyData = Data.Instance.EnemiesData;
+            _health = _enemyData.GetBaseHealth();
+            _speed = _enemyData.GetBaseMovingSpeed();
+            _armor = _enemyData.GetBaseArmor();
+            _distanceView = _enemyData.GetDistanceView();
         }
 
         #endregion
@@ -31,6 +32,10 @@
         {
             get { return _distanceView; }
         }
+        public bool IsAggressive
+        {
+            get { return _isAggressive; }
+        }
 
         #endregion
 
@@ -38,7 +43,7 @@
 
         public override void ResetHealth()
         {
-            _health = EnemyData.GetBaseHealth();
+            _health = _enemyData.GetBaseHealth();
         }
 
         #endregion

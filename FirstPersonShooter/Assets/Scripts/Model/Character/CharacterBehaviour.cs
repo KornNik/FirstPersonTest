@@ -1,25 +1,15 @@
 ﻿using System;
 using UnityEngine;
-using System.Collections;
 
 
 namespace ExampleTemplate
 {
     [RequireComponent(typeof(CharacterController))]
-    public sealed class CharacterBehaviour : MonoBehaviour, IDamageable
+    public sealed class CharacterBehaviour : UnitsBehaviour
     {
         #region Fields
 
         public static event Action<float> CharacterHealthChanged;
-
-        public Action Impact;
-        public Action Death;
-        public Action Revive;
-        public Action Aiming;
-        public event Action Jump;
-        public Action TossGranade;
-        public event Action<float> MovingSpeed;
-        public event Action<float> Strafe;
 
         public Inventory Inventory;
 
@@ -28,19 +18,23 @@ namespace ExampleTemplate
 
         private Vector3 _moveVector;
         private float _gravityForce;
-        private bool _isDead;
-        private WaitForSeconds _waitForDamage = new WaitForSeconds(1);
 
         #endregion
 
 
         #region UnityMethods
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             _characterController = GetComponent<CharacterController>();
             Inventory = new Inventory(this);
             _characterStats = new CharacterStats();
+
+            _unitsData = _characterStats.CharacterData;
+            _unitsStats = _characterStats;
+            
         }
 
         #endregion
@@ -48,7 +42,7 @@ namespace ExampleTemplate
 
         #region Methods
 
-        public void CharacterMove(Vector2 inputAxis)
+        public override void Move(Vector3 inputAxis)
         {
             if (_characterController.isGrounded)
             {
@@ -78,34 +72,20 @@ namespace ExampleTemplate
                 Jump?.Invoke();
             }
         }
-
-        private void Respawn()
+        protected override void Die(UnitsData unitsData)
         {
-            StopAllCoroutines();
-            _characterStats.ResetHealth();
-            transform.position = Data.Instance.LevelsData.GetCharacterPosition(LevelsType.TestLevel).Position;
-            transform.rotation = Data.Instance.LevelsData.GetCharacterPosition(LevelsType.TestLevel).Rotation();
-            _isDead = false;
+            base.Die(_characterStats.CharacterData);
         }
 
-        #endregion
-
-
-        #region IEnumerator
-
-        private IEnumerator DamageOverTime(float damage, float duration)
+        protected override void Respawn()
         {
-            for (int i = 0; i < duration; i++)
-            {
-                yield return _waitForDamage;
-                _characterStats.TakeDamage(damage);
-                CharacterHealthChanged?.Invoke(_characterStats.Health/_characterStats.CharacterData.GetBaseHealth());
-            }
-            if (_characterStats.Health <= 0)
-            {
-                Respawn();
-                _isDead = true;
-            }
+            base.Respawn();
+            CharacterHealthChanged?.Invoke(_unitsStats.Health / _unitsData.GetBaseHealth());
+        }
+        protected override void SetRespawnPoint()
+        {
+            transform.position = Data.Instance.LevelsData.GetCharacterPosition(LevelsType.TestLevel).Position;
+            transform.rotation = Data.Instance.LevelsData.GetCharacterPosition(LevelsType.TestLevel).Rotation();
         }
 
         #endregion
@@ -113,20 +93,18 @@ namespace ExampleTemplate
 
         #region IDamageable
 
-        public void ReceiveDamage(float damage)
+        public override void ReceiveDamage(float damage)
         {
-            _characterStats.TakeDamage(damage);
-            CharacterHealthChanged?.Invoke(_characterStats.Health / _characterStats.CharacterData.GetBaseHealth());
-            if (_characterStats.Health <= 0)
-            {
-                Respawn();
-                _isDead = true;
-            }
-        }
+            base.ReceiveDamage(damage);
 
-        public void ReceiveDamageOverTime(float damage, float duration)
-        {
-            StartCoroutine(DamageOverTime(damage, duration));
+            CharacterHealthChanged?.Invoke(_unitsStats.Health / _unitsData.GetBaseHealth());
+
+            if (_unitsStats.Health <= 0 && _isAlive)
+            {
+                _isDead = true;
+                _isAlive = false;
+                Die(_unitsData);
+            }
         }
 
         #endregion

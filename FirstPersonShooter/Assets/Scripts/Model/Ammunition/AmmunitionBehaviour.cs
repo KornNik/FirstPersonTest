@@ -18,32 +18,37 @@ namespace ExampleTemplate
 		private TrailRenderer _trailRenderer;
 		private List<AmmunitionModifier> _modifiers = new List<AmmunitionModifier>();
 
-        #endregion
+		#endregion
 
 
-        #region UnityMethods
+		#region ClassLifeCycle
 
-        protected virtual void Awake()
+		protected virtual void Awake()
 		{
 			_currentDamage = _ammunitionData.GetBaseDamage();
 			_rigidbody = GetComponent<Rigidbody>();
 			_trailRenderer = GetComponent<TrailRenderer>();
 		}
 
-        //private void OnBecameInvisible()
-        //{
-        //    if (gameObject.activeSelf)
-        //    {
-        //        ReturnToPool();
-        //    }
-        //}
-
-        #endregion
+		#endregion
 
 
-        #region Methods
+		#region UnityMethods
 
-        public void RegisterBulletModifier(AmmunitionModifier newModifier)
+		//private void OnBecameInvisible()
+		//{
+		//    if (gameObject.activeSelf)
+		//    {
+		//        ReturnToPool();
+		//    }
+		//}
+
+		#endregion
+
+
+		#region Methods
+
+		public void RegisterBulletModifier(AmmunitionModifier newModifier)
 		{
 			_modifiers.Add(newModifier);
 		}

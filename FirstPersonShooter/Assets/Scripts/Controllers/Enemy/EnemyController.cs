@@ -28,10 +28,10 @@ namespace ExampleTemplate
 		public void Execute()
 		{
 			if (!_isActive) return;
-			for (var i = 0; i < _enemiesData.GetAiList.Count; i++)
+			for (var i = 0; i < _enemiesData.GetBotList.Count; i++)
 			{
-				var bot = _enemiesData.GetAiList.ElementAt(i);
-				bot.Tick();
+				var bot = _enemiesData.GetBotList.ElementAt(i);
+				bot.EnemyAi.Tick();
 			}
 		}
 

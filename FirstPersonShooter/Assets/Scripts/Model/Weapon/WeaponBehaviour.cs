@@ -169,7 +169,6 @@ namespace ExampleTemplate
             if (_recoilCoroutine == null)
             {
                 _recoilCoroutine = StartCoroutine(nameof(RecoilReturn));
-                Debug.Log("CoroutineStart");
             }
         }
         protected void ReadyShoot()

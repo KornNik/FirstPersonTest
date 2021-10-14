@@ -47,7 +47,7 @@ namespace ExampleTemplate
             inputAxis.x = Input.GetAxis(AxisManager.HORIZONTAL);
             inputAxis.y = Input.GetAxis(AxisManager.VERTICAL);
 
-            _characterData.CharacterBehaviour.CharacterMove(inputAxis);
+            _characterData.CharacterBehaviour.Move(inputAxis);
             _characterData.CharacterBehaviour.GamingGravity();
 
             if (Input.GetAxis(AxisManager.JUMP) != 0)

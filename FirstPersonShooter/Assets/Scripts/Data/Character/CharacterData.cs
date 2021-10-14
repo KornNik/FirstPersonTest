@@ -15,7 +15,7 @@ namespace ExampleTemplate
         [HideInInspector] public CharacterBehaviour CharacterBehaviour;
         [HideInInspector] public CharacterAnimationBehaviour CharacterAnimationBehaviour;
         [HideInInspector] public Transform RightHandTarget;
-        [HideInInspector] public Transform _cameraPlace;
+        [HideInInspector] public Transform CameraPlace;
 
 
         #endregion
@@ -32,12 +32,12 @@ namespace ExampleTemplate
 
             RightHandTarget = GameObject.FindGameObjectWithTag
                 (TagManager.GetTag(TagType.RightHandTarget)).transform;
-            _cameraPlace = GameObject.FindGameObjectWithTag
+            CameraPlace = GameObject.FindGameObjectWithTag
                 (TagManager.GetTag(TagType.CameraPlace)).transform;
 
             CharacterAnimationBehaviour = CharacterBehaviour.GetComponent<CharacterAnimationBehaviour>();
 
-            Camera.transform.SetParent(_cameraPlace);
+            Camera.transform.SetParent(CameraPlace);
             Camera.transform.localPosition = Vector3.zero;
             Camera.transform.localRotation = Quaternion.identity;
         }

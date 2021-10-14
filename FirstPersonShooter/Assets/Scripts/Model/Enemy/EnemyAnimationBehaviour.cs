@@ -8,7 +8,7 @@ namespace ExampleTemplate
         #region Fields
 
         private EnemiesData _enemiesData;
-        private EnemyAi _enemyAi;
+        private EnemyBehaviour _enemy;
 
         #endregion
 
@@ -17,21 +17,21 @@ namespace ExampleTemplate
 
         private void OnEnable()
         {
-            _enemyAi.MovingSpeed += OnUnitMovingSpeed;
-            _enemyAi.Strafe += OnUnitStrafeSpeed;
-            _enemyAi.Jump += OnUnitJump;
-            _enemyAi.Impact += OnUnitImpact;
-            _enemyAi.Death += OnUnitDeath;
-            _enemyAi.Revive += OnRevive;
+            _enemy.MovingSpeed += OnUnitMovingSpeed;
+            _enemy.Strafe += OnUnitStrafeSpeed;
+            _enemy.Jump += OnUnitJump;
+            _enemy.Impact += OnUnitImpact;
+            _enemy.Death += OnUnitDeath;
+            _enemy.Revive += OnRevive;
         }
         private void OnDisable()
         {
-            _enemyAi.MovingSpeed -= OnUnitMovingSpeed;
-            _enemyAi.Strafe -= OnUnitStrafeSpeed;
-            _enemyAi.Jump -= OnUnitJump;
-            _enemyAi.Impact -= OnUnitImpact;
-            _enemyAi.Death -= OnUnitDeath;
-            _enemyAi.Revive -= OnRevive;
+            _enemy.MovingSpeed -= OnUnitMovingSpeed;
+            _enemy.Strafe -= OnUnitStrafeSpeed;
+            _enemy.Jump -= OnUnitJump;
+            _enemy.Impact -= OnUnitImpact;
+            _enemy.Death -= OnUnitDeath;
+            _enemy.Revive -= OnRevive;
         }
         private void OnAnimatorIK()
         {
@@ -42,7 +42,7 @@ namespace ExampleTemplate
         {
             base.Awake();
             _enemiesData = Data.Instance.EnemiesData;
-            _enemyAi = GetComponent<EnemyAi>();
+            _enemy = GetComponent<EnemyBehaviour>();
             _handWeight = 1;
         }
 
@@ -69,8 +69,8 @@ namespace ExampleTemplate
         {
             _unitAnimator.SetIKPositionWeight(AvatarIKGoal.RightHand, handWeight);
             _unitAnimator.SetIKRotationWeight(AvatarIKGoal.RightHand, handWeight);
-            _unitAnimator.SetIKPosition(AvatarIKGoal.RightHand, _enemyAi.RightHandTarget.position);
-            _unitAnimator.SetIKRotation(AvatarIKGoal.RightHand, _enemyAi.RightHandTarget.rotation);
+            _unitAnimator.SetIKPosition(AvatarIKGoal.RightHand, _enemy.RightHandTarget.position);
+            _unitAnimator.SetIKRotation(AvatarIKGoal.RightHand, _enemy.RightHandTarget.rotation);
         }
 
         #endregion

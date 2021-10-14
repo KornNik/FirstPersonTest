@@ -21,16 +21,23 @@ namespace ExampleTemplate
         #endregion
 
 
-        #region UnityMethods
+        #region ClassLifeCycle
 
-        protected override void Awake()
+        protected override void Awake ()
         {
-            _ammunitionData = Data.Instance.ExplosionAmmunitionData;
+            _ammunitionData = Data.Instance.BulletData;
             _explosionData = Data.Instance.ExplosionAmmunitionData;
-            Type = AmmunitionType.Granade;
+
             base.Awake();
+
+            Type = AmmunitionType.Granade;
             RegisterBulletModifier(new BonusDamageModifier(this, _ammunitionData.GetBonusDamage()));
         }
+
+        #endregion
+
+
+        #region UnityMethods
 
         private void OnCollisionEnter(Collision collision)
         {

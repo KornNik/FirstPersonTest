@@ -41,7 +41,7 @@ namespace ExampleTemplate
                 Rotation = _characterData.CharacterBehaviour.transform.rotation,
                 IsEnable = _characterData.CharacterBehaviour.enabled
             });
-            foreach(var item in _enemiesData.GetAiList)
+            foreach(var item in _enemiesData.GetBotList)
             {
                 _myData.serializableGameObjects.Add(new SerializableGameObject
                 {
@@ -65,7 +65,7 @@ namespace ExampleTemplate
                     _characterData.CharacterBehaviour.transform.rotation = item.Rotation;
                     _characterData.CharacterBehaviour.enabled = item.IsEnable;
                 }
-                foreach(var enemy in _enemiesData.GetAiList)
+                foreach(var enemy in _enemiesData.GetBotList)
                 {
                     if (item.Name == enemy.GetInstanceID().ToString())
                     {

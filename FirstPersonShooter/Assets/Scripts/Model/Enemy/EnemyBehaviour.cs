@@ -1,101 +1,45 @@
 ﻿using System;
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace ExampleTemplate
 {
-
-    public sealed class EnemyBehaviour : MonoBehaviour, IDamageable
+    [RequireComponent(typeof(EnemyAi))]
+    public sealed class EnemyBehaviour : UnitsBehaviour
     {
         #region Fields
 
-
         public static event Action<float> EnemyHealthChanged;
 
-        private WaitForSeconds _waitForDamage = new WaitForSeconds(1);
+        [HideInInspector] public EnemyAi EnemyAi;
+        [HideInInspector] public EnemyStats EnemyStats;
 
-        private bool _isColliderActive;
-        private bool _isVisible;
-        private bool _isDead;
+        public Transform RightHandTarget;
 
-        private EnemyAi _enemyAi;
         private LevelsData _levelsData;
+        private EnemiesData _enemiesData;
         private TextRendererParticleSystem _textParticle;
-
-        private Rigidbody[] _rigidbodies;
-
-        #endregion
-
-
-        #region Properties
-
-        public bool IsColliderActive
-        {
-            get => _isColliderActive;
-            set
-            {
-                _isColliderActive = value;
-                var tempCollider = GetComponent<Collider>();
-                if (tempCollider)
-                {
-                    tempCollider.enabled = _isColliderActive;
-                    if (transform.childCount <= 0) return;
-                    foreach (Transform item in transform)
-                    {
-                        tempCollider = item.GetComponentInChildren<Collider>();
-                        if (tempCollider)
-                        {
-                            tempCollider.enabled = _isColliderActive;
-                        }
-                    }
-                }
-            }
-        }
-
-        public bool IsVisible
-        {
-            get => _isVisible;
-            set
-            {
-                _isVisible = value;
-                var tempRenderer = GetComponent<Renderer>();
-                if (tempRenderer)
-                    tempRenderer.enabled = _isVisible;
-                if (transform.childCount <= 0) return;
-                foreach (Transform item in transform)
-                {
-                    tempRenderer = item.GetComponentInChildren<Renderer>();
-                    if (tempRenderer)
-                        tempRenderer.enabled = _isVisible;
-                }
-            }
-        }
 
         #endregion
 
 
         #region UnityMethods
 
-        private void OnEnable()
+        protected override void Awake()
         {
-            _enemyAi.Death += OnDie;
-        }
-        private void OnDisable()
-        {
-            _enemyAi.Death -= OnDie;
-        }
-        private void Awake()
-        {
+            base.Awake();
+
+            EnemyStats = new EnemyStats();
+
             _levelsData = Data.Instance.LevelsData;
-            _enemyAi = GetComponent<EnemyAi>();
-            _rigidbodies = GetComponentsInChildren<Rigidbody>();
+            _enemiesData = Data.Instance.EnemiesData;
+            EnemyAi = GetComponent<EnemyAi>();
 
             var textParticle = CustomResources.Load<TextRendererParticleSystem>
                 (AssetsPathParticles.ParticlesGameObject[VFXType.TextParticle]);
             _textParticle = Instantiate(textParticle, transform.position, transform.rotation, transform);
 
-            SwitchKinematic();
+            _unitsData = _enemiesData;
+            _unitsStats = EnemyStats;
         }
 
         #endregion
@@ -103,48 +47,28 @@ namespace ExampleTemplate
 
         #region Methods
 
-        private void OnDie()
+        public override void Move(Vector3 vectorMove)
         {
-            if (!_isDead) { return; }
-            _isDead = false;
-            _enemyAi.Agent.ResetPath();
-            StopAllCoroutines();
-            Invoke(nameof(Revive), _enemyAi.EnemyStats.EnemyData.GetReviveTime());
-            Invoke(nameof(SwitchAnimator), _enemyAi.EnemyStats.EnemyData.GetRagdollTime());
-            Invoke(nameof(SwitchKinematic), _enemyAi.EnemyStats.EnemyData.GetRagdollTime());
-
+            throw new NotImplementedException();
         }
-        private void Revive()
+        public void Die()
         {
-            SwitchAnimator();
-            SwitchKinematic();
-            _enemyAi.StateBot = StateBotType.None;
-            RespawnEnemy();
-            _enemyAi.EnemyStats.ResetHealth();
-            EnemyHealthChanged?.Invoke(_enemyAi.EnemyStats.Health / _enemyAi.EnemyStats.EnemyData.GetBaseHealth());
-            _enemyAi.Revive?.Invoke();
+            Die(_enemiesData);
         }
 
-        private void SwitchKinematic()
+        protected override void Die(UnitsData unitsData)
         {
-            foreach (var item in _rigidbodies)
-            {
-                item.isKinematic = !item.isKinematic;
-            }
+            base.Die(_enemiesData);
+            EnemyAi.Agent.ResetPath();
         }
-
-        private void SwitchAnimator()
+        protected override void Respawn()
         {
-            var animator = GetComponent<Animator>();
-            animator.enabled = !animator.isActiveAndEnabled;
+            base.Respawn();
+            EnemyAi.StateBot = StateBotType.None;
+            EnemyHealthChanged?.Invoke(_unitsStats.Health / _unitsData.GetBaseHealth());
+            Revive?.Invoke();
         }
-
-        private void SwitchVisibility()
-        {
-            IsVisible = !IsVisible;
-            IsColliderActive = !IsColliderActive;
-        }
-        private void RespawnEnemy()
+        protected override void SetRespawnPoint()
         {
             transform.position = Patrol.GenericPoint(_levelsData.GetEnemyPosition(LevelsType.TestLevel).Position);
             transform.rotation = _levelsData.GetEnemyPosition(LevelsType.TestLevel).Rotation();
@@ -153,51 +77,23 @@ namespace ExampleTemplate
         #endregion
 
 
-        #region IEnumerator
-
-        private IEnumerator DamageOverTime(float damage, float duration)
-        {
-
-            for (int i = 0; i < duration; i++)
-            {
-                yield return _waitForDamage;
-                _enemyAi.EnemyStats.TakeDamage(damage);
-                EnemyHealthChanged?.Invoke(_enemyAi.EnemyStats.Health / _enemyAi.EnemyStats.EnemyData.GetBaseHealth());
-                _textParticle.SpawnParticle(transform.position, _enemyAi.EnemyStats.Health, Color.red);
-            }
-            if (_enemyAi.EnemyStats.Health <= 0 && _enemyAi.StateBot != StateBotType.Died)
-            {
-                _enemyAi.StateBot = StateBotType.Died;
-                _isDead = true;
-            }
-        }
-
-        #endregion
-
-
         #region IDamageable
 
-        public void ReceiveDamage(float damage)
+        public override void ReceiveDamage(float damage)
         {
-            if (_enemyAi.StateBot == StateBotType.Died) return;
-            _enemyAi.EnemyStats.TakeDamage(damage);
-            _enemyAi.Impact?.Invoke();
-            EnemyHealthChanged?.Invoke(_enemyAi.EnemyStats.Health / _enemyAi.EnemyStats.EnemyData.GetBaseHealth());
-            _textParticle.SpawnParticle(transform.position, _enemyAi.EnemyStats.Health, Color.red);
-            if (_enemyAi.EnemyStats.Health <= 0 && _enemyAi.StateBot != StateBotType.Died)
+            base.ReceiveDamage(damage);
+
+            _textParticle.SpawnParticle(transform.position, EnemyStats.Health, Color.red);
+            EnemyHealthChanged?.Invoke(_unitsStats.Health / _unitsData.GetBaseHealth());
+
+            if (_unitsStats.Health <= 0 && _isAlive)
             {
-                _enemyAi.StateBot = StateBotType.Died;
                 _isDead = true;
+                _isAlive = false;
+                EnemyAi.StateBot = StateBotType.Died;
             }
         }
 
-        public void ReceiveDamageOverTime(float damage, float duration)
-        {
-            StartCoroutine(DamageOverTime(damage, duration));
-        }
-
         #endregion
-
-
     }
 }

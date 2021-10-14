@@ -9,12 +9,11 @@ namespace ExampleTemplate
         #region Fields
 
         [SerializeField] private int _enemyCount = 5;
-        [SerializeField] private bool _isAggressive = true;
         [SerializeField] private float _distanceView = 20f;
         [SerializeField] private float _shootingDistance = 10f;
         [SerializeField] private float _shootingDelay = 2f;
 
-        [HideInInspector] public HashSet<EnemyAi> GetAiList { get; } = new HashSet<EnemyAi>();
+        [HideInInspector] public HashSet<EnemyBehaviour> GetBotList { get; } = new HashSet<EnemyBehaviour>();
 
         #endregion
 
@@ -24,28 +23,28 @@ namespace ExampleTemplate
         public void Initialization(EnemiesType enemyType, CharacterPosition point)
         {
             if (_enemyCount <= 0) return;
-            var enemyAi = CustomResources.Load<EnemyAi>
+            var enemyAi = CustomResources.Load<EnemyBehaviour>
                 (AssetsPathEnemies.EnemiesGameObject[enemyType]);
             for (int index = 0; index < _enemyCount; index++)
             {
                 var enemy = Instantiate(enemyAi, Patrol.GenericPoint(point.Position), point.Rotation());
-                enemy.Agent.avoidancePriority = index;
+                enemy.EnemyAi.Agent.avoidancePriority = index;
                 AddBotToList(enemy);
             }
         }
 
-        private void AddBotToList(EnemyAi bot)
+        private void AddBotToList(EnemyBehaviour bot)
         {
-            if (!GetAiList.Contains(bot))
+            if (!GetBotList.Contains(bot))
             {
-                GetAiList.Add(bot);
+                GetBotList.Add(bot);
             }
         }
-        public void RemoveBotToList(EnemyAi bot)
+        public void RemoveBotToList(EnemyBehaviour bot)
         {
-            if (GetAiList.Contains(bot))
+            if (GetBotList.Contains(bot))
             {
-                GetAiList.Remove(bot);
+                GetBotList.Remove(bot);
             }
         }
 
@@ -53,10 +52,7 @@ namespace ExampleTemplate
         {
             return _distanceView;
         }
-        public bool GetIsAggressive()
-        {
-            return _isAggressive;
-        }
+
         public float GetShootingDistance()
         {
             return _shootingDistance;

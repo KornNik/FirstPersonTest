@@ -5,24 +5,18 @@ using UnityEngine.AI;
 
 namespace ExampleTemplate
 {
+    [RequireComponent(typeof(EnemyBehaviour))]
     public class EnemyAi : MonoBehaviour
     {
         #region Fields
 
         [HideInInspector] public NavMeshAgent Agent;
-        [HideInInspector] public EnemyStats EnemyStats;
-
-        public Transform RightHandTarget;
-
-        public Action<float> MovingSpeed;
-        public Action<float> Strafe;
-        public Action Impact;
-        public Action Jump;
-        public Action Death;
-        public Action Revive;
 
         private StateBotType _stateBot;
         private WeaponBehaviour _weapon;
+        private EnemyBehaviour _enemyBehaviour;
+        private EnemiesData _enemiesData;
+
         private Coroutine _waitStateRoutine;
         private Renderer[] _materials;
         private Vector3 _point;
@@ -49,10 +43,11 @@ namespace ExampleTemplate
 
         public void Awake()
         {
-            _materials = GetComponentsInChildren<Renderer>();
-            _weapon = GetComponentInChildren<WeaponBehaviour>();
             Agent = GetComponent<NavMeshAgent>();
-            EnemyStats = new EnemyStats();
+            _materials = GetComponentsInChildren<Renderer>();
+            _enemyBehaviour = GetComponent<EnemyBehaviour>();
+            _weapon = GetComponentInChildren<WeaponBehaviour>();
+            _enemiesData = Data.Instance.EnemiesData;
 
             Agent.autoRepath = true;
         }
@@ -64,13 +59,13 @@ namespace ExampleTemplate
 
         public void Tick()
         {
-            MovingSpeed?.Invoke(Agent.velocity.normalized.magnitude);
+            _enemyBehaviour.MovingSpeed?.Invoke(Agent.velocity.normalized.magnitude);
 
             if (_weapon.Clip.CountAmmunition == 0)
             {
                 _weapon.ReloadClip();
             }
-            if (EnemyStats.EnemyData.GetIsAggressive() && _stateBot != StateBotType.Died)
+            if (_enemyBehaviour.EnemyStats.IsAggressive && _stateBot != StateBotType.Died)
             {
                 if (FindTarget())
                 {
@@ -94,11 +89,11 @@ namespace ExampleTemplate
                     Detecting();
                     break;
                 case StateBotType.Died:
-                    Die();
+                    _enemyBehaviour.Die();
                     break;
             }
         }
-        public void MovePoint(Vector3 point)
+        public void Move(Vector3 point)
         {
             Agent.SetDestination(point);
         }
@@ -115,27 +110,27 @@ namespace ExampleTemplate
             if (Agent.hasPath) return;
             ColorExtensions.ChangeColor(Color.blue, _materials);
             _point = Patrol.GenericPoint(transform.position);
-            Agent.speed = EnemyStats.Speed;
-            MovePoint(_point);
+            Agent.speed = _enemyBehaviour.EnemyStats.Speed;
+            Move(_point);
             Agent.stoppingDistance = 0;
 
         }
         private bool FindTarget()
         {
-            var isFindTarget = Physics.CheckSphere(transform.position, EnemyStats.DistanceView, LayerManager.PlayerLayer);
+            var isFindTarget = Physics.CheckSphere(transform.position, _enemyBehaviour.EnemyStats.DistanceView, LayerManager.PlayerLayer);
             return isFindTarget;
         }
         private void ChaseTarget(Vector3 target)
         {
             ColorExtensions.ChangeColor(Color.red, _materials);
-            Agent.speed = EnemyStats.Speed * 2;
-            MovePoint(target);
+            Agent.speed = _enemyBehaviour.EnemyStats.Speed * 2;
+            Move(target);
             Agent.stoppingDistance = 10;
             if (AtGunpoint() && !_isDelay)
             {
                 _weapon.Fire();
                 _isDelay = true;
-                Invoke(nameof(ReadyShoot), EnemyStats.EnemyData.GetShootingDelay());
+                Invoke(nameof(ReadyShoot), _enemiesData.GetShootingDelay());
             }
         }
         private bool AtGunpoint()
@@ -154,7 +149,7 @@ namespace ExampleTemplate
         }
         private void Detecting()
         {
-            _targetColliders = Physics.OverlapSphereNonAlloc(transform.position, EnemyStats.DistanceView, _bufferColliders);
+            _targetColliders = Physics.OverlapSphereNonAlloc(transform.position, _enemyBehaviour.EnemyStats.DistanceView, _bufferColliders);
             for (int i = 0; i < _targetColliders; i++)
             {
                 CharacterBehaviour character = _bufferColliders[i].GetComponent<CharacterBehaviour>();
@@ -165,11 +160,6 @@ namespace ExampleTemplate
                     break;
                 }
             }
-        }
-
-        private void Die()
-        {
-            Death?.Invoke();
         }
         private void ReadyState(StateBotType stateBot)
         {

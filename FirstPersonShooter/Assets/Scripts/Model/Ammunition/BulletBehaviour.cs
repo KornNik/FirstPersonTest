@@ -4,14 +4,22 @@ namespace ExampleTemplate
 {
     public sealed class BulletBehaviour : AmmunitionBehaviour
     {
-        #region UnityMethods
+
+        #region ClassLifeCycle
 
         protected override void Awake()
         {
             _ammunitionData = Data.Instance.BulletData;
+
             base.Awake();
+
             RegisterBulletModifier(new PoisonDamageModifier(this, _ammunitionData.GetPoisonDamage(), _ammunitionData.GetPoisonDuration()));
         }
+
+        #endregion
+
+
+        #region UnityMethods
 
         private void OnCollisionEnter(UnityEngine.Collision collision)
         {
