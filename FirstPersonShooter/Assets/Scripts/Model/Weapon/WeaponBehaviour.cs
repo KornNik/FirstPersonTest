@@ -13,17 +13,16 @@ namespace ExampleTemplate
         [SerializeField] protected Transform _placeForClip;
         [SerializeField] protected Transform _placeForMuffler;
         [SerializeField] protected Transform _crosshair;
-        [SerializeField] protected float _force;
-        [SerializeField] protected float _rechergeTime;
-        [SerializeField] protected float _spreadFactor;
+
+        [SerializeField] private Transform _poolTransform;
 
         public Action FireActn;
         public Action ReloadActn;
 
-        public Clip Clip;
-        public Transform PoolTransform;
-        public WeaponCrosshair WeaponCrosshair;
 
+        protected float _force;
+        protected float _rechergeTime;
+        protected float _spreadFactor;
         protected int _countAmmunition;
         protected int _countClip;
         protected bool _isReady = true;
@@ -34,13 +33,14 @@ namespace ExampleTemplate
         protected Vector3 _shootDirection;
         protected Vector3 _weaponOriginPosition;
 
-        protected WeaponData _weaponData;
-        protected AmmunitionType _ammunitionType;
-        protected WeaponType _weaponType;
-        protected AmmunitionPool _ammunitionPool;
-        protected ClipModification _clipModification;
-        protected MufflerModification _mufflerModification;
+        protected Clip _clip;
         protected WeaponVFX _weaponVFX;
+        protected WeaponData _weaponData;
+        protected WeaponType _weaponType;
+        protected AmmunitionType _ammunitionType;
+        protected AmmunitionPool _ammunitionPool;
+        protected WeaponCrosshair _weaponCrosshair;
+        protected List<IWeaponModification> _weaponModifications = new List<IWeaponModification>();
 
         private bool _isVisible;
         private Queue<Clip> _clips = new Queue<Clip>();
@@ -59,6 +59,8 @@ namespace ExampleTemplate
         public Transform PlaceForClip => _placeForClip;
         public Transform PlaceForMuffler => _placeForMuffler;
         public Transform Barrel => _barrel;
+        public WeaponCrosshair WeaponCrosshair => _weaponCrosshair;
+        public Clip Clip => _clip;
 
         public int CountClip => _clips.Count;
 
@@ -89,10 +91,8 @@ namespace ExampleTemplate
         protected virtual void Awake()
         {
 
-            _ammunitionPool = new AmmunitionPool(8, PoolTransform);
-            _mufflerModification = new MufflerModification();
-            _clipModification = new ClipModification();
-            WeaponCrosshair = new WeaponCrosshair(_barrel, _crosshair);
+            _ammunitionPool = new AmmunitionPool(5, _poolTransform);
+            _weaponCrosshair = new WeaponCrosshair(_barrel, _crosshair);
 
             _countAmmunition = _weaponData.GetCountAmmunition();
             _countClip = _weaponData.GetCountClip();
@@ -125,7 +125,7 @@ namespace ExampleTemplate
                 AddClip(new Clip { CountAmmunition = _countAmmunition + ammo });
             }
             ReloadClip();
-            WeaponService.AmmunitionChanged?.Invoke(CountClip, Clip.CountAmmunition);
+            WeaponService.AmmunitionChanged?.Invoke(CountClip, _clip.CountAmmunition);
         }
         public void RemoveSpread(float value)
         {
@@ -134,30 +134,18 @@ namespace ExampleTemplate
         public void ReloadClip()
         {
             if (CountClip <= 0) return;
-            Clip = _clips.Dequeue();
+            _clip = _clips.Dequeue();
         }
 
         public abstract void Fire();
 
-        public void AddModifications()
+        public void ModificateWeapon()
         {
-            AddMufflerModificaton();
-            AddClipModification();
-        }
-        public void AddMufflerModificaton()
-        {
-            if (!_isClipModificated)
+            _weaponModifications.Add(new ClipModification());
+            _weaponModifications.Add(new MufflerModification());
+            foreach (var item in _weaponModifications)
             {
-                var clip = _clipModification.AddModification(this);
-                _isClipModificated = true;
-            }
-        }
-        public void AddClipModification()
-        {
-            if (!_isMufflerModificated)
-            {
-                var muffler = _mufflerModification.AddModification(this);
-                _isMufflerModificated = true;
+                item.AddModification(this);
             }
         }
 
@@ -202,6 +190,7 @@ namespace ExampleTemplate
         }
 
         #endregion
+
 
         #region IEnumarator
 

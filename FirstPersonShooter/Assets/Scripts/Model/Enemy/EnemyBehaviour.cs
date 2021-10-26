@@ -8,16 +8,23 @@ namespace ExampleTemplate
     {
         #region Fields
 
+        [SerializeField] private Transform _rightHandTarget;
+
         public static event Action<float> EnemyHealthChanged;
 
-        [HideInInspector] public EnemyAi EnemyAi;
-        [HideInInspector] public EnemyStats EnemyStats;
-
-        public Transform RightHandTarget;
-
+        private EnemyAi _enemyAi;
+        private EnemyStats _enemyStats;
         private LevelsData _levelsData;
-        private EnemiesData _enemiesData;
         private TextRendererParticleSystem _textParticle;
+
+        #endregion
+
+
+        #region Properties
+
+        public EnemyAi EnemyAi => _enemyAi;
+        public EnemyStats EnemyStats => _enemyStats;
+        public Transform RightHandTarget => _rightHandTarget;
 
         #endregion
 
@@ -28,18 +35,17 @@ namespace ExampleTemplate
         {
             base.Awake();
 
-            EnemyStats = new EnemyStats();
+            _enemyStats = new EnemyStats();
 
             _levelsData = Data.Instance.LevelsData;
-            _enemiesData = Data.Instance.EnemiesData;
-            EnemyAi = GetComponent<EnemyAi>();
+            _enemyAi = GetComponent<EnemyAi>();
 
             var textParticle = CustomResources.Load<TextRendererParticleSystem>
                 (AssetsPathParticles.ParticlesGameObject[VFXType.TextParticle]);
             _textParticle = Instantiate(textParticle, transform.position, transform.rotation, transform);
 
-            _unitsData = _enemiesData;
-            _unitsStats = EnemyStats;
+            _unitsData = _enemyStats.EnemiesData;
+            _unitsStats = _enemyStats;
         }
 
         #endregion
@@ -47,24 +53,20 @@ namespace ExampleTemplate
 
         #region Methods
 
-        public override void Move(Vector3 vectorMove)
-        {
-            throw new NotImplementedException();
-        }
         public void Die()
         {
-            Die(_enemiesData);
+            Die(_enemyStats.EnemiesData);
         }
 
         protected override void Die(UnitsData unitsData)
         {
-            base.Die(_enemiesData);
-            EnemyAi.Agent.ResetPath();
+            base.Die(_enemyStats.EnemiesData);
+            _enemyAi.Agent.ResetPath();
         }
         protected override void Respawn()
         {
             base.Respawn();
-            EnemyAi.StateBot = StateBotType.None;
+            _enemyAi.StateBot = StateBotType.None;
             EnemyHealthChanged?.Invoke(_unitsStats.Health / _unitsData.GetBaseHealth());
             Revive?.Invoke();
         }
@@ -83,14 +85,14 @@ namespace ExampleTemplate
         {
             base.ReceiveDamage(damage);
 
-            _textParticle.SpawnParticle(transform.position, EnemyStats.Health, Color.red);
+            _textParticle.SpawnParticle(transform.position, _enemyStats.Health, Color.red);
             EnemyHealthChanged?.Invoke(_unitsStats.Health / _unitsData.GetBaseHealth());
 
             if (_unitsStats.Health <= 0 && _isAlive)
             {
                 _isDead = true;
                 _isAlive = false;
-                EnemyAi.StateBot = StateBotType.Died;
+                _enemyAi.StateBot = StateBotType.Died;
             }
         }
 

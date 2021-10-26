@@ -7,7 +7,6 @@ namespace ExampleTemplate
     {
         #region Fields
 
-        private EnemiesData _enemiesData;
         private EnemyBehaviour _enemy;
 
         #endregion
@@ -41,7 +40,6 @@ namespace ExampleTemplate
         protected override void Awake()
         {
             base.Awake();
-            _enemiesData = Data.Instance.EnemiesData;
             _enemy = GetComponent<EnemyBehaviour>();
             _handWeight = 1;
         }

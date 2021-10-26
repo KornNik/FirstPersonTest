@@ -11,6 +11,11 @@
 
         #endregion
 
+        #region Properties
+
+        public EnemiesData EnemiesData => _enemyData;
+
+        #endregion
 
         #region ClassLyfeCycle
 

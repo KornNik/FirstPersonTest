@@ -30,10 +30,8 @@ namespace ExampleTemplate
                 (AssetsPathCharacters.CharactersGameObject[characterType]);
             CharacterBehaviour = Instantiate(characterBehaviour, point.Position, point.Rotation());
 
-            RightHandTarget = GameObject.FindGameObjectWithTag
-                (TagManager.GetTag(TagType.RightHandTarget)).transform;
-            CameraPlace = GameObject.FindGameObjectWithTag
-                (TagManager.GetTag(TagType.CameraPlace)).transform;
+            RightHandTarget = Camera.GetComponent<CameraBehaviuor>().RightHandTarget;
+            CameraPlace = CharacterBehaviour.CameraPlace;
 
             CharacterAnimationBehaviour = CharacterBehaviour.GetComponent<CharacterAnimationBehaviour>();
 

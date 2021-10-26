@@ -2,7 +2,7 @@
 
 namespace ExampleTemplate
 {
-    public class FlashLightService
+    public class FlashLightService : Service
     {
 
         #region Fields

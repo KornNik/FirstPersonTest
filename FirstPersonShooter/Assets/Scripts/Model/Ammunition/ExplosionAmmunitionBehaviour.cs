@@ -30,7 +30,7 @@ namespace ExampleTemplate
 
             base.Awake();
 
-            Type = AmmunitionType.Granade;
+            _type = AmmunitionType.Granade;
             RegisterBulletModifier(new BonusDamageModifier(this, _ammunitionData.GetBonusDamage()));
         }
 
@@ -45,10 +45,10 @@ namespace ExampleTemplate
 
             foreach (ContactPoint contact in collision.contacts)
             {
-                Services.Instance.BulletVFX.GetHitParticle(Type, contact.point);
+                Services.Instance.BulletVFX.GetHitParticle(_type, contact.point);
             }
 
-            AmmunitionExplode?.Invoke(0.3f,_explosionData.GetCameraShakeForce(),100f);
+            AmmunitionExplode?.Invoke(0.3f, _explosionData.GetCameraShakeForce(), 100f);
             AmmunitionExplodeTween?.Invoke(0.3f, _explosionData.GetCameraShakeForce(), 10, 90f);
             ExplosionForce(colliders);
 

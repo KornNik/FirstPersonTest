@@ -8,6 +8,7 @@
         private WeaponBehaviour[] _weapons = new WeaponBehaviour[5];
         private GranadeBehaviour[] _granades = new GranadeBehaviour[5];
         private FlashLightBehaviour _flashLight;
+
         private int _selectIndexWeapon = 0;
         private int _selectIndexGranade = 0;
 
@@ -18,9 +19,8 @@
         #region Properties
 
         public WeaponBehaviour[] Weapons { get { return _weapons; } private set { } }
-        public FlashLightBehaviour FlashLight { get { return _flashLight; } private set { } }
-
         public GranadeBehaviour[] Granades { get { return _granades; } private set { } }
+        public FlashLightBehaviour FlashLight { get { return _flashLight; } private set { } }
 
         #endregion
 

@@ -47,12 +47,12 @@ namespace ExampleTemplate
             inputAxis.x = Input.GetAxis(AxisManager.HORIZONTAL);
             inputAxis.y = Input.GetAxis(AxisManager.VERTICAL);
 
-            _characterData.CharacterBehaviour.Move(inputAxis);
-            _characterData.CharacterBehaviour.GamingGravity();
+            _characterData.CharacterBehaviour.CharacterMovement.Move(inputAxis);
+            _characterData.CharacterBehaviour.CharacterMovement.GamingGravity();
 
             if (Input.GetAxis(AxisManager.JUMP) != 0)
             {
-                _characterData.CharacterBehaviour.CharacterJump();
+                _characterData.CharacterBehaviour.CharacterMovement.CharacterJump();
             }
             if (Input.GetAxis(AxisManager.MOUSE_SCROLL_WHEEL) > 0)
             {
@@ -61,6 +61,10 @@ namespace ExampleTemplate
             if (Input.GetAxis(AxisManager.MOUSE_SCROLL_WHEEL) < 0)
             {
                 MouseScroll(MouseScrollWheel.Down);
+            }
+            if (Input.GetKeyDown(KeyManager.RUN))
+            {
+                _characterData.CharacterBehaviour.CharacterMovement.Run();
             }
 
             if (Input.GetKeyDown(KeyManager.FIRST_WEAPON))

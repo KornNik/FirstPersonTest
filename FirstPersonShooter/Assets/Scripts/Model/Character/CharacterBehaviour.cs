@@ -9,15 +9,23 @@ namespace ExampleTemplate
     {
         #region Fields
 
+        [SerializeField] private Transform _cameraPlace;
+
         public static event Action<float> CharacterHealthChanged;
 
-        public Inventory Inventory;
+        private Inventory _inventory;
 
-        private CharacterController _characterController;
         private CharacterStats _characterStats;
+        private CharacterMovement _characterMovement;
 
-        private Vector3 _moveVector;
-        private float _gravityForce;
+        #endregion
+
+
+        #region Properties
+
+        public CharacterMovement CharacterMovement => _characterMovement;
+        public Transform CameraPlace => _cameraPlace;
+        public Inventory Inventory => _inventory;
 
         #endregion
 
@@ -28,9 +36,9 @@ namespace ExampleTemplate
         {
             base.Awake();
 
-            _characterController = GetComponent<CharacterController>();
-            Inventory = new Inventory(this);
+            _inventory = new Inventory(this);
             _characterStats = new CharacterStats();
+            _characterMovement = new CharacterMovement(GetComponent<CharacterController>(),_characterStats,this);
 
             _unitsData = _characterStats.CharacterData;
             _unitsStats = _characterStats;
@@ -42,36 +50,6 @@ namespace ExampleTemplate
 
         #region Methods
 
-        public override void Move(Vector3 inputAxis)
-        {
-            if (_characterController.isGrounded)
-            {
-                Vector3 desiredMove = gameObject.transform.forward * inputAxis.y + gameObject.transform.right * inputAxis.x;
-                _moveVector.x = desiredMove.x * _characterStats.Speed;
-                _moveVector.z = desiredMove.z * _characterStats.Speed;
-            }
-
-            MovingSpeed?.Invoke(inputAxis.y);
-            Strafe?.Invoke(inputAxis.x);
-
-            _moveVector.y = _gravityForce;
-            _characterController.Move(_moveVector * Time.deltaTime);
-        }
-
-        public void GamingGravity()
-        {
-            if (!_characterController.isGrounded) _gravityForce -= 30 * Time.deltaTime;
-            else _gravityForce = -1;
-        }
-
-        public void CharacterJump()
-        {
-            if (_characterController.isGrounded)
-            {
-                _gravityForce = _characterStats.JumpPower;
-                Jump?.Invoke();
-            }
-        }
         protected override void Die(UnitsData unitsData)
         {
             base.Die(_characterStats.CharacterData);

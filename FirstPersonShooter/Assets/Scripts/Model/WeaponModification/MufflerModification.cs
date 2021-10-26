@@ -2,7 +2,7 @@
 
 namespace ExampleTemplate
 {
-    public class MufflerModification : WeaponModification
+    public class MufflerModification : IWeaponModification
     {
 
         #region Fields
@@ -21,14 +21,14 @@ namespace ExampleTemplate
 
         #region Methods
 
-        public override Object AddModification(WeaponBehaviour weapon)
+        public Object AddModification(WeaponBehaviour weapon)
         {
             var muffler = Object.Instantiate(Resources.Load<GameObject>(AssetsPathWeaponModification.ModificationsGameObject[ModificationType.Muffler]),
             weapon.PlaceForMuffler.position, weapon.PlaceForMuffler.rotation, weapon.PlaceForMuffler);
             weapon.RemoveSpread(_reducingSpread);
             return muffler;
         }
-        public override void RemoveModification(Object obj)
+        public void RemoveModification(Object obj)
         {
             Object.Destroy(obj);
         }

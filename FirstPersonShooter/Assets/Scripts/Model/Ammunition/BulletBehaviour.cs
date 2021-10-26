@@ -21,11 +21,11 @@ namespace ExampleTemplate
 
         #region UnityMethods
 
-        private void OnCollisionEnter(UnityEngine.Collision collision)
+        private void OnCollisionEnter(Collision collision)
         {
             var tempObj = collision.gameObject.GetComponent<IDamageable>();
 
-            foreach(UnityEngine.ContactPoint contact in collision.contacts)
+            foreach (ContactPoint contact in collision.contacts)
             {
                 Services.Instance.BulletVFX.GetHitImpactParticle(LayerMask.GetMask(LayerMask.LayerToName(collision.gameObject.layer)), contact.point);
             }

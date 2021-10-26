@@ -297,15 +297,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d52f30bb347744346a256c8435126f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PoolTransform: {fileID: 7270643635939444576}
-  IsClipModificated: 0
-  IsMufflerModificated: 0
   _barrel: {fileID: 1562680774769912467}
   _placeForClip: {fileID: 254360617733460084}
   _placeForMuffler: {fileID: 755477250637985163}
+  _crosshair: {fileID: 0}
   _force: 600
   _rechergeTime: 0.6
   _spreadFactor: 0.02
+  _poolTransform: {fileID: 7270643635939444576}
 --- !u!1 &8771936870112027403
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,6 @@ namespace ExampleTemplate
     public sealed class FlashLightBehaviour : MonoBehaviour
     {
 		#region Fields
-		public float BatteryChargeCurrent { get; private set; }
 
 		public static event Action<float> ChargeChange;
 
@@ -19,6 +18,8 @@ namespace ExampleTemplate
 		private float _share;
 		private float _batteryChargeMax;
 		private float _takeAwayTheIntensity;
+		private float _batteryChargeCurrent;
+
 		private bool _lightIsConfigure;
 
 
@@ -27,8 +28,10 @@ namespace ExampleTemplate
 
 		#region Properties
 
-		public float Charge => BatteryChargeCurrent / BatteryChargeMax;
+		public float Charge => _batteryChargeCurrent / BatteryChargeMax;
 		public float BatteryChargeMax => _batteryChargeMax;
+
+		public float BatteryChargeCurrent => _batteryChargeCurrent;
 
 		#endregion
 
@@ -46,7 +49,7 @@ namespace ExampleTemplate
 			transform.position = _camera.transform.position;
 			_vecOffset = transform.position - _goFollow.position;
 
-			BatteryChargeCurrent = BatteryChargeMax;
+			_batteryChargeCurrent = BatteryChargeMax;
 			_share = BatteryChargeMax / 4;
 			_takeAwayTheIntensity = _flashLightData.GetMaxIntensity() / (BatteryChargeMax * 200);
 
@@ -80,13 +83,13 @@ namespace ExampleTemplate
 
 		public bool EditBatteryCharge()
 		{
-			if (BatteryChargeCurrent > 0)
+			if (_batteryChargeCurrent > 0)
 			{
-				BatteryChargeCurrent -= Time.deltaTime;
-				ChargeChange?.Invoke(BatteryChargeCurrent/_flashLightData.GetBatteryChargeMax());
+				_batteryChargeCurrent -= Time.deltaTime;
+				ChargeChange?.Invoke(_batteryChargeCurrent/_flashLightData.GetBatteryChargeMax());
 				_light.intensity -= _takeAwayTheIntensity;
 
-				if (BatteryChargeCurrent < _share)
+				if (_batteryChargeCurrent < _share)
 				{
 					_light.enabled = UnityEngine.Random.Range(0, 100) >= UnityEngine.Random.Range(0, 10);
 				}
@@ -99,10 +102,10 @@ namespace ExampleTemplate
 
 		public bool BatteryRecharge()
 		{
-			if (BatteryChargeCurrent < BatteryChargeMax)
+			if (_batteryChargeCurrent < BatteryChargeMax)
 			{
-				BatteryChargeCurrent += Time.deltaTime;
-				ChargeChange?.Invoke(BatteryChargeCurrent/_flashLightData.GetBatteryChargeMax());
+				_batteryChargeCurrent += Time.deltaTime;
+				ChargeChange?.Invoke(_batteryChargeCurrent/_flashLightData.GetBatteryChargeMax());
 				_light.intensity += _takeAwayTheIntensity;
 				_light.intensity = Mathf.Clamp(_light.intensity, 0, 1.5f);
 				return true;

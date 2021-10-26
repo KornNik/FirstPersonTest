@@ -9,9 +9,10 @@ namespace ExampleTemplate
 
 		[HideInInspector] public Transform PoolTransform;
 
-		public AmmunitionType Type = AmmunitionType.Bullet;
+		protected AmmunitionType _type = AmmunitionType.Bullet;
 
 		protected float _currentDamage;
+
 		protected AmmunitionData _ammunitionData;
 
 		private Rigidbody _rigidbody;
@@ -21,27 +22,15 @@ namespace ExampleTemplate
 		#endregion
 
 
-		#region ClassLifeCycle
+		#region UnityMethods
 
 		protected virtual void Awake()
 		{
-			_currentDamage = _ammunitionData.GetBaseDamage();
 			_rigidbody = GetComponent<Rigidbody>();
 			_trailRenderer = GetComponent<TrailRenderer>();
 		}
 
-		#endregion
 
-
-		#region UnityMethods
-
-		//private void OnBecameInvisible()
-		//{
-		//    if (gameObject.activeSelf)
-		//    {
-		//        ReturnToPool();
-		//    }
-		//}
 
 		#endregion
 
@@ -85,8 +74,8 @@ namespace ExampleTemplate
 		{
 			_currentDamage = _ammunitionData.GetBaseDamage();
 			gameObject.SetActive(true);
-			InvokeRepeating(nameof(LossOfDamage), 0, 1);
-			Invoke(nameof(ReturnToPool), _ammunitionData.GetTimeToDistract());
+            InvokeRepeating(nameof(LossOfDamage), 0, 1);
+            Invoke(nameof(ReturnToPool), _ammunitionData.GetTimeToDistract());
 			transform.SetParent(null);
 		}
 

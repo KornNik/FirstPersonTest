@@ -2,7 +2,7 @@
 
 namespace ExampleTemplate
 {
-    public class ClipModification : WeaponModification
+    public class ClipModification : IWeaponModification
     {
         #region Fields
 
@@ -20,14 +20,14 @@ namespace ExampleTemplate
 
         #region Methods
 
-        public override Object AddModification(WeaponBehaviour weapon)
+        public Object AddModification(WeaponBehaviour weapon)
         {
             var clip = Object.Instantiate(Resources.Load<GameObject>(AssetsPathWeaponModification.ModificationsGameObject[ModificationType.Clip]),
             weapon.PlaceForClip.position, weapon.PlaceForClip.rotation, weapon.PlaceForClip);
             weapon.AddAmmunition(_increasAmmo);
             return clip;
         }
-        public override void RemoveModification(Object obj)
+        public void RemoveModification(Object obj)
         {
             Object.Destroy(obj);
         }

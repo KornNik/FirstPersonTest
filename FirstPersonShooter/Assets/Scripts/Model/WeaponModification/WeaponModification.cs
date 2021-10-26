@@ -2,12 +2,12 @@
 
 namespace ExampleTemplate
 {
-    public abstract class WeaponModification
+    public interface IWeaponModification
     {
         #region Mehtods
 
-        public abstract Object AddModification(WeaponBehaviour weapon);
-        public abstract void RemoveModification(Object obj);
+        Object AddModification(WeaponBehaviour weapon);
+        void RemoveModification(Object obj);
 
         #endregion
     }

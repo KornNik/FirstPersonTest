@@ -2,7 +2,7 @@
 
 namespace ExampleTemplate
 {
-    public sealed class WeaponService
+    public sealed class WeaponService : Service
 	{
         #region Fields
 

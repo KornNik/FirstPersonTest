@@ -8,9 +8,18 @@ namespace ExampleTemplate
     {
         #region Fields
 
+        [SerializeField] private Transform _rightHandTarget;
+
         private CameraData _cameraData;
         private Quaternion _cameraTargetRot;
         private Coroutine _shakeCoroutinePosition;
+
+        #endregion
+
+
+        #region Properties
+
+        public Transform RightHandTarget => _rightHandTarget;
 
         #endregion
 

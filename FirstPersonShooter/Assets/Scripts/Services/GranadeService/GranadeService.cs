@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ExampleTemplate
 {
-    public sealed class GranadeService
+    public sealed class GranadeService : Service
     {
         #region Fields
 

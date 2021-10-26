@@ -2,7 +2,7 @@
 
 namespace ExampleTemplate
 {
-    public class LoadLevelService
+    public class LoadLevelService : Service
     {
         #region Fields
 

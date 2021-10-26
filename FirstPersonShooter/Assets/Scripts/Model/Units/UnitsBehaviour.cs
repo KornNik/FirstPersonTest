@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace ExampleTemplate
 {
-    public abstract class UnitsBehaviour : MonoBehaviour, IDamageable, IMotor
+    public abstract class UnitsBehaviour : MonoBehaviour, IDamageable
     {
 
         #region Fields
@@ -167,13 +167,6 @@ namespace ExampleTemplate
         {
             StartCoroutine(DamageOverTime(damage, duration));
         }
-
-        #endregion
-
-
-        #region IMotor
-
-        public abstract void Move(Vector3 vectorMove);
 
         #endregion
     }

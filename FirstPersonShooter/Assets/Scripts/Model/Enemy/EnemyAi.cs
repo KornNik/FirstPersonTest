@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,16 +9,15 @@ namespace ExampleTemplate
     {
         #region Fields
 
-        [HideInInspector] public NavMeshAgent Agent;
-
         private StateBotType _stateBot;
         private WeaponBehaviour _weapon;
         private EnemyBehaviour _enemyBehaviour;
         private EnemiesData _enemiesData;
 
-        private Coroutine _waitStateRoutine;
-        private Renderer[] _materials;
         private Vector3 _point;
+        private NavMeshAgent _agent;
+        private Renderer[] _materials;
+        private Coroutine _waitStateRoutine;
 
         private bool _isDelay;
         private int _targetColliders;
@@ -35,6 +33,8 @@ namespace ExampleTemplate
         #region Properties
 
         public StateBotType StateBot { get => _stateBot; set { _stateBot = value; } }
+        public NavMeshAgent Agent => _agent;
+
 
         #endregion
 
@@ -43,13 +43,13 @@ namespace ExampleTemplate
 
         public void Awake()
         {
-            Agent = GetComponent<NavMeshAgent>();
+            _agent = GetComponent<NavMeshAgent>();
             _materials = GetComponentsInChildren<Renderer>();
             _enemyBehaviour = GetComponent<EnemyBehaviour>();
             _weapon = GetComponentInChildren<WeaponBehaviour>();
             _enemiesData = Data.Instance.EnemiesData;
 
-            Agent.autoRepath = true;
+            _agent.autoRepath = true;
         }
 
         #endregion
@@ -59,7 +59,7 @@ namespace ExampleTemplate
 
         public void Tick()
         {
-            _enemyBehaviour.MovingSpeed?.Invoke(Agent.velocity.normalized.magnitude);
+            _enemyBehaviour.MovingSpeed?.Invoke(_agent.velocity.normalized.magnitude);
 
             if (_weapon.Clip.CountAmmunition == 0)
             {
@@ -73,7 +73,7 @@ namespace ExampleTemplate
                 }
                 if (!FindTarget() && _stateBot == StateBotType.Detected)
                 {
-                    Agent.ResetPath();
+                    _agent.ResetPath();
                     _stateBot = StateBotType.Patrol;
                 }
             }
@@ -95,7 +95,7 @@ namespace ExampleTemplate
         }
         public void Move(Vector3 point)
         {
-            Agent.SetDestination(point);
+            _agent.SetDestination(point);
         }
         private void Default()
         {
@@ -107,12 +107,12 @@ namespace ExampleTemplate
         }
         private void Patrolling()
         {
-            if (Agent.hasPath) return;
+            if (_agent.hasPath) return;
             ColorExtensions.ChangeColor(Color.blue, _materials);
             _point = Patrol.GenericPoint(transform.position);
-            Agent.speed = _enemyBehaviour.EnemyStats.Speed;
+            _agent.speed = _enemyBehaviour.EnemyStats.Speed;
             Move(_point);
-            Agent.stoppingDistance = 0;
+            _agent.stoppingDistance = 0;
 
         }
         private bool FindTarget()
@@ -123,9 +123,9 @@ namespace ExampleTemplate
         private void ChaseTarget(Vector3 target)
         {
             ColorExtensions.ChangeColor(Color.red, _materials);
-            Agent.speed = _enemyBehaviour.EnemyStats.Speed * 2;
+            _agent.speed = _enemyBehaviour.EnemyStats.Speed * 2;
             Move(target);
-            Agent.stoppingDistance = 10;
+            _agent.stoppingDistance = 10;
             if (AtGunpoint() && !_isDelay)
             {
                 _weapon.Fire();

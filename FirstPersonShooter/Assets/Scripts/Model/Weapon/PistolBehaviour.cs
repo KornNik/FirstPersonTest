@@ -22,7 +22,7 @@
 		public override void Fire()
 		{
             if (!_isReady) return;
-			if (Clip.CountAmmunition <= 0) return;
+			if (_clip.CountAmmunition <= 0) return;
 			if (_ammunitionPool == null) return;
 
 			_shootDirection = SetSpread(_barrel.forward);
@@ -30,9 +30,8 @@
 			tempAmmunition.AddForce(_shootDirection * _force);
 			FireActn?.Invoke();
             _weaponVFX.PlayWeaponParticle(_barrel.position);
-            //WeaponRecoil();
 
-            Clip.CountAmmunition--;
+            _clip.CountAmmunition--;
 			_isReady = false;
 			Invoke(nameof(ReadyShoot), _rechergeTime);
 		}

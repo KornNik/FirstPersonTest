@@ -150,6 +150,7 @@
     <Compile Include="Assets\Scripts\Model\Camera\CameraBehaviuor.cs" />
     <Compile Include="Assets\Scripts\Model\Character\CharacterAnimationBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Character\CharacterBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Model\Character\CharacterMovement.cs" />
     <Compile Include="Assets\Scripts\Model\Character\CharacterStats.cs" />
     <Compile Include="Assets\Scripts\Model\Enemy\EnemyAi.cs" />
     <Compile Include="Assets\Scripts\Model\Enemy\EnemyAnimationBehaviour.cs" />
@@ -163,7 +164,6 @@
     <Compile Include="Assets\Scripts\Model\ParticleText\TextRendererParticleSystem.cs" />
     <Compile Include="Assets\Scripts\Model\Save\ISaveSystem.cs" />
     <Compile Include="Assets\Scripts\Model\Save\JsonService.cs" />
-    <Compile Include="Assets\Scripts\Model\Units\IMotor.cs" />
     <Compile Include="Assets\Scripts\Model\Units\UnitAnimationBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Units\UnitsBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Units\UnitsStats.cs" />

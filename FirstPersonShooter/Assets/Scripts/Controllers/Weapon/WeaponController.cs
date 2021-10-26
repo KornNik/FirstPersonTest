@@ -60,7 +60,7 @@ namespace ExampleTemplate
             }
             if (Input.GetKeyDown(KeyManager.ADD_MODIFICATION))
             {
-                tempWeapon.AddModifications();
+                tempWeapon.ModificateWeapon();
             }
 
 

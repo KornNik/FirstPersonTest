@@ -4,9 +4,16 @@
     {
         #region Fields
 
-        public CharacterData CharacterData;
+        private CharacterData _characterData;
 
         private float _jumpPower;
+
+        #endregion
+
+
+        #region Properties
+
+        public CharacterData CharacterData => _characterData;
 
         #endregion
 
@@ -15,7 +22,7 @@
 
         public CharacterStats()
         {
-            CharacterData = Data.Instance.Character;
+            _characterData = Data.Instance.Character;
             _health = CharacterData.GetBaseHealth();
             _speed = CharacterData.GetBaseMovingSpeed();
             _armor = CharacterData.GetBaseArmor();
