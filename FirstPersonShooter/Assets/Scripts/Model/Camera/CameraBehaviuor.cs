@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using DG.Tweening;
 
 namespace ExampleTemplate
 {
@@ -12,7 +11,9 @@ namespace ExampleTemplate
 
         private CameraData _cameraData;
         private Quaternion _cameraTargetRot;
-        private Coroutine _shakeCoroutinePosition;
+
+        private DOTweenShakeCamera _tweenShakeCamera;
+        private PerlinNoiseShakeCamera _perlinShakeCamera;
 
         #endregion
 
@@ -34,13 +35,13 @@ namespace ExampleTemplate
 
         private void OnEnable()
         {
-            //ExplosionAmmunitionBehaviour.AmmunitionExplode += ShakeCamera;
-            ExplosionAmmunitionBehaviour.AmmunitionExplodeTween += CreateShake;
+            //ExplosionAmmunitionBehaviour.AmmunitionExplode += CreatePerlinNoiseShake;
+            ExplosionAmmunitionBehaviour.AmmunitionExplodeTween += CreateDOTweenShake;
         }
         private void OnDisable()
         {
-            //ExplosionAmmunitionBehaviour.AmmunitionExplode -= ShakeCamera;
-            ExplosionAmmunitionBehaviour.AmmunitionExplodeTween -= CreateShake;
+            //ExplosionAmmunitionBehaviour.AmmunitionExplode -= CreatePerlinNoiseShake;
+            ExplosionAmmunitionBehaviour.AmmunitionExplodeTween -= CreateDOTweenShake;
         }
 
         #endregion
@@ -58,18 +59,6 @@ namespace ExampleTemplate
 
             gameObject.transform.localRotation = _cameraTargetRot;
         }
-        public void ShakeCamera(float duration, float magnitude, float noize)
-        {
-            if (_shakeCoroutinePosition == null)
-            {
-                _shakeCoroutinePosition = StartCoroutine(ShakeCameraCor(duration, magnitude, noize));
-            }
-        }
-
-        private void CreateShake(float duration, float strength, int vibrato, float randomness)
-        {
-            Tweener tweener = DOTween.Shake(() => transform.localPosition, pos => transform.localPosition = pos, duration, strength, vibrato, randomness, true);
-        }
         private Quaternion ClampRotationAroundXAxis(Quaternion q)
         {
             q.x /= q.w;
@@ -86,34 +75,23 @@ namespace ExampleTemplate
             return q;
         }
 
-        #endregion
-
-
-        #region IEnumerator
-
-        private IEnumerator ShakeCameraCor(float duration, float magnitude, float noize)
+        private void CreateDOTweenShake(float duration, float strength, int vibrato, float randomness)
         {
-            float elapsed = 0f;
-            Vector3 startPosition = transform.localPosition;
-            Vector2 noizeStartPoint0 = Random.insideUnitCircle * noize;
-            Vector2 noizeStartPoint1 = Random.insideUnitCircle * noize;
-
-            while (elapsed < duration)
+            if (_tweenShakeCamera == null)
             {
-                Vector2 currentNoizePoint0 = Vector2.Lerp(noizeStartPoint0, Vector2.zero, elapsed / duration);
-                Vector2 currentNoizePoint1 = Vector2.Lerp(noizeStartPoint1, Vector2.zero, elapsed / duration);
-                Vector2 cameraPostionDelta = new Vector2(Mathf.PerlinNoise(currentNoizePoint0.x, currentNoizePoint0.y), Mathf.PerlinNoise(currentNoizePoint1.x, currentNoizePoint1.y));
-                cameraPostionDelta *= magnitude;
-
-                transform.localPosition = startPosition + (Vector3)cameraPostionDelta;
-
-                elapsed += Time.deltaTime;
-
-                yield return null;
+                _tweenShakeCamera = new DOTweenShakeCamera(transform, duration, strength, vibrato, randomness);
             }
+            _tweenShakeCamera.CreateShake(duration, strength, vibrato, randomness);
+        }
 
-            transform.localPosition = startPosition;
-            _shakeCoroutinePosition = null;
+        private void CreatePerlinNoiseShake(float duration, float magnitude, float noize)
+        {
+            if (_perlinShakeCamera == null)
+            {
+                _perlinShakeCamera = new PerlinNoiseShakeCamera(this, transform, duration, magnitude, noize);
+            }
+            _perlinShakeCamera.CreateShake(duration, magnitude, noize);
+
         }
 
         #endregion

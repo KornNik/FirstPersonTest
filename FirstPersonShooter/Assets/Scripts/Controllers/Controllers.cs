@@ -24,20 +24,18 @@
         
         public Controllers()
         {
-            _initializations = new IInitialization[4];
+            _initializations = new IInitialization[3];
             _initializations[0] = new LoadLevelController();
             _initializations[1] = new WeaponController();
-            _initializations[2] = new EnemyController();
-            _initializations[3] = new FlashLightController();
-            _executeControllers = new IExecute[8];
+            _initializations[2] = new FlashLightController();
+            _executeControllers = new IExecute[7];
             _executeControllers[0] = new TimeRemainingController();
             _executeControllers[1] = new InputController();
             _executeControllers[2] = new CameraController();
             _executeControllers[3] = new WeaponController();
-            _executeControllers[4] = new EnemyController();
-            _executeControllers[5] = new FlashLightController();
-            _executeControllers[6] = new GranadeController();
-            _executeControllers[7] = new SaveController();
+            _executeControllers[4] = new FlashLightController();
+            _executeControllers[5] = new GranadeController();
+            _executeControllers[6] = new SaveController();
 
             _cleanUps = new ICleanUp[1];
             _cleanUps[0] = new TimeRemainingCleanUp();

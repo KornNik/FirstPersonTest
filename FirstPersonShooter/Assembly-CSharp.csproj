@@ -75,7 +75,6 @@
     <Compile Include="Assets\Scripts\AssetsPath\AssetsPathWeapons.cs" />
     <Compile Include="Assets\Scripts\Controllers\Camera\CameraController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Controllers.cs" />
-    <Compile Include="Assets\Scripts\Controllers\Enemy\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Controllers\FlashLight\FlashLightController.cs" />
     <Compile Include="Assets\Scripts\Controllers\GameController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Granade\GranadeController.cs" />
@@ -148,6 +147,8 @@
     <Compile Include="Assets\Scripts\Model\Ammunition\Interfaces\IDamager.cs" />
     <Compile Include="Assets\Scripts\Model\Ammunition\PoisonDamageModifier.cs" />
     <Compile Include="Assets\Scripts\Model\Camera\CameraBehaviuor.cs" />
+    <Compile Include="Assets\Scripts\Model\Camera\DOTweenShakeCamera.cs" />
+    <Compile Include="Assets\Scripts\Model\Camera\PerlinNoiseShakeCamera.cs" />
     <Compile Include="Assets\Scripts\Model\Character\CharacterAnimationBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Character\CharacterBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Character\CharacterMovement.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Assets\Scripts\Model\Weapon\WeaponAnimationBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\WeaponBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\WeaponCrosshair.cs" />
+    <Compile Include="Assets\Scripts\Model\Weapon\WeaponRecoil.cs" />
     <Compile Include="Assets\Scripts\Model\Weapon\WeaponVFX.cs" />
     <Compile Include="Assets\Scripts\Model\WeaponModification\ClipModification.cs" />
     <Compile Include="Assets\Scripts\Model\WeaponModification\MufflerModification.cs" />

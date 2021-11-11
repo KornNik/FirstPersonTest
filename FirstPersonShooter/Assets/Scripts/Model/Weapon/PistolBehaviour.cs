@@ -36,6 +36,11 @@
 			Invoke(nameof(ReadyShoot), _rechergeTime);
 		}
 
-        #endregion
-    }
+		protected override void AddAvailableModification()
+		{
+			base.AddAvailableModification();
+            _weaponModifications.Add(new MufflerModification());
+        }
+		#endregion
+	}
 }

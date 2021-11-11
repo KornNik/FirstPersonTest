@@ -52,12 +52,7 @@ namespace ExampleTemplate
             _agent.autoRepath = true;
         }
 
-        #endregion
-
-
-        #region Methods
-
-        public void Tick()
+        private void Update()
         {
             _enemyBehaviour.MovingSpeed?.Invoke(_agent.velocity.normalized.magnitude);
 
@@ -93,6 +88,13 @@ namespace ExampleTemplate
                     break;
             }
         }
+
+        #endregion
+
+
+        #region Methods
+
+
         public void Move(Vector3 point)
         {
             _agent.SetDestination(point);
