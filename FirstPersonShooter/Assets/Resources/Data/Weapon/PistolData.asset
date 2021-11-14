@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _countAmmunition: 15
   _countClip: 5
-  _bulletForce: 900
-  _spreadFactor: 0.03
-  _rechergeTime: 0.5
   _waitForReturnRecoil: 0.01
   _recoilTimeMultiplier: 2
-  _weaponRecoilX: 7
-  _weaponRecoilY: 15
+  _weaponRecoilX: 1.72
+  _weaponRecoilY: 4.65
+  _bulletForce: 400
+  _spreadFactor: 0.03
+  _rechergeTime: 0.5

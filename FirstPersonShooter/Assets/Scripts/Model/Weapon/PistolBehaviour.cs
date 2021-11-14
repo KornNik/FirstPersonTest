@@ -1,4 +1,6 @@
-﻿namespace ExampleTemplate
+﻿using UnityEngine;
+
+namespace ExampleTemplate
 {
 	public sealed class PistolBehaviour : WeaponBehaviour
 	{
@@ -27,7 +29,7 @@
 
 			_shootDirection = SetSpread(_barrel.forward);
 			var tempAmmunition = _ammunitionPool.GetAmmunition(_ammunitionType);
-			tempAmmunition.AddForce(_shootDirection * _force);
+			tempAmmunition.ShootBullet(_shootDirection * _force);
 			FireActn?.Invoke();
             _weaponVFX.PlayWeaponParticle(_barrel.position);
 
@@ -41,6 +43,7 @@
 			base.AddAvailableModification();
             _weaponModifications.Add(new MufflerModification());
         }
+
 		#endregion
 	}
 }

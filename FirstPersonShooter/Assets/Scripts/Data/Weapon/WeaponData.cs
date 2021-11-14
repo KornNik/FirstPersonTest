@@ -5,18 +5,20 @@ namespace ExampleTemplate
     [CreateAssetMenu(fileName = "WeaponData", menuName = "Data/Weapon/WeaponData")]
     public class WeaponData : ScriptableObject
     {
-
+        [Header("Clip")]
         [SerializeField] private int _countAmmunition = 10;
         [SerializeField] private int _countClip = 5;
-        [SerializeField] private float _bulletForce = 600f;
-        [SerializeField] private float _spreadFactor = 0.03f;
-        [SerializeField] private float _rechergeTime = 0.3f;
+        [Header("Recoil")]
         [SerializeField] private float _waitForReturnRecoil = 0.005f;
         [SerializeField] private float _recoilTimeMultiplier = 2f;
         [Range(1f, 7f)]
         [SerializeField] private float _weaponRecoilX = 5f;
         [Range(1f, 15f)]
         [SerializeField] private float _weaponRecoilY = 8f;
+        [Header("Bullet")]
+        [SerializeField] private float _bulletForce = 600f;
+        [SerializeField] private float _spreadFactor = 0.03f;
+        [SerializeField] private float _rechergeTime = 0.3f;
 
         public int GetCountAmmunition()
         {

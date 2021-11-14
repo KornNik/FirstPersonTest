@@ -18,3 +18,38 @@ MonoBehaviour:
   _poisonDuration: 4
   _timeToDistract: 5
   _lossOfDamageAtTime: 0.2
+  _finalDamageInPercent: 20
+  _startPointOfDamageReduction: 0.001
+  _damageReductionGraph:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.9972229
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.13381726
+      value: 0.69026357
+      inSlope: 0.017286725
+      outSlope: 0.017286725
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.81192374
+    - serializedVersion: 3
+      time: 0.9996643
+      value: 0.30370024
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

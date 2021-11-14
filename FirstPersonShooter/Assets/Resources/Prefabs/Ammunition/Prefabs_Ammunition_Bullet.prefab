@@ -109,40 +109,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PoolTransform: {fileID: 0}
-  DamageReductionGraph:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: -0.016666412
-      value: 0.9952698
-      inSlope: -0.010982323
-      outSlope: -0.010982323
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.22500154
-      value: 0.9926157
-      inSlope: -0.040528726
-      outSlope: -0.040528726
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.25769904
-    - serializedVersion: 3
-      time: 1.0402985
-      value: 0.6968689
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  Type: 1
 --- !u!54 &2392635498043122666
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -151,7 +117,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2390873267510649624}
   serializedVersion: 2
-  m_Mass: 0.2
+  m_Mass: 0.02
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -178,7 +144,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 77d08210df254d845885518314593544, type: 2}
+  - {fileID: 2100000, guid: 473d6d3ec0d161b4a85e466c8c6da3fb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

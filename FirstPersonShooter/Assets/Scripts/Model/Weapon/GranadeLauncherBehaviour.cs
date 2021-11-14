@@ -27,7 +27,7 @@
 
             _shootDirection = SetSpread(_barrel.forward);
             var tempAmmunition = _ammunitionPool.GetAmmunition(_ammunitionType);
-            tempAmmunition.AddForce(_shootDirection * _force);
+            tempAmmunition.ShootBullet(_shootDirection * _force);
             _weaponVFX.PlayWeaponParticle(_barrel.position);
             _weaponRecoil.MakeRecoil();
 

@@ -15,6 +15,8 @@ namespace ExampleTemplate
 
 		protected AmmunitionData _ammunitionData;
 
+		private float _startTime;
+
 		private Rigidbody _rigidbody;
 		private TrailRenderer _trailRenderer;
 		private List<AmmunitionModifier> _modifiers = new List<AmmunitionModifier>();
@@ -28,6 +30,7 @@ namespace ExampleTemplate
 		{
 			_rigidbody = GetComponent<Rigidbody>();
 			_trailRenderer = GetComponent<TrailRenderer>();
+			_currentDamage = _ammunitionData.GetBaseDamage();
 		}
 
 
@@ -42,17 +45,12 @@ namespace ExampleTemplate
 			_modifiers.Add(newModifier);
 		}
 
-		public void AddForce(Vector3 dir)
-		{
-			if (!_rigidbody) return;
-			ActiveAmmunition();
-			_rigidbody.AddForce(dir);
-		}
-
-		protected void LossOfDamage()
-		{
-			_currentDamage -= _ammunitionData.GetLossOfDamage();
-		}
+        public void ShootBullet(Vector3 direction)
+        {
+            if (!_rigidbody) return;
+            ActiveAmmunition();
+            _rigidbody.AddForce(direction);
+        }
 
         protected void ReturnToPool()
 		{
@@ -72,11 +70,19 @@ namespace ExampleTemplate
 
 		private void ActiveAmmunition()
 		{
-			_currentDamage = _ammunitionData.GetBaseDamage();
+			_startTime = Time.time;
 			gameObject.SetActive(true);
-            InvokeRepeating(nameof(LossOfDamage), 0, 1);
             Invoke(nameof(ReturnToPool), _ammunitionData.GetTimeToDistract());
 			transform.SetParent(null);
+		}
+
+		float GetDamageCoefficient()
+		{
+			float value = 1.0f;
+			float CurrentTime = Time.time - _startTime;
+			value = _ammunitionData.GetDamageReductionGraph().Evaluate(CurrentTime / _ammunitionData.GetTimeToDistract());
+
+			return value;
 		}
 
 		#endregion
@@ -90,7 +96,8 @@ namespace ExampleTemplate
 			{
 				_modifiers[i].InflictDamage(victim);
 			}
-			victim.ReceiveDamage(_currentDamage);
+			victim.ReceiveDamage(_currentDamage * GetDamageCoefficient());
+			Debug.Log(_currentDamage * GetDamageCoefficient());
 		}
 
 		public void AddDamage(float extraDamage)

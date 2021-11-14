@@ -7,12 +7,37 @@ namespace ExampleTemplate
     {
         #region Fields
 
+        [Header("Damage")]
         [SerializeField] protected float _baseDamage = 10;
         [SerializeField] protected float _bonusDamage = 5;
         [SerializeField] protected float _poisonDamage = 1;
         [SerializeField] protected float _poisonDuration = 4;
+
+        [Space]
+
         [SerializeField] protected float _timeToDistract = 5;
         [SerializeField] protected float _lossOfDamageAtTime = 0.2f;
+        [SerializeField] protected float _finalDamageInPercent = 20;
+        [SerializeField] protected float _startPointOfDamageReduction = 100;
+
+        [SerializeField] protected AnimationCurve _damageReductionGraph;
+
+        #endregion
+
+
+        #region UnityMethods
+
+        public AmmunitionData()
+        {
+            Keyframe[] damageReductionKeyframes;
+            damageReductionKeyframes = new Keyframe[3];
+
+            damageReductionKeyframes[0] = new Keyframe(0, 1);
+            damageReductionKeyframes[1] = new Keyframe(_startPointOfDamageReduction / 100, 1);
+            damageReductionKeyframes[2] = new Keyframe(1, _finalDamageInPercent / 100);
+
+            _damageReductionGraph = new AnimationCurve(damageReductionKeyframes);
+        }
 
         #endregion
 
@@ -42,6 +67,18 @@ namespace ExampleTemplate
         public float GetLossOfDamage()
         {
             return _lossOfDamageAtTime;
+        }
+        public float GetFinalDamageInPercent()
+        {
+            return _finalDamageInPercent;
+        }
+        public float GetStartPointOfDamageReduction()
+        {
+            return _startPointOfDamageReduction;
+        }
+        public AnimationCurve GetDamageReductionGraph()
+        {
+            return _damageReductionGraph;
         }
 
         #endregion

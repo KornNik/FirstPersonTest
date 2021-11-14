@@ -7,6 +7,7 @@ namespace ExampleTemplate
     {
         #region Fields
 
+        [Header("Exploison")]
         [SerializeField] private float _blastRadius = 5;
         [SerializeField] private float _blastForce = 700;
         [SerializeField] private float _cameraShakeForce = 0.5f;
