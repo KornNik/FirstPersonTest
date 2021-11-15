@@ -1,10 +1,10 @@
 ﻿using System;
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace ExampleTemplate
 {
+    [RequireComponent(typeof(LineRenderer))]
     public abstract class WeaponBehaviour : MonoBehaviour
     {
         #region Fields
@@ -38,9 +38,16 @@ namespace ExampleTemplate
         protected Clip _clip;
         protected WeaponVFX _weaponVFX;
         protected WeaponData _weaponData;
+        protected AmmunitionData _ammunitionData;
         protected WeaponRecoil _weaponRecoil;
         protected AmmunitionPool _ammunitionPool;
         protected WeaponCrosshair _weaponCrosshair;
+
+        #region BallisticLine
+        [SerializeField] protected LineRenderer _ballisticLine;
+        private int _numPoints = 50;
+        private float _timeBetweenPoints = 0.1f;
+        #endregion
 
         protected List<IWeaponModification> _weaponModifications = new List<IWeaponModification>();
 
@@ -86,6 +93,9 @@ namespace ExampleTemplate
 
         protected virtual void Awake()
         {
+            _ballisticLine = GetComponent<LineRenderer>();
+            _ballisticLine.startWidth = 0.03f;
+            _ballisticLine.endWidth = 0.03f;
 
             _ammunitionPool = new AmmunitionPool(5, _poolTransform);
             _weaponCrosshair = new WeaponCrosshair(_barrel, _crosshair);
@@ -106,6 +116,40 @@ namespace ExampleTemplate
 
 
         #region Methods
+
+        public void DrawBallisticLine()
+        {
+            if(!_ballisticLine.enabled)
+            {
+                _ballisticLine.enabled = true;
+            }
+            _ballisticLine.positionCount = _numPoints;
+            List<Vector3> points = new List<Vector3>();
+            Vector3 startingPosition = _barrel.position;
+            float velocity = (_weaponData.GetBulletForce() / _ammunitionData.GetBulletMass()) * Time.deltaTime;
+            Vector3 startingVelocity = _barrel.forward * velocity;
+            for (float t = 0; t < _numPoints; t += _timeBetweenPoints)
+            {
+                Vector3 newPoint = startingPosition + t * startingVelocity;
+                newPoint.y = startingPosition.y + startingVelocity.y * t + Physics.gravity.y / 2f * t * t;
+                points.Add(newPoint);
+
+                if (Physics.OverlapSphere(newPoint, 2, LayerManager.CrossHairLayer + LayerManager.WeaponLayer).Length > 0)
+                {
+                    _ballisticLine.positionCount = points.Count;
+                    break;
+                }
+            }
+
+            _ballisticLine.SetPositions(points.ToArray());
+        }
+        public void ClearBallicticLine()
+        {
+            if (_ballisticLine.enabled)
+            {
+                _ballisticLine.enabled = false;
+            }
+        }
 
         public void AddAmmunition(int ammo)
         {

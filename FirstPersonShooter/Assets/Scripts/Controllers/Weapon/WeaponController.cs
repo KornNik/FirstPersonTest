@@ -43,15 +43,17 @@ namespace ExampleTemplate
                 tempWeapon.Fire();
                 WeaponService.AmmunitionChanged?.Invoke(tempWeapon.CountClip, tempWeapon.Clip.CountAmmunition);
             }
-            if (Input.GetAxis(AxisManager.FIRE2) != 0)
+            if (Input.GetAxisRaw(AxisManager.FIRE2) != 0)
             {
                 _handWeight += Time.deltaTime * _characterData.GetBaseWeaponAimingSpeed();
                 tempWeapon.WeaponCrosshair.CrossHair(true);
+                tempWeapon.DrawBallisticLine();
             }
             else
             {
                 _handWeight -= Time.deltaTime * _characterData.GetBaseWeaponAimingSpeed();
                 tempWeapon.WeaponCrosshair.CrossHair(false);
+                tempWeapon.ClearBallicticLine();
             }
 
             if (Input.GetKeyDown(KeyManager.RELOAD_WEAPON))

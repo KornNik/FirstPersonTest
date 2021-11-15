@@ -17,6 +17,7 @@ namespace ExampleTemplate
         [SerializeField] private float _weaponRecoilY = 8f;
         [Header("Bullet")]
         [SerializeField] private float _bulletForce = 600f;
+        [Range(0.00f,0.1f)]
         [SerializeField] private float _spreadFactor = 0.03f;
         [SerializeField] private float _rechergeTime = 0.3f;
 

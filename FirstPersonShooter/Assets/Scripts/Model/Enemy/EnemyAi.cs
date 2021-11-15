@@ -60,7 +60,7 @@ namespace ExampleTemplate
             {
                 _weapon.ReloadClip();
             }
-            if (_enemyBehaviour.EnemyStats.IsAggressive && _stateBot != StateBotType.Died)
+            if (_enemyBehaviour.EnemyStats.EnemiesData.GetAggressive() && _stateBot != StateBotType.Died)
             {
                 if (FindTarget())
                 {
@@ -70,6 +70,7 @@ namespace ExampleTemplate
                 {
                     _agent.ResetPath();
                     _stateBot = StateBotType.Patrol;
+                    _weapon.ClearBallicticLine();
                 }
             }
             switch (_stateBot)
@@ -128,11 +129,9 @@ namespace ExampleTemplate
             _agent.speed = _enemyBehaviour.EnemyStats.Speed * 2;
             Move(target);
             _agent.stoppingDistance = 10;
-            if (AtGunpoint() && !_isDelay)
+            if (AtGunpoint())
             {
-                _weapon.Fire();
-                _isDelay = true;
-                Invoke(nameof(ReadyShoot), _enemiesData.GetShootingDelay());
+                AimTarget(target);
             }
         }
         private bool AtGunpoint()
@@ -141,9 +140,36 @@ namespace ExampleTemplate
             if (Physics.Raycast(_weapon.Barrel.position, _weapon.Barrel.forward, out hit,
                 LayerManager.PlayerLayer))
             {
+                _weapon.DrawBallisticLine();
                 return true;
             }
             return false;
+        }
+        private void AimTarget(Vector3 target)
+        {
+            PreemptiveShooting(target);
+        }
+        public void PreemptiveShooting(Vector3 target)
+        {
+            Vector3 fromTo = target - transform.position;
+            Vector3 fromToXZ = new Vector3(fromTo.x, 0f, fromTo.z);
+
+            transform.rotation = Quaternion.LookRotation(fromToXZ, Vector3.up);
+
+
+            float x = fromToXZ.magnitude;
+            float y = fromTo.y;
+
+            ////float AngleInRadians = AngleInDegrees * Mathf.PI / 180;
+
+            //float v2 = (Physics.gravity.y * x * x) / (2 * (y - Mathf.Tan(AngleInRadians) * x) * Mathf.Pow(Mathf.Cos(AngleInRadians), 2));
+            //float v = Mathf.Sqrt(Mathf.Abs(v2));
+
+            _weapon.Fire();
+            _isDelay = true;
+            Invoke(nameof(ReadyShoot), _enemiesData.GetShootingDelay());
+
+            //newBullet.GetComponent<Rigidbody>().velocity = SpawnTransform.forward * v;
         }
         private void ReadyShoot()
         {

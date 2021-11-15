@@ -7,7 +7,6 @@
         private EnemiesData _enemyData;
 
         private float _distanceView;
-        private bool _isAggressive = false;
 
         #endregion
 
@@ -36,10 +35,6 @@
         public float DistanceView
         {
             get { return _distanceView; }
-        }
-        public bool IsAggressive
-        {
-            get { return _isAggressive; }
         }
 
         #endregion

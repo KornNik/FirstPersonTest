@@ -12,6 +12,7 @@ namespace ExampleTemplate
         [SerializeField] private float _distanceView = 20f;
         [SerializeField] private float _shootingDistance = 10f;
         [SerializeField] private float _shootingDelay = 2f;
+        [SerializeField] private bool _isAggressive = false;
 
         [HideInInspector] public HashSet<EnemyBehaviour> GetBotList { get; } = new HashSet<EnemyBehaviour>();
 
@@ -52,7 +53,6 @@ namespace ExampleTemplate
         {
             return _distanceView;
         }
-
         public float GetShootingDistance()
         {
             return _shootingDistance;
@@ -60,6 +60,11 @@ namespace ExampleTemplate
         public float GetShootingDelay()
         {
             return _shootingDelay;
+        }
+
+        public bool GetAggressive()
+        {
+            return _isAggressive;
         }
 
         #endregion

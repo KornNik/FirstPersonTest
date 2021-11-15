@@ -18,6 +18,7 @@ namespace ExampleTemplate
         private const string CROSSHAIR = "Crosshair";
         private const string ENEMY = "Enemy";
         private const string PLAYER = "Player";
+        private const string WEAPON = "Weapon";
 
         public const int DEFAULT_LAYER = 0;
 
@@ -36,6 +37,7 @@ namespace ExampleTemplate
         public static int CrossHairLayer { get; }
         public static int EnemyLayer { get; }
         public static int PlayerLayer { get; }
+        public static int WeaponLayer { get; }
         
         #endregion
 
@@ -55,6 +57,7 @@ namespace ExampleTemplate
             CrossHairLayer = LayerMask.GetMask(CROSSHAIR);
             EnemyLayer = LayerMask.GetMask(ENEMY);
             PlayerLayer = LayerMask.GetMask(PLAYER);
+            WeaponLayer = LayerMask.GetMask(WEAPON);
         }
 
         #endregion

@@ -31,6 +31,8 @@ namespace ExampleTemplate
 			_rigidbody = GetComponent<Rigidbody>();
 			_trailRenderer = GetComponent<TrailRenderer>();
 			_currentDamage = _ammunitionData.GetBaseDamage();
+
+			_rigidbody.mass = _ammunitionData.GetBulletMass();
 		}
 
 

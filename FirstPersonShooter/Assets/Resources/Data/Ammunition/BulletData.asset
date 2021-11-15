@@ -16,6 +16,7 @@ MonoBehaviour:
   _bonusDamage: 5
   _poisonDamage: 1
   _poisonDuration: 4
+  _bulletMass: 0.02
   _timeToDistract: 5
   _lossOfDamageAtTime: 0.2
   _finalDamageInPercent: 20

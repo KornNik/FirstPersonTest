@@ -25,7 +25,7 @@ namespace ExampleTemplate
 
         protected override void Awake ()
         {
-            _ammunitionData = Data.Instance.BulletData;
+            _ammunitionData = Data.Instance.ExplosionAmmunitionData;
             _explosionData = Data.Instance.ExplosionAmmunitionData;
 
             base.Awake();

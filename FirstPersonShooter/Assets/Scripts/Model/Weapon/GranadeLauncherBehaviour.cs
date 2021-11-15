@@ -7,7 +7,7 @@
         protected override void Awake()
 		{
             _weaponData = Data.Instance.GranadeLauncherData;
-
+            _ammunitionData = Data.Instance.ExplosionAmmunitionData;
             base.Awake();
             _weaponVFX = new WeaponVFX(_barrel, VFXType.MuzzleFlash);
             _weaponType = WeaponType.GranadeLauncher;

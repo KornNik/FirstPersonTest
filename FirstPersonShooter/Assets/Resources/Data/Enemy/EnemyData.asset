@@ -18,7 +18,7 @@ MonoBehaviour:
   _waitForRevive: 10
   _switchToRagdollTime: 2
   _enemyCount: 5
-  _isAggressive: 0
   _distanceView: 20
   _shootingDistance: 10
   _shootingDelay: 2
+  _isAggressive: 0

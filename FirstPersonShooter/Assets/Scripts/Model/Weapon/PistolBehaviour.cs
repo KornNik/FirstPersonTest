@@ -10,6 +10,7 @@ namespace ExampleTemplate
 		protected override void Awake()
 		{
 			_weaponData = Data.Instance.PistolData;
+			_ammunitionData = Data.Instance.BulletData;
 			base.Awake();
 			_weaponType = WeaponType.Pistol;
 			_ammunitionType = AmmunitionType.Bullet;

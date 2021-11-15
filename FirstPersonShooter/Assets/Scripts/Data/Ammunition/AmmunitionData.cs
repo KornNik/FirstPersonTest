@@ -15,6 +15,7 @@ namespace ExampleTemplate
 
         [Space]
 
+        [SerializeField] protected float _bulletMass = 0.2f;
         [SerializeField] protected float _timeToDistract = 5;
         [SerializeField] protected float _lossOfDamageAtTime = 0.2f;
         [SerializeField] protected float _finalDamageInPercent = 20;
@@ -79,6 +80,10 @@ namespace ExampleTemplate
         public AnimationCurve GetDamageReductionGraph()
         {
             return _damageReductionGraph;
+        }
+        public float GetBulletMass()
+        {
+            return _bulletMass;
         }
 
         #endregion
