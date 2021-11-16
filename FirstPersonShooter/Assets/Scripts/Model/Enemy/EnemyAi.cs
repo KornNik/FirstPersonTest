@@ -18,8 +18,10 @@ namespace ExampleTemplate
         private NavMeshAgent _agent;
         private Renderer[] _materials;
         private Coroutine _waitStateRoutine;
+        private RaycastHit _targetHit;
 
         private bool _isDelay;
+        private bool _isAtGunPoint;
         private int _targetColliders;
         private float _handWeight;
 
@@ -99,6 +101,7 @@ namespace ExampleTemplate
         public void Move(Vector3 point)
         {
             _agent.SetDestination(point);
+            _agent.updateRotation = false;
         }
         private void Default()
         {
@@ -129,10 +132,12 @@ namespace ExampleTemplate
             _agent.speed = _enemyBehaviour.EnemyStats.Speed * 2;
             Move(target);
             _agent.stoppingDistance = 10;
+
             if (AtGunpoint())
             {
-                AimTarget(target);
+                ShootTarget();
             }
+
         }
         private bool AtGunpoint()
         {
@@ -141,35 +146,17 @@ namespace ExampleTemplate
                 LayerManager.PlayerLayer))
             {
                 _weapon.DrawBallisticLine();
+                _weapon.transform.LookAt(hit.transform);
                 return true;
             }
             return false;
         }
-        private void AimTarget(Vector3 target)
+        private void ShootTarget()
         {
-            PreemptiveShooting(target);
-        }
-        public void PreemptiveShooting(Vector3 target)
-        {
-            Vector3 fromTo = target - transform.position;
-            Vector3 fromToXZ = new Vector3(fromTo.x, 0f, fromTo.z);
-
-            transform.rotation = Quaternion.LookRotation(fromToXZ, Vector3.up);
-
-
-            float x = fromToXZ.magnitude;
-            float y = fromTo.y;
-
-            ////float AngleInRadians = AngleInDegrees * Mathf.PI / 180;
-
-            //float v2 = (Physics.gravity.y * x * x) / (2 * (y - Mathf.Tan(AngleInRadians) * x) * Mathf.Pow(Mathf.Cos(AngleInRadians), 2));
-            //float v = Mathf.Sqrt(Mathf.Abs(v2));
-
+            if (_isDelay) return;
             _weapon.Fire();
             _isDelay = true;
             Invoke(nameof(ReadyShoot), _enemiesData.GetShootingDelay());
-
-            //newBullet.GetComponent<Rigidbody>().velocity = SpawnTransform.forward * v;
         }
         private void ReadyShoot()
         {

@@ -20,5 +20,5 @@ MonoBehaviour:
   _enemyCount: 5
   _distanceView: 20
   _shootingDistance: 10
-  _shootingDelay: 2
+  _shootingDelay: 4
   _isAggressive: 0
