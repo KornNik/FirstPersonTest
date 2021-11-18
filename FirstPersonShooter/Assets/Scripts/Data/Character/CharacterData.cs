@@ -8,6 +8,7 @@ namespace ExampleTemplate
     {
         #region Fields
 
+        [Header("CharacterStats")]
         [SerializeField] private float _baseWeaponAimingSpeed = 3;
         [SerializeField] private float _baseJumpPower = 10;
 

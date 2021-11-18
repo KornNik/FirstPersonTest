@@ -63,6 +63,8 @@ namespace ExampleTemplate
         public Transform PlaceForMuffler => _placeForMuffler;
         public Transform Barrel => _barrel;
         public WeaponCrosshair WeaponCrosshair => _weaponCrosshair;
+        public WeaponData WeaponData => _weaponData;
+        public AmmunitionData AmmunitionData => _ammunitionData;
         public Clip Clip => _clip;
 
         public int CountClip => _clips.Count;

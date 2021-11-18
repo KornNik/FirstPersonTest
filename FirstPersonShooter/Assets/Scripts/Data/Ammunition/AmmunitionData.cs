@@ -12,14 +12,13 @@ namespace ExampleTemplate
         [SerializeField] protected float _bonusDamage = 5;
         [SerializeField] protected float _poisonDamage = 1;
         [SerializeField] protected float _poisonDuration = 4;
-
-        [Space]
-
-        [SerializeField] protected float _bulletMass = 0.2f;
-        [SerializeField] protected float _timeToDistract = 5;
+        [Header("DamageCurve")]
         [SerializeField] protected float _lossOfDamageAtTime = 0.2f;
         [SerializeField] protected float _finalDamageInPercent = 20;
         [SerializeField] protected float _startPointOfDamageReduction = 100;
+        [Header("Etc")]
+        [SerializeField] protected float _bulletMass = 0.2f;
+        [SerializeField] protected float _timeToDistract = 5;
 
         [SerializeField] protected AnimationCurve _damageReductionGraph;
 

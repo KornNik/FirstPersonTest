@@ -6,9 +6,11 @@ namespace ExampleTemplate
     {
         #region Fields
 
+        [Header("Stats")]
         [SerializeField] protected float _baseMovingSpeed = 10f;
         [SerializeField] protected float _baseHealth = 50f;
         [SerializeField] protected float _baseArmor = 3f;
+        [Header("DeathVariables")]
         [SerializeField] protected float _waitForRevive = 3f;
         [SerializeField] protected float _switchToRagdollTime = 2f;
 

@@ -869,6 +869,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraPlace: {fileID: 5973138215778923513}
+  _feetTransforms:
+  - {fileID: 8082250119476239787}
+  - {fileID: 5740174204829910229}
 --- !u!114 &842207359607746238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -898,7 +901,7 @@ CharacterController:
   m_StepOffset: 0
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 1.15, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!136 &-3150348854159531988
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -910,9 +913,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1.7708837
+  m_Height: 1.8444568
   m_Direction: 1
-  m_Center: {x: 0, y: 0.98210484, z: 0}
+  m_Center: {x: 0, y: 0.87777156, z: 0}
 --- !u!1 &3105768643581669863
 GameObject:
   m_ObjectHideFlags: 0

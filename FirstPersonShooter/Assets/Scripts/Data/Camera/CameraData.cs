@@ -7,10 +7,12 @@ namespace ExampleTemplate
     {
         #region Fields
 
+        [Header("XYBehavour")]
         [SerializeField] private float _ySensitivity = 2f;
         [SerializeField] private float _xSensitivity = 2f;
         [SerializeField] private float _maximumX = 90f;
         [SerializeField] private float _minimumX = -90f;
+        [Header("Etc")]
         [SerializeField] private bool _isClampRotation = true;
 
         #endregion

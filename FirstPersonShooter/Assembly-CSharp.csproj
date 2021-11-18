@@ -218,7 +218,10 @@
     <Compile Include="Assets\Scripts\UI\Type\QualitySettingsType.cs" />
     <Compile Include="Assets\Scripts\UI\Type\ScreenElementType.cs" />
     <Compile Include="Assets\Scripts\UI\Type\ScreenType.cs" />
+    <Compile Include="Assets\SnowShader\SnowBrush.cs" />
     <None Include="Assets\dataSave\data.txt" />
+    <None Include="Assets\SnowShader\Snow Plane.shader" />
+    <None Include="Assets\SnowShader\Snow Height Map Update.shader" />
     <None Include="Assets\Shaders\TextParticlesShader.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/ETC/Programs/GitPrograms/FirstPersonShooter/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

@@ -8,12 +8,14 @@ namespace ExampleTemplate
 
         #region Fields
 
+        [Header("UnityLightParameters")]
         [SerializeField] private float _range = 10;
         [SerializeField] private float _spotAngle = 45;
-        [SerializeField] private float _batteryChargeMax = 10.0f;
         [SerializeField] private float _maxIntensity = 1.5f;
-        [SerializeField] private float _rotationSpeed = 10.0f;
         [SerializeField] private Color _originColor = Color.white;
+        [Header("CodeParameters")]
+        [SerializeField] private float _batteryChargeMax = 10.0f;
+        [SerializeField] private float _rotationSpeed = 10.0f;
 
         #endregion
 

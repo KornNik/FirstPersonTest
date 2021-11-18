@@ -7,11 +7,12 @@ namespace ExampleTemplate
     public class EnemiesData : UnitsData
     {
         #region Fields
-
-        [SerializeField] private int _enemyCount = 5;
+        [Header("Observation")]
         [SerializeField] private float _distanceView = 20f;
         [SerializeField] private float _shootingDistance = 10f;
         [SerializeField] private float _shootingDelay = 2f;
+        [Header("Etc")]
+        [SerializeField] private int _enemyCount = 5;
         [SerializeField] private bool _isAggressive = false;
 
         [HideInInspector] public HashSet<EnemyBehaviour> GetBotList { get; } = new HashSet<EnemyBehaviour>();

@@ -5,14 +5,17 @@ namespace ExampleTemplate
     [CreateAssetMenu(fileName = "GranadeData", menuName = "Data/Granade/GranadeData")]
     public class GranadeData : ScriptableObject
     {
-        [SerializeField] private float _radius = 25;
+        [Header("Damage")]
         [SerializeField] private float _damage = 15;
         [SerializeField] private float _poisonDamage = 5;
         [SerializeField] private float _poisonDuration = 5;
+        [Header("Explosion")]
+        [SerializeField] private float _radius = 25;
         [SerializeField] private float _delayExplosion = 5;
+        [Header("Etc")]
         [SerializeField] private float _timeToDistract = 5;
-        [SerializeField] private float _throwForce = 800;
         [SerializeField] private int _particlesCount = 20;
+        [SerializeField] private float _throwForce = 800;
 
         public float GetRadius()
         {
